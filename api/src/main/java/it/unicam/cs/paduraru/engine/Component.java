@@ -6,15 +6,20 @@ public class Component {
     protected Component(Entity parent){
         this.parent = parent;
     }
-    protected void SetID(long newID) {
+    public void setID(long newID) {
         ID = newID;
     }
-    public long GetID(){
+    public long getID(){
         return ID;
     }
 
 
-    protected Entity getParent() {
+    public Entity getParent() {
         return parent;
+    }
+    @Override
+    public boolean equals(Object object){
+        if(!(object instanceof Component)) return false;
+        return ID == ((Component)object).ID;
     }
 }

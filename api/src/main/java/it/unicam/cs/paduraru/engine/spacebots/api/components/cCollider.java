@@ -15,18 +15,7 @@ public abstract class cCollider extends Component {
         this.shape = shape;
     }
 
-    public abstract void OnColliding(cCollider second); /*{
-        //Possibiletà di aggiugnere collider specifici per ogni forma
-        Entity secondParent = second.getParent();
-        if(parent instanceof eRobot){
-            if(secondParent instanceof eLabelledArea)
-            {
-                eLabelledArea area = (eLabelledArea) secondParent;
-                eRobot robotParent = (eRobot) parent;
-                robotParent.addLabel(area.getLabel());
-            }
-        }
-    }*/
+    public abstract void OnColliding(cCollider second);
 
     public Shape getShape() {
         return shape;

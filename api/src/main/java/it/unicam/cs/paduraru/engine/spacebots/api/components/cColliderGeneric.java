@@ -1,20 +1,20 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
+import it.unicam.cs.paduraru.engine.Entity;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
 
-public class cColliderWorkingArea extends cCollider{
-    public cColliderWorkingArea(ELabelledArea parent, Shape shape) {
+public class cColliderGeneric extends cCollider{
+    public cColliderGeneric(Entity parent, Shape shape) {
         super(parent, shape);
     }
-//code smell
+
     @Override
     public void OnColliding(cCollider second) {
-        //Non serve
+        return;
     }
 
     @Override
     public void OnExit(cCollider second) {
-        //Non serve
+        return;
     }
 }

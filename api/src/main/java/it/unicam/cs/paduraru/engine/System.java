@@ -2,8 +2,10 @@ package it.unicam.cs.paduraru.engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 abstract public class System {
+    protected AtomicInteger lastID = new AtomicInteger(0);
     protected List<Component> components;
     protected System(){
         components = new ArrayList<>();

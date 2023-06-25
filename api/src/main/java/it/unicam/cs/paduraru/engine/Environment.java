@@ -32,7 +32,7 @@ public class Environment {
     }
 
     public void addEntity(Entity toAdd) {
-        toAdd.SetID(entities.stream().count());
+        toAdd.setID(entities.stream().count());
         entities.add(toAdd);
     }
 
@@ -41,7 +41,7 @@ public class Environment {
     }
 
     public void addComponent(Component toAdd) {
-        toAdd.SetID(components.stream().count());
+        toAdd.setID(components.stream().count());
         components.add(toAdd);
     }
 

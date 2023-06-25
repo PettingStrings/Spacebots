@@ -3,6 +3,7 @@ package it.unicam.cs.paduraru.spacebots.app.console;
 import it.unicam.cs.paduraru.engine.GameController;
 import it.unicam.cs.paduraru.engine.Pair;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class Main {
 
         try {
             envBuilder.createSwarm(rangeX, rangeY,50,commands);
+            envBuilder.addLabelledArea(new ELabelledArea());
         } catch (Exception e) {
             LogLn(e.getMessage());
             System.exit(1);

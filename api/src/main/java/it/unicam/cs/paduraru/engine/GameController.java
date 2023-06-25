@@ -1,6 +1,11 @@
 package it.unicam.cs.paduraru.engine;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
+import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 public final class GameController {
 
     public static Environment DefaultEnvironment;
@@ -50,5 +55,12 @@ public final class GameController {
 
     public static void runCurrentEnvironment() throws Exception {
         environments.get(currentEnvironment).run();
+    }
+
+    public static List<cCollider> checkInCircle(Point origin, int radius) throws Exception {
+        SysCollision sys =(SysCollision) environments.get(currentEnvironment).getSystems().stream().
+                filter(system -> system instanceof SysCollision).collect(Collectors.toList()).get(0);
+        if(sys == null) throw new Exception("Current environment has no SysCollision");
+        return sys.checkInCircle(origin, radius);
     }
 }

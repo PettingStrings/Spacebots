@@ -8,10 +8,10 @@ public class Entity {
     }
 
     public Entity(){};
-    protected void SetID(long newID){
+    public void setID(long newID){
         ID = newID;
     }
-    protected long GetID(){
+    public long setID(){
         return ID;
     }
 
@@ -30,9 +30,13 @@ public class Entity {
     public void setPosition(Point other) {
         this.position = other;
     }
-
     public <T extends  Component> T getComponent(){
         //Call game, environment, susmem la caca
         return null;
+    }
+    @Override
+    public boolean equals(Object object){
+        if(!(object instanceof Entity)) return false;
+        return ID == ((Entity)object).ID;
     }
 }

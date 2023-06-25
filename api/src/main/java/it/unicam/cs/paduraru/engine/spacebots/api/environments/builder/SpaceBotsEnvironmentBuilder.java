@@ -6,10 +6,9 @@ import it.unicam.cs.paduraru.engine.Point;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
 import it.unicam.cs.paduraru.engine.spacebots.api.Util;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.eLabelledArea;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.eRobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Rectangle;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
@@ -27,13 +26,13 @@ public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
     public void createSwarm(Pair<Integer, Integer> rangeX, Pair<Integer, Integer> rangeY, int numBots, List<BotCommand> commands) throws Exception {
 
         Point origin;
-        eRobot bot;
+        ERobot bot;
 
         for(int i = 0; i < numBots; i++){
-            origin = new Point(Util.RandInt(rangeX.getFirst(),rangeX.getSecond()),
-                    Util.RandInt(rangeY.getFirst(), rangeY.getSecond() ));
+            origin = new Point(Util.randInt(rangeX.getFirst(),rangeX.getSecond()),
+                    Util.randInt(rangeY.getFirst(), rangeY.getSecond() ));
 
-            bot = new eRobot(origin);
+            bot = new ERobot(origin);
 
             environment.addEntity(bot);
             environment.addComponent(new cColliderRobot(bot, new Rectangle(10,10)));
@@ -42,7 +41,7 @@ public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
 
     }
 
-    public void addLabelledArea(eLabelledArea area) throws Exception {
+    public void addLabelledArea(ELabelledArea area) throws Exception {
         isFinalized();
         environment.addEntity(area);
     }

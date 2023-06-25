@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.Entity;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 
 public class Done extends BotCommand{
     public final int ip;
@@ -8,7 +8,7 @@ public class Done extends BotCommand{
         this.ip = loopPointer;
     }
     @Override
-    public int execute(Entity target, int instructionPointer) {
+    public int execute(ERobot target, int instructionPointer) {
         return ip;
     }
 

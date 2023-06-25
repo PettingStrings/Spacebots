@@ -1,17 +1,33 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.systems;
 
-import it.unicam.cs.paduraru.engine.Component;
-import it.unicam.cs.paduraru.engine.Pair;
-import it.unicam.cs.paduraru.engine.Point;
+import it.unicam.cs.paduraru.engine.*;
 import it.unicam.cs.paduraru.engine.System;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderGeneric;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Circle;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class SysCollision extends System{
+
+    public List<cCollider> checkInCircle(Point origin, int radius) throws Exception {
+        Entity temp = new Entity(origin);
+        cColliderGeneric coll = new cColliderGeneric(temp, new Circle(radius));
+        List<Pair<cCollider, cCollider>> pairs =
+                components.stream().map(component -> new Pair<cCollider,cCollider>(coll, (cCollider) component)).collect(Collectors.toList());
+
+        List<cCollider> collidingColliders = new ArrayList<>();
+        for (Pair<cCollider, cCollider> pair: pairs) {
+            if(isColliding(pair))
+                collidingColliders.add(pair.getSecond());
+        }
+
+        return collidingColliders;
+    }
 
     public enum CollisionType{ RECT_RECT, RECT_CIRCLE, CIRCLE_RECT, CIRCLE_CIRCLE }
     List<Pair<cCollider, cCollider>> lastColliding;
@@ -21,7 +37,9 @@ public class SysCollision extends System{
     }
     @Override
     public void addComponents(List<Component> componentsToAdd) {
-        this.components.addAll(componentsToAdd.stream().filter( component -> component instanceof cCollider).toList());
+        List<Component> newColliders = componentsToAdd.stream().filter(component -> component instanceof cCollider).toList();
+        newColliders.forEach(component -> {component.setID(lastID.getAndAdd(1));});
+        this.components.addAll(newColliders);
     }
 
     @Override
@@ -39,8 +57,10 @@ public class SysCollision extends System{
 
     @Override
     public void addComponent(Component comp) {
-        if(comp instanceof cCollider)
+        if(comp instanceof cCollider) {
+            comp.setID(lastID.getAndAdd(1));
             this.components.add(comp);
+        }
     }
 //region Collision Detection-Resolution
     private void resolveCollidingCollisions(List<Pair<cCollider, cCollider>> pairs) {
