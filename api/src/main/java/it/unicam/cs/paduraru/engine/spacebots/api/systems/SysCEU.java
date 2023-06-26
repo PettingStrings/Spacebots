@@ -1,12 +1,12 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.systems;
 
 import it.unicam.cs.paduraru.engine.Component;
-import it.unicam.cs.paduraru.engine.System;
+import it.unicam.cs.paduraru.engine.ASystem;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
 
 import java.util.List;
 
-public class SysCEU extends System {
+public class SysCEU extends ASystem {
     @Override
     public void addComponents(List<Component> components) {
         components.stream().forEach(comp -> addComponent(comp));

@@ -12,7 +12,7 @@ public class EnvironmentBuilder {
         environment.addEntity(toAdd);
     }
 
-    public void addSystem(System toAdd){
+    public void addSystem(ASystem toAdd){
         environment.addSystem(toAdd);
     }
 

@@ -6,12 +6,12 @@ import java.util.List;
 public class Environment {
 
     List<Entity> entities;
-    List<System> systems;
+    List<ASystem> systems;
     List<Component> components;
 
     public Environment(){
         entities = new ArrayList<Entity>();
-        systems = new ArrayList<System>();
+        systems = new ArrayList<ASystem>();
         components = new ArrayList<Component>();
     }
 
@@ -36,7 +36,7 @@ public class Environment {
         entities.add(toAdd);
     }
 
-    public void addSystem(System toAdd) {
+    public void addSystem(ASystem toAdd) {
         systems.add(toAdd);
     }
 
@@ -45,12 +45,12 @@ public class Environment {
         components.add(toAdd);
     }
 
-    public List<System> getSystems() {
+    public List<ASystem> getSystems() {
         return systems;
     }
 
     public void run() throws Exception {
-        for (System system : systems) {
+        for (ASystem system : systems) {
             system.run();
         }
     }

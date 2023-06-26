@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
 }
 
 group = 'org.example'
@@ -22,5 +21,3 @@ test {
         events "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
     }
 }
-
-mainClassName = "it/unicam/cs/paduraru/spacebots/app/console/Main.java"

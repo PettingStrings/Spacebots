@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EnvironmentTest {
 
-    private final class TestSystem extends System{
+    private final class TestASystem extends ASystem {
 
         @Override
         public void addComponents(List<Component> components) {
@@ -53,7 +53,7 @@ class EnvironmentTest {
     void addSystem() {
         env.clear();
         Entity tempEnt = new Entity();
-        TestSystem tempSys = new TestSystem();
+        TestASystem tempSys = new TestASystem();
         Component tempComp = new Component(tempEnt);
 
         env.addSystem(tempSys);

@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.systems;
 
 import it.unicam.cs.paduraru.engine.*;
-import it.unicam.cs.paduraru.engine.System;
+import it.unicam.cs.paduraru.engine.ASystem;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderGeneric;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Circle;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SysCollision extends System{
+public class SysCollision extends ASystem {
 
     public List<cCollider> checkInCircle(Vector origin, int radius) throws Exception {
         Entity temp = new Entity(origin);

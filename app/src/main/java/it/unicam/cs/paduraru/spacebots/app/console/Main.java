@@ -18,9 +18,6 @@ import java.util.List;
 
 public class Main {
 
-    public static void LogLn(String msg){
-        System.out.println(">"+msg);
-    }
     public static void main(String[] args) {
         System.out.println("==== Console App =====");
         System.out.println("====    START    =====\n");
@@ -35,8 +32,8 @@ public class Main {
         SpaceBotsEnvironmentBuilder envBuilder = new SpaceBotsEnvironmentBuilder();
 
         try {
-            envBuilder.createSwarm(rangeX, rangeY,50,commands);
-            envBuilder.addLabelledArea(new ELabelledArea());
+            envBuilder.createSwarm(rangeX, rangeY,5,commands);
+            //envBuilder.addLabelledArea(new ELabelledArea());
         } catch (Exception e) {
             LogLn(e.getMessage());
             System.exit(1);
@@ -63,6 +60,10 @@ public class Main {
         }
 
         System.out.println("\n====    END   =====\n");
+    }
+
+    public static void LogLn(String msg){
+        System.out.println(">"+msg);
     }
 
     private static void LogEntitiesLocations(List<Entity> entities) {
