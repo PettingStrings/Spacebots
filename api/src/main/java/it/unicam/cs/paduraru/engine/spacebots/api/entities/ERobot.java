@@ -21,6 +21,7 @@ public class ERobot extends Entity {
         currentLabels = new ArrayList<>();
         signaledLabels = new ArrayList<>();
         velocity = 0;
+        direction = new Vector(0,0);
     }
 
     public void addLabel(Label label) {
@@ -39,13 +40,12 @@ public class ERobot extends Entity {
         return direction;
     }
 
-    public void setDirection(Vector currentVelocity) {
-        this.direction = currentVelocity;
+    public void setDirection(Vector newDir) {
+        this.direction = newDir.normalize();
     }
 
     public void move() {
-        setPosition(getPosition().add(
-                new Vector(direction.getX()*velocity, direction.getY()*velocity)));
+        setPosition(getPosition().add(direction.mulScalar(velocity)));
     }
 
     public void setCurrentLabels(List<Label> currentLabels) {

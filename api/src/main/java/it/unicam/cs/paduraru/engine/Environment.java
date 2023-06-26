@@ -54,4 +54,9 @@ public class Environment {
             system.run();
         }
     }
+
+    public void addComponents(List<Component> components) {
+        for (Component comp: components)
+            addComponent(comp);
+    }
 }

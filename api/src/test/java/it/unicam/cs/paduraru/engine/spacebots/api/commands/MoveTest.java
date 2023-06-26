@@ -12,12 +12,12 @@ class MoveTest {
     void execute() {
         int ip = 0;
         ERobot bot = new ERobot(new Vector(0,0));
-        Move commMove = new Move(new Vector(1,1),1);
+        Move commMove = new Move(new Vector(1,0),1);
 
         ip = commMove.execute(bot,ip);
-        assertTrue(bot.getPosition().equals(new Vector(1,1)) && ip == 1);
+        assertTrue(bot.getPosition().equals(new Vector(1,0)) && ip == 1);
 
         ip = commMove.execute(bot,ip);
-        assertTrue(bot.getPosition().equals(new Vector(2,2)) && ip == 2);
+        assertTrue(bot.getPosition().equals(new Vector(2,0)) && ip == 2);
     }
 }
