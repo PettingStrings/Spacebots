@@ -50,4 +50,42 @@ class FollowTest {
         assertTrue(follower.getPosition().equals(new Vector(5,0)));
     }
 
+    @Test
+    public void test_followsTwo() throws Exception {
+        ERobot follower = new ERobot(new Vector(0,0));
+        ERobot signaler1 = new ERobot(new Vector(10,0)),
+                signaler2 = new ERobot(new Vector(0,10));
+
+        Label label = new Label("0010110_");
+
+        signaler1.signal(label);
+
+        Circle circle = new Circle(10);
+
+        cColliderRobot followerCollider = new cColliderRobot(follower, circle),
+                signaler1Collider = new cColliderRobot(signaler1, circle),
+                signaler2Collider = new cColliderRobot(signaler2, circle);
+
+        Environment env = new Environment();
+
+        env.addEntity(follower);
+        env.addEntity(signaler1);
+        env.addEntity(signaler2);
+
+        env.addComponent(followerCollider);
+        env.addComponent(signaler1Collider);
+        env.addComponent(signaler2Collider);
+
+        env.addSystem(new SysCollision());
+
+        env.initialize();
+
+        GameController.addEnvironment(env);
+
+        Follow cmdFollow = new Follow(label, 10,5);
+        cmdFollow.execute(follower, 0);
+
+        //assertTrue(follower.getPosition().equals(new Vector(5,0)));
+    }
+
 }
