@@ -9,12 +9,11 @@ import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class SysCollision extends System{
 
-    public List<cCollider> checkInCircle(Point origin, int radius) throws Exception {
+    public List<cCollider> checkInCircle(Vector origin, int radius) throws Exception {
         Entity temp = new Entity(origin);
         cColliderGeneric coll = new cColliderGeneric(temp, new Circle(radius));
         List<Pair<cCollider, cCollider>> pairs =
@@ -115,7 +114,7 @@ public class SysCollision extends System{
         throw new Exception("Unknown shapes: " + pair.getFirst().toString() + " " + pair.getSecond().getClass().toString());
     }
     public static boolean collisionCircleToCircle(Pair<cCollider, cCollider> pair) {
-        Point position1 = pair.getFirst().getPosition(), position2 = pair.getSecond().getPosition();
+        Vector position1 = pair.getFirst().getPosition(), position2 = pair.getSecond().getPosition();
         int r1  = ((Circle)pair.getFirst().getShape()).getRadius(),
                 r2 = ((Circle)pair.getSecond().getShape()).getRadius();
 
@@ -128,9 +127,9 @@ public class SysCollision extends System{
         Circle circle = (Circle)pair.getFirst().getShape();
         Rectangle rect = (Rectangle)pair.getSecond().getShape();
 
-        Point cPos = pair.getFirst().getPosition(), rPos = pair.getSecond().getPosition();
+        Vector cPos = pair.getFirst().getPosition(), rPos = pair.getSecond().getPosition();
 
-        Point distance = new Point(Math.abs(cPos.getX() - rPos.getX()), Math.abs(cPos.getY() - rPos.getY()));
+        Vector distance = new Vector(Math.abs(cPos.getX() - rPos.getX()), Math.abs(cPos.getY() - rPos.getY()));
 
         if (distance.getX() > (rect.getWidth()/2 + circle.getRadius())) { return false; }
         if (distance.getY() > (rect.getHeight()/2 + circle.getRadius())) { return false; }
@@ -138,8 +137,8 @@ public class SysCollision extends System{
         if (distance.getX() <= (rect.getWidth()/2)) { return true; }
         if (distance.getY() <= (rect.getHeight()/2)) { return true; }
 
-        int cornerDist = (distance.getX() - rect.getWidth()/2)^2 +
-                (distance.getY() - rect.getHeight()/2)^2;
+        double cornerDist = Math.pow(distance.getX() - rect.getWidth()/2,2) +
+                Math.pow(distance.getY() - rect.getHeight()/2,2);
 
         return (cornerDist <= (circle.getRadius()^2));
     }
@@ -150,7 +149,7 @@ public class SysCollision extends System{
 
     public static boolean collisionRectToRect(Pair<cCollider, cCollider> pair) {
         //AABB method
-        Point position1 = pair.getFirst().getPosition(),
+        Vector position1 = pair.getFirst().getPosition(),
                 position2 = pair.getSecond().getPosition();
 
         Rectangle rect1 = (Rectangle)pair.getFirst().getShape(),

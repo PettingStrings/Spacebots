@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.entities;
 
-import it.unicam.cs.paduraru.engine.Point;
+import it.unicam.cs.paduraru.engine.Vector;
 import it.unicam.cs.paduraru.engine.spacebots.api.Label;
 import it.unicam.cs.paduraru.engine.Entity;
 
@@ -12,10 +12,10 @@ public class ERobot extends Entity {
     private List<Label> currentLabels;
     private List<Label> signaledLabels;
     private Label followingLabel;
-    private Point direction;//Per colpa del move random devo memorizzare la velocità qui
+    private Vector direction;//Per colpa del move random devo memorizzare la velocità qui
     private int velocity;
 
-    public ERobot(Point origin) {
+    public ERobot(Vector origin) {
         super();
         SetPosition(origin);
         currentLabels = new ArrayList<>();
@@ -35,17 +35,17 @@ public class ERobot extends Entity {
         return currentLabels;
     }
 
-    public Point getDirection() {
+    public Vector getDirection() {
         return direction;
     }
 
-    public void setDirection(Point currentVelocity) {
+    public void setDirection(Vector currentVelocity) {
         this.direction = currentVelocity;
     }
 
     public void move() {
         setPosition(getPosition().add(
-                new Point(direction.getX()*velocity, direction.getY()*velocity)));
+                new Vector(direction.getX()*velocity, direction.getY()*velocity)));
     }
 
     public void setCurrentLabels(List<Label> currentLabels) {

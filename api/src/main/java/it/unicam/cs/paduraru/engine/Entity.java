@@ -2,8 +2,8 @@ package it.unicam.cs.paduraru.engine;
 
 public class Entity {
     private long ID;
-    private Point position;
-    public Entity(Point origin){
+    private Vector position;
+    public Entity(Vector origin){
         position = origin;
     }
 
@@ -15,19 +15,19 @@ public class Entity {
         return ID;
     }
 
-    protected void SetPosition(Point newPosition){
+    protected void SetPosition(Vector newPosition){
         position = newPosition;
     }
 
-    public Point GetPosition(){
+    public Vector GetPosition(){
         return position;
     }
 
-    public Point getPosition() {
+    public Vector getPosition() {
         return position;
     }
 
-    public void setPosition(Point other) {
+    public void setPosition(Vector other) {
         this.position = other;
     }
     public <T extends  Component> T getComponent(){

@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.Point;
+import it.unicam.cs.paduraru.engine.Vector;
 import it.unicam.cs.paduraru.engine.spacebots.api.Label;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ class UnsignalTest {
     @Test
     void execute() throws Exception {
         Label label = new Label("Ciao_");
-        ERobot robot = new ERobot(new Point(1,1));
+        ERobot robot = new ERobot(new Vector(1,1));
         robot.signal(label);
         Unsignal unsignal = new Unsignal(label);
         assertTrue(robot.getSignaledLabels().contains(label) && robot.getSignaledLabels().size() == 1);

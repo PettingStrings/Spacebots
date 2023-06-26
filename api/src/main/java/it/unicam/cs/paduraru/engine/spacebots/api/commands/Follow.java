@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.GameController;
-import it.unicam.cs.paduraru.engine.Point;
+import it.unicam.cs.paduraru.engine.Vector;
 import it.unicam.cs.paduraru.engine.spacebots.api.Label;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
@@ -45,8 +45,10 @@ public class Follow extends BotCommand{
         }
 
         foundTargets.remove(target);
-        List<Point> suitableRobotsPositions = foundTargets.stream().filter(collider -> collider.getParent() instanceof ERobot)
-                .map(collider -> (ERobot)collider.getParent()).filter(robot -> robot.getSignaledLabels().contains(label))
+        List<Vector> suitableRobotsPositions = foundTargets.stream()
+                .filter(collider -> collider.getParent() instanceof ERobot)
+                .map(collider -> (ERobot)collider.getParent())
+                .filter(robot -> robot.getSignaledLabels().contains(label))
                 .map(robot -> robot.getPosition())
                 .toList();
 
@@ -55,11 +57,11 @@ public class Follow extends BotCommand{
         return tmp.execute(target, instructionPointer);
     }
 
-    private Point getAvgDirection(List<ERobot> suitableRobots) {
-        Point avg = new Point(0,0);
+    private Vector getAvgDirection(List<Vector> suitableRobotsPositions) {
+        Vector avg = new Vector(0,0);
         int i = 0;
-        for (; i < suitableRobots.size(); i++) {
-            avg = avg.add(suitableRobots.get(i).getPosition());
+        for (; i < suitableRobotsPositions.size(); i++) {
+            avg = avg.add(suitableRobotsPositions.get(i));
         }
         return avg.divScalar(i);
     }

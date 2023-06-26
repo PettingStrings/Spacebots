@@ -1,12 +1,12 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.Point;
+import it.unicam.cs.paduraru.engine.Vector;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 
 public class Move extends BotCommand{
-    Point direction;
+    Vector direction;
     int velocity;
-    public Move(Point direction, int velocity){
+    public Move(Vector direction, int velocity){
         this.direction = direction;
         this.velocity = velocity;
     }

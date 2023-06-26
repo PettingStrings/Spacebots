@@ -57,7 +57,7 @@ public final class GameController {
         environments.get(currentEnvironment).run();
     }
 
-    public static List<cCollider> checkInCircle(Point origin, int radius) throws Exception {
+    public static List<cCollider> checkInCircle(Vector origin, int radius) throws Exception {
         SysCollision sys =(SysCollision) environments.get(currentEnvironment).getSystems().stream().
                 filter(system -> system instanceof SysCollision).collect(Collectors.toList()).get(0);
         if(sys == null) throw new Exception("Current environment has no SysCollision");
