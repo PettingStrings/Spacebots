@@ -18,9 +18,15 @@ dependencies {
 }
 
 sourceSets {
+    main {
+        java {
+            srcDirs = ['api/src/main','app/src/main']
+        }
+    }
+
     test {
         java {
-            srcDirs = ['api/src/test/java', 'app/src/test/java']
+            srcDirs = ['api/src/test']
         }
     }
 }
@@ -29,4 +35,4 @@ test {
     useJUnitPlatform()
 }
 
-mainClassName = "it.unicam.cs.paduraru.app.Main"
+mainClassName = "app/src/main/java/it/unicam/cs/paduraru/spacebots/app/gui/Main.java"
