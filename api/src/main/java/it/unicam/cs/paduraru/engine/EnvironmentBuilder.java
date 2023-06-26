@@ -8,15 +8,15 @@ public class EnvironmentBuilder {
         environment = new Environment();
     }
 
-    protected void AddEntity(Entity toAdd){
+    public void addEntity(Entity toAdd){
         environment.addEntity(toAdd);
     }
 
-    protected void AddSystem(System toAdd){
+    public void addSystem(System toAdd){
         environment.addSystem(toAdd);
     }
 
-    protected void AddComponent(Component toAdd){
+    protected void addComponent(Component toAdd){
         environment.addComponent(toAdd);
     }
 

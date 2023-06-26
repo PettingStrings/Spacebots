@@ -9,6 +9,7 @@ import java.util.List;
 //Code Execution Unit
 public class cCEU extends Component{
     List<BotCommand> commands;
+
     int instructionPointer;
     public cCEU(ERobot parent, List<BotCommand> commands) {
         super(parent);
@@ -18,6 +19,14 @@ public class cCEU extends Component{
 
     public void executeNextLine(){
         instructionPointer = commands.get(instructionPointer).execute((ERobot) parent, instructionPointer);
+    }
+
+    public int getInstructionPointer() {
+        return instructionPointer;
+    }
+
+    private void setInstructionPointer(int instructionPointer) {
+        this.instructionPointer = instructionPointer;
     }
 
 }

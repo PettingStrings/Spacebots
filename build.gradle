@@ -33,6 +33,9 @@ sourceSets {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
 }
 
-mainClassName = "app/src/main/java/it/unicam/cs/paduraru/spacebots/app/gui/Main.java"
+mainClassName = "app/src/main/java/it/unicam/cs/paduraru/spacebots/app/console/Main.java"

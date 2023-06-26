@@ -13,7 +13,7 @@ public class SysCEU extends System {
     }
 
     @Override
-    public void run() throws Exception {
+    public void run(){
         components.stream().map(component -> (cCEU)component).forEach(cCEU::executeNextLine);
     }
 
