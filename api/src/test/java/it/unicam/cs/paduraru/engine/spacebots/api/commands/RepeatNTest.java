@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.Vector;
+import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +11,9 @@ class RepeatNTest {
     @Test
     void execute() {
         int ip = 0;
-        ERobot robot = new ERobot(new Vector(0,0));
+        ERobot robot = new ERobot(new PVector(0,0));
         BotCommand[] commands = new BotCommand[]{
-            new RepeatN(2), new Move(new Vector(1,1),1), new Done(0)
+            new RepeatN(2), new Move(new PVector(1,1),1), new Done(0)
         };
         ((RepeatN)commands[0]).setDoneIp(2);
         for (int i = 0; i < 100; i++) {

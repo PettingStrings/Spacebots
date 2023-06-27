@@ -6,13 +6,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EnvironmentTest {
+class PEnvironmentTest {
 
     private final class TestASystem extends ASystem {
 
         @Override
-        public void addComponents(List<Component> components) {
-            for (Component comp: components) {
+        public void addComponents(List<PComponent> components) {
+            for (PComponent comp: components) {
                 this.addComponent(comp);
             }
         }
@@ -23,12 +23,12 @@ class EnvironmentTest {
         }
 
         @Override
-        public void addComponent(Component comp) {
+        public void addComponent(PComponent comp) {
             this.components.add(comp);
         }
     }
 
-    Environment env = new Environment();
+    PEnvironment env = new PEnvironment();
     @Test
     void initialize() {
     }
@@ -36,7 +36,7 @@ class EnvironmentTest {
     @Test
     void getEntities() {
         env.clear();
-        Entity temp = new Entity();
+        PEntity temp = new PEntity();
         env.addEntity(temp);
         assertTrue( env.getEntities().stream().count() == 1 && env.getEntities().contains(temp));
     }
@@ -44,7 +44,7 @@ class EnvironmentTest {
     @Test
     void addEntity() {
         env.clear();
-        Entity temp = new Entity();
+        PEntity temp = new PEntity();
         env.addEntity(temp);
         assertTrue(env.entities.stream().count() == 1);
     }
@@ -52,9 +52,9 @@ class EnvironmentTest {
     @Test
     void addSystem() {
         env.clear();
-        Entity tempEnt = new Entity();
+        PEntity tempEnt = new PEntity();
         TestASystem tempSys = new TestASystem();
-        Component tempComp = new Component(tempEnt);
+        PComponent tempComp = new PComponent(tempEnt);
 
         env.addSystem(tempSys);
 

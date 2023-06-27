@@ -1,13 +1,13 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
-import it.unicam.cs.paduraru.engine.Component;
+import it.unicam.cs.paduraru.engine.PComponent;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 
 import java.util.List;
 
 //Code Execution Unit
-public class cCEU extends Component{
+public class cCEU extends PComponent {
     List<BotCommand> commands;
 
     int instructionPointer;

@@ -1,46 +1,46 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.entities;
 
-import it.unicam.cs.paduraru.engine.Vector;
-import it.unicam.cs.paduraru.engine.spacebots.api.Label;
-import it.unicam.cs.paduraru.engine.Entity;
+import it.unicam.cs.paduraru.engine.PVector;
+import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
+import it.unicam.cs.paduraru.engine.PEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ERobot extends Entity {
+public class ERobot extends PEntity {
 
-    private List<Label> currentLabels;
-    private List<Label> signaledLabels;
-    private Label followingLabel;
-    private Vector direction;//Per colpa del move random devo memorizzare la velocità qui
+    private List<PLabel> currentLabels;
+    private List<PLabel> signaledLabels;
+    private PLabel followingLabel;
+    private PVector direction;//Per colpa del move random devo memorizzare la velocità qui
     private int velocity;
 
-    public ERobot(Vector origin) {
+    public ERobot(PVector origin) {
         super();
         SetPosition(origin);
         currentLabels = new ArrayList<>();
         signaledLabels = new ArrayList<>();
         velocity = 0;
-        direction = new Vector(0,0);
+        direction = new PVector(0,0);
     }
 
-    public void addLabel(Label label) {
+    public void addLabel(PLabel label) {
         getCurrentLabels().add(label);
     }
 
-    public void removeLabel(Label label) {
+    public void removeLabel(PLabel label) {
         getCurrentLabels().remove(label);
     }
 
-    public List<Label> getCurrentLabels() {
+    public List<PLabel> getCurrentLabels() {
         return currentLabels;
     }
 
-    public Vector getDirection() {
+    public PVector getDirection() {
         return direction;
     }
 
-    public void setDirection(Vector newDir) {
+    public void setDirection(PVector newDir) {
         this.direction = newDir.normalize();
     }
 
@@ -48,33 +48,33 @@ public class ERobot extends Entity {
         setPosition(getPosition().add(direction.mulScalar(velocity)));
     }
 
-    public void setCurrentLabels(List<Label> currentLabels) {
+    public void setCurrentLabels(List<PLabel> currentLabels) {
         this.currentLabels = currentLabels;
     }
 
-    public List<Label> getSignaledLabels() {
+    public List<PLabel> getSignaledLabels() {
         return signaledLabels;
     }
 
-    public void setSignaledLabels(List<Label> signaledLabels) {
+    public void setSignaledLabels(List<PLabel> signaledLabels) {
         this.signaledLabels = signaledLabels;
     }
 
-    public Label getFollowingLabel() {
+    public PLabel getFollowingLabel() {
         return followingLabel;
     }
 
-    public void setFollowingLabel(Label followingLabel) {
+    public void setFollowingLabel(PLabel followingLabel) {
         this.followingLabel = followingLabel;
     }
 
-    public void signal(Label label) {
+    public void signal(PLabel label) {
         if(signaledLabels.contains(label))
             return;
         signaledLabels.add(label);
     }
 
-    public void unsignal(Label label) {
+    public void unsignal(PLabel label) {
         signaledLabels.remove(label);
     }
 

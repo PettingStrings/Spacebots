@@ -2,10 +2,10 @@ package it.unicam.cs.paduraru.engine.spacebots.api;
 
 import java.util.Objects;
 
-public class Label {
+public class PLabel {
     String name;
 
-    public Label(String name) throws Exception {
+    public PLabel(String name) throws Exception {
         if(!name.endsWith("_")) throw new Exception("Label must end with '_'");
         this.name = name;
     }
@@ -13,7 +13,7 @@ public class Label {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Label label)) return false;
+        if (!(o instanceof PLabel label)) return false;
         return name.equals(o);
     }
 

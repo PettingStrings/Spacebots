@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.Vector;
-import it.unicam.cs.paduraru.engine.spacebots.api.Label;
+import it.unicam.cs.paduraru.engine.PVector;
+import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +12,10 @@ class UntilTest {
     @Test
     void execute() throws Exception {
         int ip = 0;
-        Label condition = new Label("Harooo everynyan_"), fakeLabel = new Label("Oh My Gaaah!_");
-        ERobot robot = new ERobot(new Vector(0,0));
+        PLabel condition = new PLabel("Harooo everynyan_"), fakeLabel = new PLabel("Oh My Gaaah!_");
+        ERobot robot = new ERobot(new PVector(0,0));
         BotCommand[] commands = new BotCommand[]{
-                new Until(condition), new Move(new Vector(1,1),1), new Done(0)
+                new Until(condition), new Move(new PVector(1,1),1), new Done(0)
         };
         ((Until)commands[0]).setDoneIp(2);
         //No conditions on robot

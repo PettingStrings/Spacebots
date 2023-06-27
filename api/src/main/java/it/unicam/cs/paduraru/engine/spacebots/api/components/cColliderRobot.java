@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
-import it.unicam.cs.paduraru.engine.Entity;
+import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
@@ -13,7 +13,7 @@ public class cColliderRobot extends cCollider{
     @Override
     public void OnColliding(cCollider second) {
         //Possibiletà di aggiugnere collider specifici per ogni forma
-        Entity secondParent = second.getParent();
+        PEntity secondParent = second.getParent();
         if(secondParent instanceof ELabelledArea)
         {
             ELabelledArea area = (ELabelledArea) secondParent;
@@ -25,7 +25,7 @@ public class cColliderRobot extends cCollider{
     @Override
     public void OnExit(cCollider second) {
         //Possibiletà di aggiugnere collider specifici per ogni forma
-        Entity secondParent = second.getParent();
+        PEntity secondParent = second.getParent();
         if(secondParent instanceof ELabelledArea)
         {
             ELabelledArea area = (ELabelledArea) secondParent;

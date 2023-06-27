@@ -1,11 +1,11 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.spacebots.api.Label;
+import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 
 public class Unsignal extends BotCommand{
-    Label label;
-    public  Unsignal(Label label){
+    PLabel label;
+    public  Unsignal(PLabel label){
         this.label = label;
     }
     @Override

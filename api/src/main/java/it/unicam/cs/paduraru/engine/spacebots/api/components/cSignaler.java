@@ -1,13 +1,13 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
-import it.unicam.cs.paduraru.engine.Entity;
-import it.unicam.cs.paduraru.engine.spacebots.api.Label;
-import it.unicam.cs.paduraru.engine.Component;
+import it.unicam.cs.paduraru.engine.PEntity;
+import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
+import it.unicam.cs.paduraru.engine.PComponent;
 
-public class cSignaler extends Component{
-    Label label;
+public class cSignaler extends PComponent {
+    PLabel label;
 
-    protected cSignaler(Entity parent) {
+    protected cSignaler(PEntity parent) {
         super(parent);
     }
 }

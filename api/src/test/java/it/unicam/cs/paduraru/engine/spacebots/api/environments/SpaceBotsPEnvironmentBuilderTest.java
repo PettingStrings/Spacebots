@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpaceBotsEnvironmentBuilderTest {
+class SpaceBotsPEnvironmentBuilderTest {
 
     @Test
     void createSwarm() throws Exception {

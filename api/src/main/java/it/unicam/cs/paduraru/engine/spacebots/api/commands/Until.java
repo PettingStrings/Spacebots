@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.spacebots.api.Label;
+import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 /*
 *Ripete delle istruzioni fino a quando una certa condizione non è percepita nell’ambiente
@@ -8,9 +8,9 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
  */
 public class Until extends BotCommand{
     int doneIp;
-    Label label;
+    PLabel label;
 
-    public Until(Label label){
+    public Until(PLabel label){
         this.label = label;
     }
     @Override

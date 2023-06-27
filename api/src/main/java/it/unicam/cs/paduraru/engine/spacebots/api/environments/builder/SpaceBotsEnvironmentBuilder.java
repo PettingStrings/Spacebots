@@ -2,7 +2,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.environments.builder;
 
 import it.unicam.cs.paduraru.engine.EnvironmentBuilder;
 import it.unicam.cs.paduraru.engine.Pair;
-import it.unicam.cs.paduraru.engine.Vector;
+import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
 import it.unicam.cs.paduraru.engine.spacebots.api.Util;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
@@ -25,11 +25,11 @@ public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
     }
     public void createSwarm(Pair<Integer, Integer> rangeX, Pair<Integer, Integer> rangeY, int numBots, List<BotCommand> commands) throws Exception {
 
-        Vector origin;
+        PVector origin;
         ERobot bot;
 
         for(int i = 0; i < numBots; i++){
-            origin = new Vector(Util.randInt(rangeX.getFirst(),rangeX.getSecond()),
+            origin = new PVector(Util.randInt(rangeX.getFirst(),rangeX.getSecond()),
                     Util.randInt(rangeY.getFirst(), rangeY.getSecond() ));
 
             bot = new ERobot(origin);

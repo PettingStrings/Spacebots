@@ -8,20 +8,20 @@ import java.util.stream.Collectors;
 
 public final class GameController {
 
-    public static Environment DefaultEnvironment;
-    static List<Environment> environments = new ArrayList<Environment>();
+    public static PEnvironment DefaultEnvironment;
+    static List<PEnvironment> environments = new ArrayList<PEnvironment>();
     static int currentEnvironment;
 
     private GameController(){};
     public static void Initialize(){
-        for (Environment env: environments)
+        for (PEnvironment env: environments)
             env.initialize();
     }
 
     public static void createEnvironment() {
-        environments.add(new Environment());
+        environments.add(new PEnvironment());
     }
-    public static void createEnvironment(Environment defaultEnvironment) {
+    public static void createEnvironment(PEnvironment defaultEnvironment) {
         environments.add(defaultEnvironment);
     }
 
@@ -37,11 +37,11 @@ public final class GameController {
     public static void StepCurrentEnvironment() {
     }
 
-    public static List<Entity> GetCurrentEntities() {
+    public static List<PEntity> GetCurrentEntities() {
         return environments.get(currentEnvironment).getEntities();
     }
 
-    public static void addEnvironment(Environment environment) {
+    public static void addEnvironment(PEnvironment environment) {
         environments.add(environment);
     }
 
@@ -57,7 +57,7 @@ public final class GameController {
         environments.get(currentEnvironment).run();
     }
 
-    public static List<cCollider> checkInCircle(Vector origin, int radius) throws Exception {
+    public static List<cCollider> checkInCircle(PVector origin, int radius) throws Exception {
         SysCollision sys =(SysCollision) environments.get(currentEnvironment).getSystems().stream().
                 filter(system -> system instanceof SysCollision).collect(Collectors.toList()).get(0);
         if(sys == null) throw new Exception("Current environment has no SysCollision");

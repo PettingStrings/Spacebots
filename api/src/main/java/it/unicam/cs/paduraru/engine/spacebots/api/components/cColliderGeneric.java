@@ -1,10 +1,10 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
-import it.unicam.cs.paduraru.engine.Entity;
+import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
 
 public class cColliderGeneric extends cCollider{
-    public cColliderGeneric(Entity parent, Shape shape) {
+    public cColliderGeneric(PEntity parent, Shape shape) {
         super(parent, shape);
     }
 

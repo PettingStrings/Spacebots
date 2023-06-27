@@ -3,16 +3,16 @@ package it.unicam.cs.paduraru.engine;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Environment {
+public class PEnvironment {
 
-    List<Entity> entities;
+    List<PEntity> entities;
     List<ASystem> systems;
-    List<Component> components;
+    List<PComponent> components;
 
-    public Environment(){
-        entities = new ArrayList<Entity>();
+    public PEnvironment(){
+        entities = new ArrayList<PEntity>();
         systems = new ArrayList<ASystem>();
-        components = new ArrayList<Component>();
+        components = new ArrayList<PComponent>();
     }
 
     public  void clear() {
@@ -27,11 +27,11 @@ public class Environment {
         }
     }
 
-    public List<Entity> getEntities() {
+    public List<PEntity> getEntities() {
         return entities;
     }
 
-    public void addEntity(Entity toAdd) {
+    public void addEntity(PEntity toAdd) {
         toAdd.setID(entities.stream().count());
         entities.add(toAdd);
     }
@@ -40,7 +40,7 @@ public class Environment {
         systems.add(toAdd);
     }
 
-    public void addComponent(Component toAdd) {
+    public void addComponent(PComponent toAdd) {
         toAdd.setID(components.stream().count());
         components.add(toAdd);
     }
@@ -55,8 +55,8 @@ public class Environment {
         }
     }
 
-    public void addComponents(List<Component> components) {
-        for (Component comp: components)
+    public void addComponents(List<PComponent> components) {
+        for (PComponent comp: components)
             addComponent(comp);
     }
 }

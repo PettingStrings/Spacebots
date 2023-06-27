@@ -1,16 +1,12 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.*;
-import it.unicam.cs.paduraru.engine.spacebots.api.Label;
+import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Circle;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
 import org.junit.jupiter.api.Test;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,10 +14,10 @@ class FollowTest {
 
     @Test
     public void test_followsOne() throws Exception {
-        ERobot follower = new ERobot(new Vector(0,0));
-        ERobot signaler1 = new ERobot(new Vector(10,0));
+        ERobot follower = new ERobot(new PVector(0,0));
+        ERobot signaler1 = new ERobot(new PVector(10,0));
 
-        Label label = new Label("0010110_");
+        PLabel label = new PLabel("0010110_");
 
         signaler1.signal(label);
 
@@ -30,7 +26,7 @@ class FollowTest {
         cColliderRobot followerCollider = new cColliderRobot(follower, circle),
         signaler1Collider = new cColliderRobot(signaler1, circle);
 
-        Environment env = new Environment();
+        PEnvironment env = new PEnvironment();
 
         env.addEntity(follower);
         env.addEntity(signaler1);
@@ -47,16 +43,16 @@ class FollowTest {
         Follow cmdFollow = new Follow(label, 10,5);
         cmdFollow.execute(follower, 0);
 
-        assertTrue(follower.getPosition().equals(new Vector(5,0)));
+        assertTrue(follower.getPosition().equals(new PVector(5,0)));
     }
 
     @Test
     public void test_followsTwo() throws Exception {
-        ERobot follower = new ERobot(new Vector(0,0));
-        ERobot signaler1 = new ERobot(new Vector(10,0)),
-                signaler2 = new ERobot(new Vector(0,10));
+        ERobot follower = new ERobot(new PVector(0,0));
+        ERobot signaler1 = new ERobot(new PVector(10,0)),
+                signaler2 = new ERobot(new PVector(0,10));
 
-        Label label = new Label("0010110_");
+        PLabel label = new PLabel("0010110_");
 
         signaler1.signal(label);
 
@@ -66,7 +62,7 @@ class FollowTest {
                 signaler1Collider = new cColliderRobot(signaler1, circle),
                 signaler2Collider = new cColliderRobot(signaler2, circle);
 
-        Environment env = new Environment();
+        PEnvironment env = new PEnvironment();
 
         env.addEntity(follower);
         env.addEntity(signaler1);

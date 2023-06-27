@@ -1,9 +1,9 @@
 package it.unicam.cs.paduraru.engine;
 
-public class Component {
+public class PComponent {
     long ID;
-    protected Entity parent;
-    protected Component(Entity parent){
+    protected PEntity parent;
+    protected PComponent(PEntity parent){
         this.parent = parent;
     }
     public void setID(long newID) {
@@ -14,12 +14,12 @@ public class Component {
     }
 
 
-    public Entity getParent() {
+    public PEntity getParent() {
         return parent;
     }
     @Override
     public boolean equals(Object object){
-        if(!(object instanceof Component)) return false;
-        return ID == ((Component)object).ID;
+        if(!(object instanceof PComponent)) return false;
+        return ID == ((PComponent)object).ID;
     }
 }

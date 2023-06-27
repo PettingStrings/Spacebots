@@ -1,14 +1,14 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.entities;
 
-import it.unicam.cs.paduraru.engine.spacebots.api.Label;
+import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
-import it.unicam.cs.paduraru.engine.Entity;
+import it.unicam.cs.paduraru.engine.PEntity;
 
-public class ELabelledArea extends Entity {
-    Label label;
+public class ELabelledArea extends PEntity {
+    PLabel label;
     Shape shape;
 
-    public Label getLabel() {
+    public PLabel getLabel() {
         return label;
     }
 }

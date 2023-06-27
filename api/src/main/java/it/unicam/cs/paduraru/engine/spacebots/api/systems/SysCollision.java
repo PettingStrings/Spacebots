@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 public class SysCollision extends ASystem {
 
-    public List<cCollider> checkInCircle(Vector origin, int radius) throws Exception {
-        Entity temp = new Entity(origin);
+    public List<cCollider> checkInCircle(PVector origin, int radius) throws Exception {
+        PEntity temp = new PEntity(origin);
         cColliderGeneric coll = new cColliderGeneric(temp, new Circle(radius));
         List<Pair<cCollider, cCollider>> pairs =
                 components.stream().map(component -> new Pair<cCollider,cCollider>(coll, (cCollider) component)).collect(Collectors.toList());
@@ -35,8 +35,8 @@ public class SysCollision extends ASystem {
         lastColliding = new ArrayList<>();
     }
     @Override
-    public void addComponents(List<Component> componentsToAdd) {
-        List<Component> newColliders = componentsToAdd.stream().filter(component -> component instanceof cCollider).toList();
+    public void addComponents(List<PComponent> componentsToAdd) {
+        List<PComponent> newColliders = componentsToAdd.stream().filter(component -> component instanceof cCollider).toList();
         newColliders.forEach(component -> {component.setID(lastID.getAndAdd(1));});
         this.components.addAll(newColliders);
     }
@@ -55,7 +55,7 @@ public class SysCollision extends ASystem {
     }
 
     @Override
-    public void addComponent(Component comp) {
+    public void addComponent(PComponent comp) {
         if(comp instanceof cCollider) {
             comp.setID(lastID.getAndAdd(1));
             this.components.add(comp);
@@ -69,8 +69,8 @@ public class SysCollision extends ASystem {
     private List<Pair<cCollider, cCollider>> getIntersectingColliderPairs() throws Exception {
         List<Pair<cCollider, cCollider>> toResolve = new ArrayList<>();
 
-        for (Component comp1: components) {
-            for (Component comp2: components) {
+        for (PComponent comp1: components) {
+            for (PComponent comp2: components) {
                 if(comp1.equals(comp2)) continue;
 
                 Pair<cCollider, cCollider> pair = new Pair<>((cCollider) comp1,(cCollider) comp2);
@@ -114,7 +114,7 @@ public class SysCollision extends ASystem {
         throw new Exception("Unknown shapes: " + pair.getFirst().toString() + " " + pair.getSecond().getClass().toString());
     }
     public static boolean collisionCircleToCircle(Pair<cCollider, cCollider> pair) {
-        Vector position1 = pair.getFirst().getPosition(), position2 = pair.getSecond().getPosition();
+        PVector position1 = pair.getFirst().getPosition(), position2 = pair.getSecond().getPosition();
         int r1  = ((Circle)pair.getFirst().getShape()).getRadius(),
                 r2 = ((Circle)pair.getSecond().getShape()).getRadius();
 
@@ -127,9 +127,9 @@ public class SysCollision extends ASystem {
         Circle circle = (Circle)pair.getFirst().getShape();
         Rectangle rect = (Rectangle)pair.getSecond().getShape();
 
-        Vector cPos = pair.getFirst().getPosition(), rPos = pair.getSecond().getPosition();
+        PVector cPos = pair.getFirst().getPosition(), rPos = pair.getSecond().getPosition();
 
-        Vector distance = new Vector(Math.abs(cPos.getX() - rPos.getX()), Math.abs(cPos.getY() - rPos.getY()));
+        PVector distance = new PVector(Math.abs(cPos.getX() - rPos.getX()), Math.abs(cPos.getY() - rPos.getY()));
 
         if (distance.getX() > (rect.getWidth()/2 + circle.getRadius())) { return false; }
         if (distance.getY() > (rect.getHeight()/2 + circle.getRadius())) { return false; }
@@ -149,7 +149,7 @@ public class SysCollision extends ASystem {
 
     public static boolean collisionRectToRect(Pair<cCollider, cCollider> pair) {
         //AABB method
-        Vector position1 = pair.getFirst().getPosition(),
+        PVector position1 = pair.getFirst().getPosition(),
                 position2 = pair.getSecond().getPosition();
 
         Rectangle rect1 = (Rectangle)pair.getFirst().getShape(),

@@ -1,15 +1,15 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
-import it.unicam.cs.paduraru.engine.Component;
-import it.unicam.cs.paduraru.engine.Entity;
-import it.unicam.cs.paduraru.engine.Vector;
+import it.unicam.cs.paduraru.engine.PComponent;
+import it.unicam.cs.paduraru.engine.PEntity;
+import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
 
-public abstract class cCollider extends Component {
+public abstract class cCollider extends PComponent {
     Shape shape;
-    Vector position;
+    PVector position;
 
-    public cCollider(Entity parent, Shape shape) {
+    public cCollider(PEntity parent, Shape shape) {
         super(parent);
         position = parent.GetPosition();
         this.shape = shape;
@@ -21,7 +21,7 @@ public abstract class cCollider extends Component {
         return shape;
     }
 
-    public Vector getPosition() {
+    public PVector getPosition() {
         return parent.getPosition();
     }
 

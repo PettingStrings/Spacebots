@@ -20,7 +20,7 @@ class SysCollisionTest {
     public class cColliderTest extends cCollider{
         public boolean onExitCalled = false, onCollidingCalled = false;
 
-        public cColliderTest(Entity parent, Shape shape) {
+        public cColliderTest(PEntity parent, Shape shape) {
             super(parent, shape);
         }
 
@@ -37,11 +37,11 @@ class SysCollisionTest {
         }
     }
 
-    ERobot parent = new ERobot(new Vector(0,0));
+    ERobot parent = new ERobot(new PVector(0,0));
     cCollider parentCollider = new cColliderRobot(parent, null);
 
     //region Overlapping circles
-    ERobot ovCircle1 = new ERobot(new Vector(0,0)), ovCircle2 = new ERobot(new Vector(5,5));
+    ERobot ovCircle1 = new ERobot(new PVector(0,0)), ovCircle2 = new ERobot(new PVector(5,5));
     Circle ovCircleShape1 = new Circle(10), ovCircleShape2 = new Circle(5);
     cColliderRobot ovCircleCollider1 = new cColliderRobot(ovCircle1,ovCircleShape1),
             ovCircleCollider2 = new cColliderRobot(ovCircle2,ovCircleShape2);
@@ -49,7 +49,7 @@ class SysCollisionTest {
     //endregion
 
     //region Overlapping rects
-    ERobot ovRect1 = new ERobot(new Vector(0,0)),ovRect2 = new ERobot(new Vector(5,5));
+    ERobot ovRect1 = new ERobot(new PVector(0,0)),ovRect2 = new ERobot(new PVector(5,5));
     Rectangle ovRectShape1 = new Rectangle(5,5), ovRectShape2 = new Rectangle(7,7);
     cColliderRobot ovRectCollider1 = new cColliderRobot(ovRect1,ovRectShape1),
             ovRectCollider2 = new cColliderRobot(ovRect2,ovRectShape2);
@@ -57,7 +57,7 @@ class SysCollisionTest {
     //endregion
 
     //region Non overlapping circles
-    ERobot novCircle1 = new ERobot(new Vector(0,0)), novCircle2 = new ERobot(new Vector(20,20));
+    ERobot novCircle1 = new ERobot(new PVector(0,0)), novCircle2 = new ERobot(new PVector(20,20));
     Circle novCircleShape1 = new Circle(10), novCircleShape2 = new Circle(5);
     cColliderRobot novCircleCollider1 = new cColliderRobot(novCircle1,novCircleShape1),
             novCircleCollider2 = new cColliderRobot(novCircle2,novCircleShape2);
@@ -65,7 +65,7 @@ class SysCollisionTest {
     //endregion
 
     //region Non overlapping rects
-    ERobot novRect1 = new ERobot(new Vector(0,0)),novRect2 = new ERobot(new Vector(5,5));
+    ERobot novRect1 = new ERobot(new PVector(0,0)),novRect2 = new ERobot(new PVector(5,5));
     Rectangle novRectShape1 = new Rectangle(5,5), novRectShape2 = new Rectangle(7,7);
     cColliderRobot novRectCollider1 = new cColliderRobot(novRect1,novRectShape1),
             novRectCollider2 = new cColliderRobot(novRect2,novRectShape2);
@@ -73,7 +73,7 @@ class SysCollisionTest {
     //endregion
 
     //region Overlapping rect-circle
-    ERobot ovrcRect = new ERobot(new Vector(0,0)), ovrcCircle = new ERobot(new Vector(5,5));
+    ERobot ovrcRect = new ERobot(new PVector(0,0)), ovrcCircle = new ERobot(new PVector(5,5));
     Shape ovrcRectShape = new Rectangle(10,10), ovrcCircleShape = new Circle(5);
     cColliderRobot ovrcRectCollider = new cColliderRobot(ovrcRect,ovrcRectShape),
     ovrcCircleCollider = new cColliderRobot(ovrcCircle,ovrcCircleShape);
@@ -81,7 +81,7 @@ class SysCollisionTest {
     //endregion
 
     //region Non overlapping rect-circle
-    ERobot novrcRect = new ERobot(new Vector(0,0)), novrcCircle = new ERobot(new Vector(50,50));
+    ERobot novrcRect = new ERobot(new PVector(0,0)), novrcCircle = new ERobot(new PVector(50,50));
     Shape novrcRectShape = new Rectangle(10,10), novrcCircleShape = new Circle(5);
     cColliderRobot novrcRectCollider = new cColliderRobot(novrcRect,novrcRectShape),
             novrcCircleCollider = new cColliderRobot(novrcCircle,novrcCircleShape);
@@ -95,7 +95,7 @@ class SysCollisionTest {
     @Test
     void test_addComponents() {
         ASystem temp = new SysCollision();
-        temp.addComponents(List.of(new Component[]{parentCollider, new cCEU(parent, null)}));
+        temp.addComponents(List.of(new PComponent[]{parentCollider, new cCEU(parent, null)}));
         assertEquals(1, temp.getComponents().size());
     }
 
@@ -167,7 +167,7 @@ class SysCollisionTest {
     @Test
     void test_doesItCallEventsCorrectly() throws Exception {
         SysCollision testSystem = new SysCollision();
-        ERobot robot1 = new ERobot(new Vector(0,0)), robot2 = new ERobot(new Vector(100,100));
+        ERobot robot1 = new ERobot(new PVector(0,0)), robot2 = new ERobot(new PVector(100,100));
 
         robot1.setID(0);
         robot2.setID(1);
@@ -189,7 +189,7 @@ class SysCollisionTest {
         assertFalse(coll1.onCollidingCalled || coll1.onExitCalled
                 || coll2.onCollidingCalled || coll2.onExitCalled);
         //now we make them collide
-        robot1.setPosition(new Vector(100,100));
+        robot1.setPosition(new PVector(100,100));
 
         testSystem.run();
 
@@ -201,7 +201,7 @@ class SysCollisionTest {
         assertTrue(coll1.onCollidingCalled && coll2.onCollidingCalled &&
                 !coll1.onExitCalled && !coll2.onExitCalled);
         //now we separate and OnExt should be called
-        robot1.setPosition(new Vector(0,0));
+        robot1.setPosition(new PVector(0,0));
 
         testSystem.run();
 
@@ -217,8 +217,8 @@ class SysCollisionTest {
     @Test
     void test_checkInCircle() throws Exception {
         SysCollision sys = new SysCollision();
-        ERobot robot1 = new ERobot(new Vector(0,0)), robot2 = new ERobot(new Vector(100,100))
-        ,robot3 = new ERobot(new Vector(30,30));
+        ERobot robot1 = new ERobot(new PVector(0,0)), robot2 = new ERobot(new PVector(100,100))
+        ,robot3 = new ERobot(new PVector(30,30));
 
         robot1.setID(0);
         robot2.setID(1);

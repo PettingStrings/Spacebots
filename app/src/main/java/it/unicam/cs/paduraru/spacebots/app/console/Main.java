@@ -1,14 +1,13 @@
 package it.unicam.cs.paduraru.spacebots.app.console;
 
-import it.unicam.cs.paduraru.engine.Entity;
+import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.GameController;
 import it.unicam.cs.paduraru.engine.Pair;
-import it.unicam.cs.paduraru.engine.Vector;
+import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Done;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Forever;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Move;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
@@ -26,7 +25,7 @@ public class Main {
         List<BotCommand> commands = new ArrayList<>();
 
         commands.add(new Forever());
-        commands.add(new Move(new Vector(1,1), 5));
+        commands.add(new Move(new PVector(1,1), 5));
         commands.add(new Done(0));
 
         SpaceBotsEnvironmentBuilder envBuilder = new SpaceBotsEnvironmentBuilder();
@@ -66,7 +65,7 @@ public class Main {
         System.out.println(">"+msg);
     }
 
-    private static void LogEntitiesLocations(List<Entity> entities) {
+    private static void LogEntitiesLocations(List<PEntity> entities) {
         entities.forEach(entity ->
                 System.out.println(entity.getClass() +
                         "-> x:" + entity.getPosition().getX() +

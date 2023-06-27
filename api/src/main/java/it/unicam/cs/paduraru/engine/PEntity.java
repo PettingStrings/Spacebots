@@ -1,13 +1,13 @@
 package it.unicam.cs.paduraru.engine;
 
-public class Entity {
+public class PEntity {
     private long ID;
-    private Vector position;
-    public Entity(Vector origin){
+    private PVector position;
+    public PEntity(PVector origin){
         position = origin;
     }
 
-    public Entity(){};
+    public PEntity(){};
     public void setID(long newID){
         ID = newID;
     }
@@ -15,28 +15,28 @@ public class Entity {
         return ID;
     }
 
-    protected void SetPosition(Vector newPosition){
+    protected void SetPosition(PVector newPosition){
         position = newPosition;
     }
 
-    public Vector GetPosition(){
+    public PVector GetPosition(){
         return position;
     }
 
-    public Vector getPosition() {
+    public PVector getPosition() {
         return position;
     }
 
-    public void setPosition(Vector other) {
+    public void setPosition(PVector other) {
         this.position = other;
     }
-    public <T extends  Component> T getComponent(){
+    public <T extends PComponent> T getComponent(){
         //Call game, environment, susmem la caca
         return null;
     }
     @Override
     public boolean equals(Object object){
-        if(!(object instanceof Entity)) return false;
-        return ID == ((Entity)object).ID;
+        if(!(object instanceof PEntity)) return false;
+        return ID == ((PEntity)object).ID;
     }
 }

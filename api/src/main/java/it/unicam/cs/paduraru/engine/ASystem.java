@@ -6,17 +6,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 abstract public class ASystem {
     protected AtomicInteger lastID = new AtomicInteger(0);
-    protected List<Component> components;
+    protected List<PComponent> components;
     protected ASystem(){
         components = new ArrayList<>();
     }
-    public abstract void addComponents(List<Component> components);
+    public abstract void addComponents(List<PComponent> components);
 
     public abstract void run() throws Exception;
 
-    public abstract void addComponent(Component comp);
+    public abstract void addComponent(PComponent comp);
 
-    public List<Component> getComponents() {
+    public List<PComponent> getComponents() {
         return components;
     }
 }
