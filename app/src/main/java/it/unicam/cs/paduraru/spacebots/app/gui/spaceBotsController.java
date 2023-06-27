@@ -1,17 +1,49 @@
 package it.unicam.cs.paduraru.spacebots.app.gui;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Tab;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import java.io.Console;
+
 public class spaceBotsController {
 
-    Shape swarmTool = new Circle(50), circleTool = new Circle(50), squareTool = new Rectangle(50,50);
-    Shape selectedTool = swarmTool;
+    //region Injected GUI
+    @FXML
+    AnchorPane simPane, mainPane;
+    @FXML
+    public Circle swarmTool, circleTool;
+    @FXML
+    public Rectangle rectTool;
+
+    @FXML
+    Tab entitiesTab;
+    //endregion
+
+    Shape selectedTool;
+
+
+    @FXML
+    void initialize() {
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(simPane.widthProperty());
+        clip.heightProperty().bind(simPane.heightProperty());
+        simPane.setClip(clip);
+
+        selectedTool = swarmTool;
+        swarmTool.setVisible(false);
+        rectTool.setVisible(false);
+        circleTool.setVisible(false);
+    }
+
     @FXML
     void onClick_AddSwarm(MouseEvent event) {
         testAlert("AddSwarm");
@@ -54,17 +86,23 @@ public class spaceBotsController {
 
     @FXML
     void onClick_SelectAddCircleTool(MouseEvent event) {
-        testAlert("Add Circle");
+        swarmTool.setVisible(false);
+        circleTool.setVisible(true);
+        rectTool.setVisible(false);
     }
 
     @FXML
     void onClick_SelectAddSquareTool(MouseEvent event) {
-        testAlert("Add Square");
+        swarmTool.setVisible(false);
+        circleTool.setVisible(false);
+        rectTool.setVisible(true);
     }
 
     @FXML
     void onClick_SelectAddSwarmTool(MouseEvent event) {
-        testAlert("Add Swarm");
+        swarmTool.setVisible(true);
+        circleTool.setVisible(false);
+        rectTool.setVisible(false);
     }
 
     @FXML
@@ -106,8 +144,22 @@ public class spaceBotsController {
     }
 
     public void onMove_HoverTool(MouseEvent mouseEvent) {
-        if(selectedTool.equals(swarmTool)){
+        double x = mouseEvent.getX(), y = mouseEvent.getY();
 
-        }
+        swarmTool.setLayoutX(x);
+        swarmTool.setLayoutY(y);
+
+        circleTool.setLayoutX(x);
+        circleTool.setLayoutY(y);
+
+        rectTool.setLayoutX(x-rectTool.getWidth()/2);
+        rectTool.setLayoutY(y-rectTool.getHeight()/2);
+    }
+
+    public void onSelectionChanged_EntitiesTab(Event event) {
+        if(entitiesTab.isSelected())
+            selectedTool.setVisible(true);
+        else
+            selectedTool.setVisible(false);
     }
 }
