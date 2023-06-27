@@ -4,8 +4,8 @@ import it.unicam.cs.paduraru.engine.*;
 import it.unicam.cs.paduraru.engine.ASystem;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderGeneric;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Circle;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Rectangle;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PRectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class SysCollision extends ASystem {
 
     public List<cCollider> checkInCircle(PVector origin, int radius) throws Exception {
         PEntity temp = new PEntity(origin);
-        cColliderGeneric coll = new cColliderGeneric(temp, new Circle(radius));
+        cColliderGeneric coll = new cColliderGeneric(temp, new PCircle(radius));
         List<Pair<cCollider, cCollider>> pairs =
                 components.stream().map(component -> new Pair<cCollider,cCollider>(coll, (cCollider) component)).collect(Collectors.toList());
 
@@ -98,25 +98,25 @@ public class SysCollision extends ASystem {
         return isColliding;
     }
     public static CollisionType getCollisionType(Pair<cCollider, cCollider> pair) throws Exception {
-        if(pair.getFirst().getShape() instanceof Circle){
+        if(pair.getFirst().getShape() instanceof PCircle){
 
-            if(pair.getSecond().getShape() instanceof Circle)
+            if(pair.getSecond().getShape() instanceof PCircle)
                 return CollisionType.CIRCLE_CIRCLE;
-            else if(pair.getSecond().getShape() instanceof Rectangle)
+            else if(pair.getSecond().getShape() instanceof PRectangle)
                 return CollisionType.CIRCLE_RECT;
 
-        }else if(pair.getFirst().getShape() instanceof Rectangle){
-            if(pair.getSecond().getShape() instanceof Circle)
+        }else if(pair.getFirst().getShape() instanceof PRectangle){
+            if(pair.getSecond().getShape() instanceof PCircle)
                 return CollisionType.RECT_CIRCLE;
-            else if(pair.getSecond().getShape() instanceof Rectangle)
+            else if(pair.getSecond().getShape() instanceof PRectangle)
                 return CollisionType.RECT_RECT;
         }
         throw new Exception("Unknown shapes: " + pair.getFirst().toString() + " " + pair.getSecond().getClass().toString());
     }
     public static boolean collisionCircleToCircle(Pair<cCollider, cCollider> pair) {
         PVector position1 = pair.getFirst().getPosition(), position2 = pair.getSecond().getPosition();
-        int r1  = ((Circle)pair.getFirst().getShape()).getRadius(),
-                r2 = ((Circle)pair.getSecond().getShape()).getRadius();
+        int r1  = ((PCircle)pair.getFirst().getShape()).getRadius(),
+                r2 = ((PCircle)pair.getSecond().getShape()).getRadius();
 
         return Math.abs(Math.pow(position1.getX() - position2.getX(), 2) +
                 Math.pow(position1.getY() - position2.getY(), 2))
@@ -124,8 +124,8 @@ public class SysCollision extends ASystem {
     }
 
     public static boolean collisionCircleToRect(Pair<cCollider, cCollider> pair) {
-        Circle circle = (Circle)pair.getFirst().getShape();
-        Rectangle rect = (Rectangle)pair.getSecond().getShape();
+        PCircle circle = (PCircle)pair.getFirst().getShape();
+        PRectangle rect = (PRectangle)pair.getSecond().getShape();
 
         PVector cPos = pair.getFirst().getPosition(), rPos = pair.getSecond().getPosition();
 
@@ -152,8 +152,8 @@ public class SysCollision extends ASystem {
         PVector position1 = pair.getFirst().getPosition(),
                 position2 = pair.getSecond().getPosition();
 
-        Rectangle rect1 = (Rectangle)pair.getFirst().getShape(),
-                rect2 = (Rectangle)pair.getFirst().getShape();
+        PRectangle rect1 = (PRectangle)pair.getFirst().getShape(),
+                rect2 = (PRectangle)pair.getFirst().getShape();
 
         return  position1.getX() < position2.getX() + rect2.getWidth() &&
                 position2.getX() + rect1.getWidth() > position2.getY() &&

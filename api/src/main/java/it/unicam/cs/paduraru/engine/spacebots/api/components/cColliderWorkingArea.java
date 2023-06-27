@@ -1,10 +1,10 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
 public class cColliderWorkingArea extends cCollider{
-    public cColliderWorkingArea(ELabelledArea parent, Shape shape) {
+    public cColliderWorkingArea(ELabelledArea parent, PShape shape) {
         super(parent, shape);
     }
 //code smell

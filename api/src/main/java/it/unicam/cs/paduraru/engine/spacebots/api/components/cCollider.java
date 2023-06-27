@@ -3,13 +3,13 @@ package it.unicam.cs.paduraru.engine.spacebots.api.components;
 import it.unicam.cs.paduraru.engine.PComponent;
 import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.PVector;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
 public abstract class cCollider extends PComponent {
-    Shape shape;
+    PShape shape;
     PVector position;
 
-    public cCollider(PEntity parent, Shape shape) {
+    public cCollider(PEntity parent, PShape shape) {
         super(parent);
         position = parent.GetPosition();
         this.shape = shape;
@@ -17,7 +17,7 @@ public abstract class cCollider extends PComponent {
 
     public abstract void OnColliding(cCollider second);
 
-    public Shape getShape() {
+    public PShape getShape() {
         return shape;
     }
 

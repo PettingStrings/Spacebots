@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.shapes;
 
-public class Circle extends Shape {
-    public Circle(int radius){
+public class PCircle extends PShape {
+    public PCircle(int radius){
         data = new int[]{radius};
     }
 

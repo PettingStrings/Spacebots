@@ -4,7 +4,7 @@ import it.unicam.cs.paduraru.engine.*;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Circle;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class FollowTest {
 
         signaler1.signal(label);
 
-        Circle circle = new Circle(10);
+        PCircle circle = new PCircle(10);
 
         cColliderRobot followerCollider = new cColliderRobot(follower, circle),
         signaler1Collider = new cColliderRobot(signaler1, circle);
@@ -56,7 +56,7 @@ class FollowTest {
 
         signaler1.signal(label);
 
-        Circle circle = new Circle(10);
+        PCircle circle = new PCircle(10);
 
         cColliderRobot followerCollider = new cColliderRobot(follower, circle),
                 signaler1Collider = new cColliderRobot(signaler1, circle),

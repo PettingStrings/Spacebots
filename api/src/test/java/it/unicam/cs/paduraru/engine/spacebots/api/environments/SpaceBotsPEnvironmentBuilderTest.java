@@ -15,7 +15,7 @@ class SpaceBotsPEnvironmentBuilderTest {
         SpaceBotsEnvironmentBuilder builder = new SpaceBotsEnvironmentBuilder();
 
         try {
-            builder.createSwarm(new Pair<>(-10,10), new Pair<>(-10, 10), 50, new ArrayList<>());
+            builder.createSwarm(new Pair<>(-10.0,10.0), new Pair<>(-10.0, 10.0), 50, new ArrayList<>());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,13 +1,15 @@
 package it.unicam.cs.paduraru.engine;
 
+import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PEnvironment {
 
     List<PEntity> entities;
-    List<ASystem> systems;
     List<PComponent> components;
+    List<ASystem> systems;
 
     public PEnvironment(){
         entities = new ArrayList<PEntity>();
@@ -58,5 +60,11 @@ public class PEnvironment {
     public void addComponents(List<PComponent> components) {
         for (PComponent comp: components)
             addComponent(comp);
+    }
+
+    public List<PComponent> getComponentOf(PEntity pEntity, Class<cColliderRobot> cColliderRobotClass) {
+        return components.stream()
+                .filter(pComponent -> pComponent instanceof cColliderRobot && pComponent.parent.equals(pEntity))
+                .toList();
     }
 }

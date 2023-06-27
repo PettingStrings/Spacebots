@@ -21,7 +21,7 @@ public class Main {
         System.out.println("==== Console App =====");
         System.out.println("====    START    =====\n");
 
-        Pair<Integer,Integer> rangeX = new Pair<>(-50,50), rangeY = new Pair<>(-50,50) ;
+        Pair<Double,Double> rangeX = new Pair<>(-50.0,50.0), rangeY = new Pair<>(-50.0,50.0) ;
         List<BotCommand> commands = new ArrayList<>();
 
         commands.add(new Forever());

@@ -6,9 +6,9 @@ import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Circle;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Rectangle;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PRectangle;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,7 +20,7 @@ class SysCollisionTest {
     public class cColliderTest extends cCollider{
         public boolean onExitCalled = false, onCollidingCalled = false;
 
-        public cColliderTest(PEntity parent, Shape shape) {
+        public cColliderTest(PEntity parent, PShape shape) {
             super(parent, shape);
         }
 
@@ -42,7 +42,7 @@ class SysCollisionTest {
 
     //region Overlapping circles
     ERobot ovCircle1 = new ERobot(new PVector(0,0)), ovCircle2 = new ERobot(new PVector(5,5));
-    Circle ovCircleShape1 = new Circle(10), ovCircleShape2 = new Circle(5);
+    PCircle ovCircleShape1 = new PCircle(10), ovCircleShape2 = new PCircle(5);
     cColliderRobot ovCircleCollider1 = new cColliderRobot(ovCircle1,ovCircleShape1),
             ovCircleCollider2 = new cColliderRobot(ovCircle2,ovCircleShape2);
     Pair<cCollider,cCollider> ovCirclesPair = new Pair<>(ovCircleCollider1,ovCircleCollider2);
@@ -50,7 +50,7 @@ class SysCollisionTest {
 
     //region Overlapping rects
     ERobot ovRect1 = new ERobot(new PVector(0,0)),ovRect2 = new ERobot(new PVector(5,5));
-    Rectangle ovRectShape1 = new Rectangle(5,5), ovRectShape2 = new Rectangle(7,7);
+    PRectangle ovRectShape1 = new PRectangle(5,5), ovRectShape2 = new PRectangle(7,7);
     cColliderRobot ovRectCollider1 = new cColliderRobot(ovRect1,ovRectShape1),
             ovRectCollider2 = new cColliderRobot(ovRect2,ovRectShape2);
     Pair<cCollider,cCollider> ovRectPair = new Pair<>(ovRectCollider1,ovRectCollider2);
@@ -58,7 +58,7 @@ class SysCollisionTest {
 
     //region Non overlapping circles
     ERobot novCircle1 = new ERobot(new PVector(0,0)), novCircle2 = new ERobot(new PVector(20,20));
-    Circle novCircleShape1 = new Circle(10), novCircleShape2 = new Circle(5);
+    PCircle novCircleShape1 = new PCircle(10), novCircleShape2 = new PCircle(5);
     cColliderRobot novCircleCollider1 = new cColliderRobot(novCircle1,novCircleShape1),
             novCircleCollider2 = new cColliderRobot(novCircle2,novCircleShape2);
     Pair<cCollider,cCollider> novCirclesPair = new Pair<>(novCircleCollider1,novCircleCollider2);
@@ -66,7 +66,7 @@ class SysCollisionTest {
 
     //region Non overlapping rects
     ERobot novRect1 = new ERobot(new PVector(0,0)),novRect2 = new ERobot(new PVector(5,5));
-    Rectangle novRectShape1 = new Rectangle(5,5), novRectShape2 = new Rectangle(7,7);
+    PRectangle novRectShape1 = new PRectangle(5,5), novRectShape2 = new PRectangle(7,7);
     cColliderRobot novRectCollider1 = new cColliderRobot(novRect1,novRectShape1),
             novRectCollider2 = new cColliderRobot(novRect2,novRectShape2);
     Pair<cCollider,cCollider> novRectPair = new Pair<>(novRectCollider1,novRectCollider2);
@@ -74,7 +74,7 @@ class SysCollisionTest {
 
     //region Overlapping rect-circle
     ERobot ovrcRect = new ERobot(new PVector(0,0)), ovrcCircle = new ERobot(new PVector(5,5));
-    Shape ovrcRectShape = new Rectangle(10,10), ovrcCircleShape = new Circle(5);
+    PShape ovrcRectShape = new PRectangle(10,10), ovrcCircleShape = new PCircle(5);
     cColliderRobot ovrcRectCollider = new cColliderRobot(ovrcRect,ovrcRectShape),
     ovrcCircleCollider = new cColliderRobot(ovrcCircle,ovrcCircleShape);
     Pair<cCollider,cCollider> ovRcPair = new Pair<>(ovrcRectCollider,ovrcCircleCollider);
@@ -82,7 +82,7 @@ class SysCollisionTest {
 
     //region Non overlapping rect-circle
     ERobot novrcRect = new ERobot(new PVector(0,0)), novrcCircle = new ERobot(new PVector(50,50));
-    Shape novrcRectShape = new Rectangle(10,10), novrcCircleShape = new Circle(5);
+    PShape novrcRectShape = new PRectangle(10,10), novrcCircleShape = new PCircle(5);
     cColliderRobot novrcRectCollider = new cColliderRobot(novrcRect,novrcRectShape),
             novrcCircleCollider = new cColliderRobot(novrcCircle,novrcCircleShape);
     Pair<cCollider,cCollider> novRcPair = new Pair<>(novrcRectCollider,novrcCircleCollider);
@@ -172,8 +172,8 @@ class SysCollisionTest {
         robot1.setID(0);
         robot2.setID(1);
 
-        cColliderTest coll1 = new cColliderTest(robot1, new Circle(10)),
-                coll2 = new cColliderTest(robot2, new Circle(10));
+        cColliderTest coll1 = new cColliderTest(robot1, new PCircle(10)),
+                coll2 = new cColliderTest(robot2, new PCircle(10));
 
         coll1.setID(0);
         coll2.setID(1);
@@ -224,9 +224,9 @@ class SysCollisionTest {
         robot2.setID(1);
         robot3.setID(3);
 
-        cColliderTest coll1 = new cColliderTest(robot1, new Circle(50)),
-                coll2 = new cColliderTest(robot2, new Circle(10)),
-                coll3 = new cColliderTest(robot3, new Circle(10));
+        cColliderTest coll1 = new cColliderTest(robot1, new PCircle(50)),
+                coll2 = new cColliderTest(robot2, new PCircle(10)),
+                coll3 = new cColliderTest(robot3, new PCircle(10));
 
         sys.addComponent(coll1);
         sys.addComponent(coll2);

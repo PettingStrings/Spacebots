@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.shapes;
 
-public class Rectangle extends Shape {
-    public Rectangle(int width, int height){
+public class PRectangle extends PShape {
+    public PRectangle(int width, int height){
         data = new int[]{width, height};
     }
 

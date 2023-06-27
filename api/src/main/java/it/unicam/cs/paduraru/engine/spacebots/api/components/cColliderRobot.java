@@ -3,10 +3,10 @@ package it.unicam.cs.paduraru.engine.spacebots.api.components;
 import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
-import it.unicam.cs.paduraru.engine.spacebots.api.shapes.Shape;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
 public class cColliderRobot extends cCollider{
-    public cColliderRobot(ERobot parent, Shape shape) {
+    public cColliderRobot(ERobot parent, PShape shape) {
         super(parent, shape);
     }
 

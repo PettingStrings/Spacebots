@@ -1,5 +1,12 @@
 package it.unicam.cs.paduraru.spacebots.app.gui;
 
+import it.unicam.cs.paduraru.engine.PVector;
+import it.unicam.cs.paduraru.engine.Pair;
+import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
+import it.unicam.cs.paduraru.engine.spacebots.api.commands.Done;
+import it.unicam.cs.paduraru.engine.spacebots.api.commands.Forever;
+import it.unicam.cs.paduraru.engine.spacebots.api.commands.Move;
+import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -13,6 +20,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 import java.io.Console;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class spaceBotsController {
 
@@ -30,6 +39,7 @@ public class spaceBotsController {
 
     Shape selectedTool;
 
+    GUISpaceBotsEnvBuilder guiEnvBuilder = new GUISpaceBotsEnvBuilder();
 
     @FXML
     void initialize() {
@@ -89,6 +99,7 @@ public class spaceBotsController {
         swarmTool.setVisible(false);
         circleTool.setVisible(true);
         rectTool.setVisible(false);
+        selectedTool = circleTool;
     }
 
     @FXML
@@ -96,6 +107,7 @@ public class spaceBotsController {
         swarmTool.setVisible(false);
         circleTool.setVisible(false);
         rectTool.setVisible(true);
+        selectedTool = rectTool;
     }
 
     @FXML
@@ -103,6 +115,7 @@ public class spaceBotsController {
         swarmTool.setVisible(true);
         circleTool.setVisible(false);
         rectTool.setVisible(false);
+        selectedTool = swarmTool;
     }
 
     @FXML
@@ -161,5 +174,36 @@ public class spaceBotsController {
             selectedTool.setVisible(true);
         else
             selectedTool.setVisible(false);
+    }
+
+    public void onClick_CreateCircle(MouseEvent mouseEvent) {
+        testAlert("Create Circle");
+    }
+
+    public void onClick_CreateSwarm(MouseEvent mouseEvent) {
+        Pair<Double,Double> rangeX = new Pair<>(swarmTool.getLayoutX() - swarmTool.getRadius(),
+                swarmTool.getLayoutX() + swarmTool.getRadius()),
+
+                rangeY = new Pair<>(swarmTool.getLayoutY() - swarmTool.getRadius(),
+                        swarmTool.getLayoutY() + swarmTool.getRadius());
+
+        try {
+            guiEnvBuilder.createSwarm(rangeX, rangeY, 5,
+                    Arrays.stream(new BotCommand[]{new Forever(), new Move(new PVector(1,1), 5), new Done(0)}).toList());
+        } catch (Exception e) {
+            testAlert("Error Creating Swarm :( :");
+            System.out.println(e.getMessage());
+        }
+        guiEnvBuilder.getGuiEntities().forEach(guiEntity ->
+        {simPane.getChildren().add(guiEntity.shape);});
+        showEntities();
+    }
+
+    private void showEntities() {
+
+    }
+
+    public void onClick_CreateSquare(MouseEvent mouseEvent) {
+        testAlert("Create Square");
     }
 }
