@@ -5,8 +5,8 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 
 public class Move extends BotCommand{
     PVector direction;
-    int velocity;
-    public Move(PVector direction, int velocity){
+    double velocity;
+    public Move(PVector direction, double velocity){
         this.direction = direction;
         this.velocity = velocity;
     }
@@ -19,12 +19,7 @@ public class Move extends BotCommand{
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public Object deepCopy() {
-        return new Move(this.direction,this.velocity);
+        return new Move((PVector) this.direction.deepCopy(),this.velocity);
     }
 }

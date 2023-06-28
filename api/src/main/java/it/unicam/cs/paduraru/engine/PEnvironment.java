@@ -1,7 +1,5 @@
 package it.unicam.cs.paduraru.engine;
 
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;

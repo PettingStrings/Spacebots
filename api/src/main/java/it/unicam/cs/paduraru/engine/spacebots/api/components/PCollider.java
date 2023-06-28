@@ -5,32 +5,19 @@ import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
-import java.util.Objects;
-
-public class cCollider extends PComponent {
+public abstract class PCollider extends PComponent {
     PShape shape;
     PVector position;
-
-    public cCollider(PEntity parent, PShape shape) {
+    public PCollider(PEntity parent, PShape shape) {
         super(parent);
+        this.position = parent.GetPosition();
+        this.shape = shape;
+    }
+    protected PCollider(PComponent component, PShape shape) {
+        super(component);
         position = parent.GetPosition();
         this.shape = shape;
     }
-
-    protected cCollider(PComponent com, PShape shape) {
-        super(com);
-        position = parent.GetPosition();
-        this.shape = shape;
-    }
-
-    protected cCollider(cCollider col){
-        this(col, col.shape);
-    }
-
-    public void OnColliding(cCollider second){
-
-    }
-
     public PShape getShape() {
         return shape;
     }
@@ -39,13 +26,6 @@ public class cCollider extends PComponent {
         return parent.getPosition();
     }
 
-    public void OnExit(cCollider second){
-
-    }
-
-    @Override
-    public Object deepCopy() {
-        return new cCollider((PComponent) super.deepCopy(),(PShape)this.shape.deepCopy());
-    }
-
+    public abstract void OnExit(PCollider second);
+    public abstract void OnColliding(PCollider second);
 }

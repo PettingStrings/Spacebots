@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class cCEUTest {
+class PCEUTest {
 
     @Test
     void executeNextLine() {
@@ -23,7 +23,7 @@ class cCEUTest {
         commands.add(new Move(new PVector(1,0),1));
         commands.add(new Done(0));
 
-        cCEU ceu = new cCEU(robot, commands);
+        PCEU ceu = new PCEU(robot, commands);
 
         for (int i = 0; i < 100; i++) {
             assertEquals(0, ceu.instructionPointer);

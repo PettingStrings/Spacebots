@@ -4,7 +4,6 @@ import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.PEntity;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class ERobot extends PEntity {
     private List<PLabel> signaledLabels;
     private PLabel followingLabel;
     private PVector direction;//Per colpa del move random devo memorizzare la velocità qui
-    private int velocity;
+    private double velocity;
 
     public ERobot(PVector origin) {
         super();
@@ -87,7 +86,7 @@ public class ERobot extends PEntity {
         signaledLabels.remove(label);
     }
 
-    public void setVelocity(int velocity) {
+    public void setVelocity(double velocity) {
         this.velocity = velocity;
     }
 

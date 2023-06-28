@@ -16,11 +16,6 @@ public class Signal extends BotCommand{
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public Object deepCopy() {
         return new Signal((PLabel) this.label.deepCopy());
     }

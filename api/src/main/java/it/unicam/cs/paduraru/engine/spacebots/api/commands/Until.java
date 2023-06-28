@@ -21,11 +21,6 @@ public class Until extends BotCommand{
        return instructionPointer+1;
     }
 
-    @Override
-    public void initialize() {
-
-    }
-
     public int getDoneIp() {
         return doneIp;
     }

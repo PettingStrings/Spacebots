@@ -5,7 +5,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Done;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Forever;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Move;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ class SysCEUTest {
         programs.get(1).add(new Move(new PVector(0,1),1));
         programs.get(1).add(new Done(0));
 
-        cCEU ceu1 = new cCEU(bot1, programs.get(0)), ceu2 = new cCEU(bot2, programs.get(1));
+        PCEU ceu1 = new PCEU(bot1, programs.get(0)), ceu2 = new PCEU(bot2, programs.get(1));
 
         sys.addComponent(ceu1);
         sys.addComponent(ceu2);
@@ -42,20 +42,20 @@ class SysCEUTest {
 
         for (int i = 0; i < 100; i++) {
 
-            assertEquals(0, ((cCEU)sys.getComponents().get(0)).getInstructionPointer());
-            assertEquals(0, ((cCEU)sys.getComponents().get(1)).getInstructionPointer());
+            assertEquals(0, ((PCEU)sys.getComponents().get(0)).getInstructionPointer());
+            assertEquals(0, ((PCEU)sys.getComponents().get(1)).getInstructionPointer());
 
             sys.run();
 
-            assertEquals(1, ((cCEU)sys.getComponents().get(0)).getInstructionPointer());
-            assertEquals(1, ((cCEU)sys.getComponents().get(1)).getInstructionPointer());
+            assertEquals(1, ((PCEU)sys.getComponents().get(0)).getInstructionPointer());
+            assertEquals(1, ((PCEU)sys.getComponents().get(1)).getInstructionPointer());
 
             sys.run();
 
             assertTrue(bot1.getPosition().equals(new PVector(1+i,0)));
-            assertEquals(2, ((cCEU)sys.getComponents().get(0)).getInstructionPointer());
+            assertEquals(2, ((PCEU)sys.getComponents().get(0)).getInstructionPointer());
             assertTrue(bot2.getPosition().equals(new PVector(10,11+i)));
-            assertEquals(2, ((cCEU)sys.getComponents().get(1)).getInstructionPointer());
+            assertEquals(2, ((PCEU)sys.getComponents().get(1)).getInstructionPointer());
 
             sys.run();
 

@@ -3,7 +3,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 import it.unicam.cs.paduraru.engine.GameController;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class Follow extends BotCommand{
     @Override
     public int execute(ERobot target, int instructionPointer) {
 
-        List<cCollider> foundTargets;
+        List<PCollider> foundTargets;
 
         try {
              foundTargets = GameController.checkInCircle(target.getPosition(), dist);
@@ -67,13 +67,7 @@ public class Follow extends BotCommand{
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public Object deepCopy() {
-        Follow command = new Follow((PLabel) this.label.deepCopy(), this.dist, this.velocity);
-        return command;
+        return new Follow((PLabel) this.label.deepCopy(), this.dist, this.velocity);
     }
 }

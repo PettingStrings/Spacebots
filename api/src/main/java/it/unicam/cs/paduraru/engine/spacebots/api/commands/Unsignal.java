@@ -15,11 +15,6 @@ public class Unsignal extends BotCommand{
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public Object deepCopy() {
         return new Unsignal((PLabel) this.label.deepCopy());
     }

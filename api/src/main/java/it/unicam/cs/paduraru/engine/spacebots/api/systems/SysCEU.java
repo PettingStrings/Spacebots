@@ -3,9 +3,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.systems;
 import it.unicam.cs.paduraru.engine.DeepCopy;
 import it.unicam.cs.paduraru.engine.PComponent;
 import it.unicam.cs.paduraru.engine.PSystem;
-import it.unicam.cs.paduraru.engine.Pair;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,12 +16,12 @@ public class SysCEU extends PSystem implements DeepCopy {
 
     @Override
     public void run(){
-        components.stream().map(component -> (cCEU)component).forEach(cCEU::executeNextLine);
+        components.stream().map(component -> (PCEU)component).forEach(PCEU::executeNextLine);
     }
 
     @Override
     public void addComponent(PComponent comp) {
-        if(!(comp instanceof cCEU)) return;
+        if(!(comp instanceof PCEU)) return;
         components.add(comp);
     }
 

@@ -5,7 +5,7 @@ import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.Pair;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.*;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
@@ -235,8 +235,8 @@ public class SpaceBotsController {
                     try {
                         return new Pair<PVector, Shape>(
                                 ent.GetPosition(), GUIAppUtil.convertToFXShape (
-                                ((cCollider)GameController.getEnvironment(GameController.getCurrentEnvironment())
-                                .getComponentOf(ent, cCollider.class).get(0)).getShape())
+                                ((PCollider)GameController.getEnvironment(GameController.getCurrentEnvironment())
+                                .getComponentOf(ent, PCollider.class).get(0)).getShape())
                         );
                     } catch (Exception e) {
                         throw new RuntimeException(e);

@@ -2,7 +2,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.*;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.PColliderRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
@@ -23,8 +23,8 @@ class FollowTest {
 
         PCircle circle = new PCircle(10);
 
-        cColliderRobot followerCollider = new cColliderRobot(follower, circle),
-        signaler1Collider = new cColliderRobot(signaler1, circle);
+        PColliderRobot followerCollider = new PColliderRobot(follower, circle),
+        signaler1Collider = new PColliderRobot(signaler1, circle);
 
         PEnvironment env = new PEnvironment();
 
@@ -58,9 +58,9 @@ class FollowTest {
 
         PCircle circle = new PCircle(10);
 
-        cColliderRobot followerCollider = new cColliderRobot(follower, circle),
-                signaler1Collider = new cColliderRobot(signaler1, circle),
-                signaler2Collider = new cColliderRobot(signaler2, circle);
+        PColliderRobot followerCollider = new PColliderRobot(follower, circle),
+                signaler1Collider = new PColliderRobot(signaler1, circle),
+                signaler2Collider = new PColliderRobot(signaler2, circle);
 
         PEnvironment env = new PEnvironment();
 

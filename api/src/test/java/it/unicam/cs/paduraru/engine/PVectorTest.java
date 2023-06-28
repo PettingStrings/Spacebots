@@ -18,6 +18,7 @@ class PVectorTest {
     void divScalar() {
         PVector v1 = new PVector(50,50);
         assertTrue(v1.divScalar(2).equals(new PVector(25,25)));
+        assertTrue(v1.divScalar(0).equals(new PVector(0,0)));
     }
 
     @Test

@@ -37,8 +37,7 @@ public class PVector implements DeepCopy{
         return new PVector(divide(x,i), divide(y,i));
     }
     private double divide(double dividend, double divisor){
-        if(dividend == 0 && divisor == 0) return 0;
-
+        if(dividend == 0 || divisor == 0) return 0;
         return dividend/divisor;
     }
     public PVector mulScalar(double i){
@@ -56,7 +55,6 @@ public class PVector implements DeepCopy{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        //Enhaced instanceof Java 14+
         if (!(o instanceof PVector vector)) return false;
         return x == vector.x && y == vector.y;
     }

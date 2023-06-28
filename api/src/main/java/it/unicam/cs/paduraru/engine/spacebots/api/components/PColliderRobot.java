@@ -6,19 +6,17 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
-public class cColliderRobot extends cCollider{
-    public cColliderRobot(ERobot parent, PShape shape) {
+public class PColliderRobot extends PCollider {
+    public PColliderRobot(ERobot parent, PShape shape) {
         super(parent, shape);
     }
 
-    public cColliderRobot(cCollider cCollider, PShape shape) {
-        super(cCollider);
-        position = parent.GetPosition();
-        this.shape = shape;
+    private PColliderRobot(PComponent pComponent, PShape pShape) {
+        super(pComponent,pShape);
     }
 
     @Override
-    public void OnColliding(cCollider second) {
+    public void OnColliding(PCollider second) {
         //Possibiletà di aggiugnere collider specifici per ogni forma
         PEntity secondParent = second.getParent();
         if(secondParent instanceof ELabelledArea)
@@ -30,7 +28,7 @@ public class cColliderRobot extends cCollider{
     }
 
     @Override
-    public void OnExit(cCollider second) {
+    public void OnExit(PCollider second) {
         //Possibiletà di aggiugnere collider specifici per ogni forma
         PEntity secondParent = second.getParent();
         if(secondParent instanceof ELabelledArea)
@@ -43,6 +41,6 @@ public class cColliderRobot extends cCollider{
 
     @Override
     public Object deepCopy() {
-        return new cColliderRobot((cCollider) super.deepCopy(),(PShape)this.shape.deepCopy());
+        return new PColliderRobot((PComponent) super.deepCopy(),(PShape)this.shape.deepCopy());
     }
 }

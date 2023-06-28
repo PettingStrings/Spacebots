@@ -13,13 +13,7 @@ public class Done extends BotCommand{
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public Object deepCopy() {
-        Done command = new Done(this.ip);
-        return command;
+        return new Done(ip);
     }
 }

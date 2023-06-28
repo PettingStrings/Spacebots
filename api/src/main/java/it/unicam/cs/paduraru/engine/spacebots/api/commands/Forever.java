@@ -10,11 +10,6 @@ public class Forever extends BotCommand{
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public Object deepCopy() {
         return new Forever();
     }

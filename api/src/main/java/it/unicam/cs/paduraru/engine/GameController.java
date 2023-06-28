@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderGeneric;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.PColliderGeneric;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
 
@@ -67,7 +67,7 @@ public final class GameController {
         environments.get(currentEnvironment).run();
     }
 
-    public static List<cCollider> checkInCircle(PVector origin, int radius) throws Exception {
+    public static List<PCollider> checkInCircle(PVector origin, int radius) throws Exception {
         SysCollision sys = (SysCollision) environments.get(currentEnvironment).getSystems().stream().
                 filter(system -> system instanceof SysCollision).collect(Collectors.toList()).get(0);
         if(sys == null) throw new Exception("Current environment has no SysCollision");
@@ -75,15 +75,15 @@ public final class GameController {
         PEnvironment env = environments.get(currentEnvironment);
 
         PEntity tempEnt = new PEntity(origin);
-        cColliderGeneric tempColl = new cColliderGeneric(tempEnt, new PCircle(radius));
+        PColliderGeneric tempColl = new PColliderGeneric(tempEnt, new PCircle(radius));
         env.addEntity(tempEnt);
 
-        List<Pair<cCollider, cCollider>> pairs =
+        List<Pair<PCollider, PCollider>> pairs =
                 env.components.stream().map(component ->
-                        new Pair<cCollider,cCollider>(tempColl, (cCollider) component)).collect(Collectors.toList());
+                        new Pair<PCollider, PCollider>(tempColl, (PCollider) component)).collect(Collectors.toList());
         //sys.isColliding lancia un eccezione, quindi non posso usare le stream
-        List<cCollider> collidingColliders = new ArrayList<>();
-        for (Pair<cCollider, cCollider> pair: pairs) {
+        List<PCollider> collidingColliders = new ArrayList<>();
+        for (Pair<PCollider, PCollider> pair: pairs) {
             if(sys.isColliding(pair))
                 collidingColliders.add(pair.getSecond());
         }
