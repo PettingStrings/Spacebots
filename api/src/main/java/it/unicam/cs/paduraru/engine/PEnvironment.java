@@ -32,12 +32,10 @@ public class PEnvironment implements DeepCopy{
                 comp -> comp.parent = environment.entities.get(
                         environment.entities.indexOf(comp.parent)));
 
-        //DA MODIFICARE I SYSTEM VANNO RICREATI DA 0
-        //environment.systems = this.systems.stream().map(sys -> (PSystem)sys.deepCopy()).collect(Collectors.toList());
         for (var s: this.systems) {
             environment.systems.add((PSystem) s.deepCopy());
         }
-        environment.systems = environment.systems.stream()        .map(sys -> {sys.clear(); return sys;})
+        environment.systems = environment.systems.stream().map(sys -> {sys.clear(); return sys;})
                 .map(sys -> {sys.addComponents(environment.components); return sys;})
                 .collect(Collectors.toList());
 

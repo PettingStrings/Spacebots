@@ -8,6 +8,8 @@ import it.unicam.cs.paduraru.engine.spacebots.api.commands.*;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PRectangle;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -199,9 +201,8 @@ public class SpaceBotsController {
     }
 
     public void onClick_CreateCircle(MouseEvent mouseEvent) throws Exception {
-        PVector origin = new PVector(circleTool.getLayoutX() - circleTool.getRadius(),
-                circleTool.getLayoutY() - circleTool.getRadius());
-        envBuilder.addLabelledArea(new ELabelledArea(origin, new PLabel("prova")));
+        PVector origin = new PVector(circleTool.getLayoutX(), circleTool.getLayoutY());
+        envBuilder.addLabelledArea(new ELabelledArea(origin, new PLabel("prova")), new PCircle(20));
         UpdateSimArea();
     }
 
@@ -251,6 +252,9 @@ public class SpaceBotsController {
     }
 
     public void onClick_CreateSquare(MouseEvent mouseEvent) {
-        testAlert("Create Square");
+        PVector origin = new PVector(rectTool.getLayoutX(),
+                rectTool.getLayoutY());
+        envBuilder.addLabelledArea(new ELabelledArea(origin, new PLabel("prova")), new PRectangle(19,19));
+        UpdateSimArea();
     }
 }

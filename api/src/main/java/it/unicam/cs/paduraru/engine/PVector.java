@@ -2,8 +2,6 @@ package it.unicam.cs.paduraru.engine;
 
 import it.unicam.cs.paduraru.engine.spacebots.api.Util;
 
-import java.util.Objects;
-
 public class PVector implements DeepCopy{
     double x,y;
 
@@ -14,11 +12,7 @@ public class PVector implements DeepCopy{
         this.x = x;
         this.y = y;
     }
-
-    public static PVector random(double minX, double maxX, double minY, double maxY) {
-        return new PVector(Util.randInt(minX, maxX),Util.randInt(minY, maxY));
-    }
-
+    //region Getters-Setters
     public void SetX(double newVal){
         x = newVal;
     }
@@ -31,13 +25,21 @@ public class PVector implements DeepCopy{
     public double getY(){
         return y;
     }
-
+    //endregion
+    public static PVector random(double minX, double maxX, double minY, double maxY) {
+        return new PVector(Util.randDouble(minX, maxX), Util.randDouble(minY, maxY));
+    }
     public PVector add(PVector other) {
         return new PVector(x + other.getX(), y + other.getY());
     }
 
     public PVector divScalar(double i) {
-        return new PVector(x/i, y/i);
+        return new PVector(divide(x,i), divide(y,i));
+    }
+    private double divide(double dividend, double divisor){
+        if(dividend == 0 && divisor == 0) return 0;
+
+        return dividend/divisor;
     }
     public PVector mulScalar(double i){
         return new PVector(x*i, y*i);
@@ -48,19 +50,15 @@ public class PVector implements DeepCopy{
     public PVector normalize(){
         return divScalar(magnitude());
     }
-    public PVector distance(PVector from){
-        return new PVector(from.getX() - getX(), from.getY() - getY());
+    public PVector distance(PVector other){
+        return new PVector(other.getX() - getX(), other.getY() - getY());
     }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        //Enhaced instanceof Java 14+
         if (!(o instanceof PVector vector)) return false;
         return x == vector.x && y == vector.y;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
     }
 
     @Override

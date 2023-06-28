@@ -12,9 +12,11 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PRectangle;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
 
+import java.awt.*;
 import java.util.List;
 
 public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
@@ -41,9 +43,9 @@ public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
 
     }
 
-    public void addLabelledArea(ELabelledArea area) {
+    public void addLabelledArea(ELabelledArea area, PShape shape) {
         environment.addEntity(area);
-        environment.addComponent(new cColliderWorkingArea(area, new PCircle(20)));
+        environment.addComponent(new cColliderWorkingArea(area, shape));
     }
 
 
