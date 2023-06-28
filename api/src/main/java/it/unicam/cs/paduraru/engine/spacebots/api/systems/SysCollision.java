@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.systems;
 
 import it.unicam.cs.paduraru.engine.*;
-import it.unicam.cs.paduraru.engine.ASystem;
+import it.unicam.cs.paduraru.engine.PSystem;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderGeneric;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
@@ -11,7 +11,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SysCollision extends ASystem {
+public class SysCollision extends PSystem {
+
+    public enum CollisionType{ RECT_RECT, RECT_CIRCLE, CIRCLE_RECT, CIRCLE_CIRCLE }
+    List<Pair<cCollider, cCollider>> lastColliding;
+
+    public SysCollision(){
+        lastColliding = new ArrayList<>();
+    }
+    @Override
+    public void addComponents(List<PComponent> componentsToAdd) {
+        List<PComponent> newColliders = componentsToAdd.stream().filter(component -> component instanceof cCollider).toList();
+        components.addAll(newColliders);
+    }
+
+    @Override
+    public void run() throws Exception {
+        List<Pair<cCollider, cCollider>> currentColliding = getIntersectingColliderPairs();
+        resolveCollidingCollisions(currentColliding);
+        lastColliding.removeAll(currentColliding);
+        fireOnExit(lastColliding);
+        lastColliding = currentColliding;
+    }
+
+    private void fireOnExit(List<Pair<cCollider, cCollider>> lastColliding) {
+        lastColliding.forEach(pair -> pair.getFirst().OnExit(pair.getSecond()));
+    }
 
     public List<cCollider> checkInCircle(PVector origin, int radius) throws Exception {
         PEntity temp = new PEntity(origin);
@@ -28,39 +53,26 @@ public class SysCollision extends ASystem {
         return collidingColliders;
     }
 
-    public enum CollisionType{ RECT_RECT, RECT_CIRCLE, CIRCLE_RECT, CIRCLE_CIRCLE }
-    List<Pair<cCollider, cCollider>> lastColliding;
-
-    public SysCollision(){
-        lastColliding = new ArrayList<>();
-    }
-    @Override
-    public void addComponents(List<PComponent> componentsToAdd) {
-        List<PComponent> newColliders = componentsToAdd.stream().filter(component -> component instanceof cCollider).toList();
-        newColliders.forEach(component -> {component.setID(lastID.getAndAdd(1));});
-        this.components.addAll(newColliders);
-    }
-
-    @Override
-    public void run() throws Exception {
-        List<Pair<cCollider, cCollider>> currentColliding = getIntersectingColliderPairs();
-        resolveCollidingCollisions(currentColliding);
-        lastColliding.removeAll(currentColliding);
-        fireOnExit(lastColliding);
-        lastColliding = currentColliding;
-    }
-
-    private void fireOnExit(List<Pair<cCollider, cCollider>> lastColliding) {
-        lastColliding.forEach(pair -> pair.getFirst().OnExit(pair.getSecond()));
-    }
-
     @Override
     public void addComponent(PComponent comp) {
-        if(comp instanceof cCollider) {
-            comp.setID(lastID.getAndAdd(1));
+        if(comp instanceof cCollider)
             this.components.add(comp);
-        }
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Object deepCopy() {
+        SysCollision sys = new SysCollision();
+
+        sys.components = this.components.stream()
+                .map(com -> (PComponent)com.deepCopy()).collect(Collectors.toList());
+
+        sys.lastColliding = this.lastColliding.stream()
+                .map(comp -> (Pair<cCollider,cCollider>)comp.deepCopy()).collect(Collectors.toList());
+
+        return sys;
+    }
+
 //region Collision Detection-Resolution
     private void resolveCollidingCollisions(List<Pair<cCollider, cCollider>> pairs) {
         pairs.forEach(pair -> pair.getFirst().OnColliding(pair.getSecond()));

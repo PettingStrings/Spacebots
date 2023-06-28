@@ -15,4 +15,9 @@ public class PRectangle extends PShape {
     public int getHeight() {
         return data[1];
     }
+
+    @Override
+    public Object deepCopy() {
+        return new PRectangle(getWidth(),getHeight());
+    }
 }

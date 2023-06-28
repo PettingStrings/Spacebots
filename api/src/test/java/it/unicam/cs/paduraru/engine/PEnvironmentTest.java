@@ -1,5 +1,8 @@
 package it.unicam.cs.paduraru.engine;
 
+import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PEnvironmentTest {
 
-    private final class TestASystem extends ASystem {
+    private final class TestASystem extends PSystem {
 
         @Override
         public void addComponents(List<PComponent> components) {
@@ -25,6 +28,12 @@ class PEnvironmentTest {
         @Override
         public void addComponent(PComponent comp) {
             this.components.add(comp);
+        }
+
+        /*Unused*/
+        @Override
+        public Object deepCopy() {
+            return new TestASystem();
         }
     }
 
@@ -65,5 +74,17 @@ class PEnvironmentTest {
 
     @Test
     void addComponent() {
+    }
+
+    @Test
+    void test_DeepCopy(){
+        PEnvironment env = new PEnvironment();
+        ERobot robot = new ERobot(new PVector(0,0));
+        cColliderRobot coll = new cColliderRobot(robot, new PCircle(5));
+
+        env.addEntity(robot);
+        env.addComponent(coll);
+
+        PEnvironment copy = (PEnvironment) env.deepCopy();
     }
 }

@@ -8,4 +8,9 @@ public class PCircle extends PShape {
     public int getRadius() {
         return data[0];
     }
+
+    @Override
+    public Object deepCopy() {
+        return new PCircle(getRadius());
+    }
 }

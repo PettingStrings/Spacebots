@@ -1,12 +1,14 @@
 package it.unicam.cs.paduraru.engine.spacebots.api;
 
+import it.unicam.cs.paduraru.engine.DeepCopy;
+
 import java.util.Objects;
 
-public class PLabel {
+public class PLabel implements DeepCopy {
     String name;
 
-    public PLabel(String name) throws Exception {
-        if(!name.endsWith("_")) throw new Exception("Label must end with '_'");
+    public PLabel(String name) {
+        //if(!name.endsWith("_")) throw new Exception("Label must end with '_'");
         this.name = name;
     }
 
@@ -20,5 +22,10 @@ public class PLabel {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public Object deepCopy() {
+        return new PLabel(this.name);
     }
 }

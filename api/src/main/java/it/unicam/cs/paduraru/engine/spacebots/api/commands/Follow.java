@@ -70,4 +70,10 @@ public class Follow extends BotCommand{
     public void initialize() {
 
     }
+
+    @Override
+    public Object deepCopy() {
+        Follow command = new Follow((PLabel) this.label.deepCopy(), this.dist, this.velocity);
+        return command;
+    }
 }

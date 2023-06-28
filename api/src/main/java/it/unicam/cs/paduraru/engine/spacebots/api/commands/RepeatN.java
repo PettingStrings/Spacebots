@@ -36,4 +36,12 @@ public class RepeatN extends BotCommand{
     public void setDoneIp(int doneIp) {
         this.doneIp = doneIp;
     }
+
+    @Override
+    public Object deepCopy() {
+        RepeatN command = new RepeatN(this.maxIteration);
+        command.currentIteration = this.currentIteration;
+        command.doneIp = this.doneIp;
+        return command;
+    }
 }

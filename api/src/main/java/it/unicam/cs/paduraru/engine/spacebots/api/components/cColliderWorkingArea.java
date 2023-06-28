@@ -17,4 +17,9 @@ public class cColliderWorkingArea extends cCollider{
     public void OnExit(cCollider second) {
         //Non serve
     }
+
+    @Override
+    public Object deepCopy() {
+        return super.deepCopy();
+    }
 }

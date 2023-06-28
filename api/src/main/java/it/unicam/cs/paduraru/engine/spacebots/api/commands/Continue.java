@@ -31,4 +31,9 @@ public class Continue  extends BotCommand{
         currentStep = maxSteps;
         isFinished = false;
     }
+
+    @Override
+    public Object deepCopy() {
+        return null;
+    }
 }

@@ -4,7 +4,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.Util;
 
 import java.util.Objects;
 
-public class PVector {
+public class PVector implements DeepCopy{
     double x,y;
 
     public PVector(){
@@ -61,5 +61,10 @@ public class PVector {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override
+    public Object deepCopy() {
+        return  new PVector(x,y);
     }
 }

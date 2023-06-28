@@ -1,15 +1,16 @@
 package it.unicam.cs.paduraru.spacebots.app.gui;
 
+import it.unicam.cs.paduraru.engine.GameController;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.Pair;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Done;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Forever;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Move;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.input.InputMethodEvent;
@@ -19,11 +20,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-import java.io.Console;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
-public class spaceBotsController {
+public class SpaceBotsController {
 
     //region Injected GUI
     @FXML
@@ -39,10 +39,15 @@ public class spaceBotsController {
 
     Shape selectedTool;
 
-    GUISpaceBotsEnvBuilder guiEnvBuilder = new GUISpaceBotsEnvBuilder();
+    SpaceBotsEnvironmentBuilder envBuilder;
 
     @FXML
     void initialize() {
+        envBuilder = new SpaceBotsEnvironmentBuilder();
+
+        GameController.addEnvironment(envBuilder.getEnvironment());
+        GameController.setCurrentEnvironment(0);
+
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(simPane.widthProperty());
         clip.heightProperty().bind(simPane.heightProperty());
@@ -125,12 +130,22 @@ public class spaceBotsController {
 
     @FXML
     void onClick_StepBack(MouseEvent event) {
-        testAlert("Step Back");
+        try {
+            GameController.stepBackCurrentEnvironment();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        UpdateSimArea();
     }
 
     @FXML
     void onClick_StepForward(MouseEvent event) {
-        testAlert("Step Forward");
+        try {
+            GameController.stepForwardCurrentEnvironment();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        UpdateSimArea();
     }
 
     @FXML
@@ -181,22 +196,42 @@ public class spaceBotsController {
     }
 
     public void onClick_CreateSwarm(MouseEvent mouseEvent) {
-        Pair<Double,Double> rangeX = new Pair<>(swarmTool.getLayoutX() - swarmTool.getRadius(),
-                swarmTool.getLayoutX() + swarmTool.getRadius()),
-
-                rangeY = new Pair<>(swarmTool.getLayoutY() - swarmTool.getRadius(),
-                        swarmTool.getLayoutY() + swarmTool.getRadius());
+        Pair<Double,Double>
+            rangeX =
+                new Pair<>(swarmTool.getLayoutX() - swarmTool.getRadius(), swarmTool.getLayoutX() + swarmTool.getRadius()),
+            rangeY =
+                new Pair<>(swarmTool.getLayoutY() - swarmTool.getRadius(), swarmTool.getLayoutY() + swarmTool.getRadius());
 
         try {
-            guiEnvBuilder.createSwarm(rangeX, rangeY, 5,
+            envBuilder.createSwarm(rangeX, rangeY, 5,
                     Arrays.stream(new BotCommand[]{new Forever(), new Move(new PVector(1,1), 5), new Done(0)}).toList());
         } catch (Exception e) {
             testAlert("Error Creating Swarm :( :");
             System.out.println(e.getMessage());
         }
-        guiEnvBuilder.getGuiEntities().forEach(guiEntity ->
-        {simPane.getChildren().add(guiEntity.shape);});
-        showEntities();
+
+        UpdateSimArea();
+
+    }
+
+    private void UpdateSimArea() {
+        //I primi 3 sono i tool
+        simPane.getChildren().remove(3, simPane.getChildren().size());
+        simPane.getChildren().addAll(GameController.getEnvironment(GameController.getCurrentEnvironment()).getEntities().stream()
+                .map(ent -> {
+                    try {
+                        return new Pair<PVector, Shape>(
+                                ent.GetPosition(), GUIAppUtil.convertToFXShape (
+                                ((cCollider)GameController.getEnvironment(GameController.getCurrentEnvironment())
+                                .getComponentOf(ent, cCollider.class).get(0)).getShape())
+                        );
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }).map(pair ->{ pair.getSecond().setLayoutX(pair.getFirst().getX());
+                    pair.getSecond().setLayoutY(pair.getFirst().getY());
+                    return pair.getSecond();
+                }).collect(Collectors.toList()) );
     }
 
     private void showEntities() {

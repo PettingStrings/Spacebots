@@ -31,4 +31,9 @@ public class MoveRandom extends BotCommand{
     public void initialize() {
 
     }
+
+    @Override
+    public Object deepCopy() {
+        return new MoveRandom(this.minX,this.maxX,this.minY,this.maxY,this.velocity);
+    }
 }

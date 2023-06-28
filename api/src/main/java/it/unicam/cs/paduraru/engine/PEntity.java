@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine;
 
-public class PEntity {
+public class PEntity implements DeepCopy{
     private long ID;
     private PVector position;
     public PEntity(PVector origin){
@@ -38,5 +38,16 @@ public class PEntity {
     public boolean equals(Object object){
         if(!(object instanceof PEntity)) return false;
         return ID == ((PEntity)object).ID;
+    }
+
+    @Override
+    public Object deepCopy() {
+        PEntity copied = new PEntity();
+
+        copied.ID = this.ID;
+        copied.position = (PVector) this.position.deepCopy();
+
+        return copied;
+
     }
 }

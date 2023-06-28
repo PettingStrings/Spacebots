@@ -1,5 +1,7 @@
 package it.unicam.cs.paduraru.engine;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderGeneric;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
 
 import java.util.ArrayList;
@@ -9,7 +11,8 @@ import java.util.stream.Collectors;
 public final class GameController {
 
     public static PEnvironment DefaultEnvironment;
-    static List<PEnvironment> environments = new ArrayList<PEnvironment>();
+    static List<PEnvironment> environments = new ArrayList<>();
+    static List<List<PEnvironment>> history = new ArrayList<>();
     static int currentEnvironment;
 
     private GameController(){};
@@ -34,7 +37,9 @@ public final class GameController {
 
     }
 
-    public static void StepCurrentEnvironment() {
+    public static void stepForwardCurrentEnvironment() throws Exception {
+        history.get(currentEnvironment).add((PEnvironment)environments.get(currentEnvironment).deepCopy());
+        environments.get(currentEnvironment).run();
     }
 
     public static List<PEntity> GetCurrentEntities() {
@@ -43,6 +48,10 @@ public final class GameController {
 
     public static void addEnvironment(PEnvironment environment) {
         environments.add(environment);
+        history.add(new ArrayList<>());
+    }
+    public static PEnvironment getEnvironment(int i){
+        return environments.get(i);
     }
 
     public static int getCurrentEnvironment() {
@@ -54,13 +63,35 @@ public final class GameController {
     }
 
     public static void runCurrentEnvironment() throws Exception {
+        history.get(currentEnvironment).add((PEnvironment)environments.get(currentEnvironment).deepCopy());
         environments.get(currentEnvironment).run();
     }
 
     public static List<cCollider> checkInCircle(PVector origin, int radius) throws Exception {
-        SysCollision sys =(SysCollision) environments.get(currentEnvironment).getSystems().stream().
+        SysCollision sys = (SysCollision) environments.get(currentEnvironment).getSystems().stream().
                 filter(system -> system instanceof SysCollision).collect(Collectors.toList()).get(0);
         if(sys == null) throw new Exception("Current environment has no SysCollision");
-        return sys.checkInCircle(origin, radius);
+
+        PEnvironment env = environments.get(currentEnvironment);
+
+        PEntity tempEnt = new PEntity(origin);
+        cColliderGeneric tempColl = new cColliderGeneric(tempEnt, new PCircle(radius));
+        env.addEntity(tempEnt);
+
+        List<Pair<cCollider, cCollider>> pairs =
+                env.components.stream().map(component ->
+                        new Pair<cCollider,cCollider>(tempColl, (cCollider) component)).collect(Collectors.toList());
+        //sys.isColliding lancia un eccezione, quindi non posso usare le stream
+        List<cCollider> collidingColliders = new ArrayList<>();
+        for (Pair<cCollider, cCollider> pair: pairs) {
+            if(sys.isColliding(pair))
+                collidingColliders.add(pair.getSecond());
+        }
+
+        return collidingColliders;
+    }
+
+    public static void stepBackCurrentEnvironment() {
+        environments.set(currentEnvironment, history.get(currentEnvironment).remove(history.get(currentEnvironment).size()-1));
     }
 }

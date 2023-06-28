@@ -14,4 +14,9 @@ public class Stop extends BotCommand{
     public void initialize() {
 
     }
+
+    @Override
+    public Object deepCopy() {
+        return new Stop();
+    }
 }

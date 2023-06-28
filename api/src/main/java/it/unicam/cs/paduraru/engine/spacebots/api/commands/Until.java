@@ -33,4 +33,11 @@ public class Until extends BotCommand{
     public void setDoneIp(int doneIp) {
         this.doneIp = doneIp;
     }
+
+    @Override
+    public Object deepCopy() {
+        Until command = new Until((PLabel) this.label.deepCopy());
+        command.doneIp = this.doneIp;
+        return command;
+    }
 }

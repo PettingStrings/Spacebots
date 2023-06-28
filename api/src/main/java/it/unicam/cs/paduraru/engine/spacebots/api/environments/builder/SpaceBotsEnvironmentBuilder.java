@@ -9,6 +9,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PRectangle;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
@@ -35,7 +36,7 @@ public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
             bot = new ERobot(origin);
 
             environment.addEntity(bot);
-            environment.addComponent(new cColliderRobot(bot, new PRectangle(10,10)));
+            environment.addComponent(new cColliderRobot(bot, new PCircle(5)));
             environment.addComponent(new cCEU(bot, commands));
         }
 

@@ -25,4 +25,5 @@ class SpaceBotsPEnvironmentBuilderTest {
         assertTrue(builder.getEnvironment().getEntities().stream().count() == 50);
 
     }
+
 }

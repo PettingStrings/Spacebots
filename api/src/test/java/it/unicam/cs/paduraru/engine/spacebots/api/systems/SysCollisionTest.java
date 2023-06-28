@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.systems;
 
 import it.unicam.cs.paduraru.engine.*;
-import it.unicam.cs.paduraru.engine.ASystem;
+import it.unicam.cs.paduraru.engine.PSystem;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
@@ -94,14 +94,15 @@ class SysCollisionTest {
 
     @Test
     void test_addComponents() {
-        ASystem temp = new SysCollision();
+        PSystem temp = new SysCollision();
         temp.addComponents(List.of(new PComponent[]{parentCollider, new cCEU(parent, null)}));
         assertEquals(1, temp.getComponents().size());
     }
 
     @Test
     void test_addComponent() {
-        ASystem temp = new SysCollision();
+        //Memo: la gestione degli ID lo fa l'environment
+        PSystem temp = new SysCollision();
         temp.addComponent(new cColliderRobot(parent, null));
 
         assertEquals(1, temp.getComponents().size());
@@ -110,7 +111,7 @@ class SysCollisionTest {
         temp.addComponent(new cColliderRobot(parent, null));
 
         assertEquals(2, temp.getComponents().size());
-        assertEquals(1, temp.getComponents().get(1).getID());
+        assertEquals(0, temp.getComponents().get(1).getID());
     }
 
     @Test
