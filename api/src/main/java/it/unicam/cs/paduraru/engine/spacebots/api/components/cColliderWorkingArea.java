@@ -7,7 +7,12 @@ public class cColliderWorkingArea extends cCollider{
     public cColliderWorkingArea(ELabelledArea parent, PShape shape) {
         super(parent, shape);
     }
-//code smell
+
+    protected cColliderWorkingArea(cCollider o) {
+        super(o);
+    }
+
+    //code smell
     @Override
     public void OnColliding(cCollider second) {
         //Non serve
@@ -20,6 +25,6 @@ public class cColliderWorkingArea extends cCollider{
 
     @Override
     public Object deepCopy() {
-        return super.deepCopy();
+        return new cColliderWorkingArea((cCollider) super.deepCopy());
     }
 }

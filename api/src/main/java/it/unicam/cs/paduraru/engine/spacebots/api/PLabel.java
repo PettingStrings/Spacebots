@@ -8,15 +8,15 @@ public class PLabel implements DeepCopy {
     String name;
 
     public PLabel(String name) {
-        //if(!name.endsWith("_")) throw new Exception("Label must end with '_'");
+        if(!name.endsWith("_")) name += "_";
         this.name = name;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PLabel label)) return false;
-        return name.equals(o);
+        if (!(o instanceof PLabel)) return false;
+        return name.equals(((PLabel)o).name);
     }
 
     @Override

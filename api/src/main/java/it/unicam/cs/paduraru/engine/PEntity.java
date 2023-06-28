@@ -8,6 +8,12 @@ public class PEntity implements DeepCopy{
     }
 
     public PEntity(){};
+
+    protected PEntity(PEntity o) {
+        this.setID(o.ID);
+        this.position = o.position;
+    }
+
     public void setID(long newID){
         ID = newID;
     }

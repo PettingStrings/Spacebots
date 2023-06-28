@@ -5,6 +5,8 @@ import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
+import java.util.Objects;
+
 public class cCollider extends PComponent {
     PShape shape;
     PVector position;
@@ -45,4 +47,5 @@ public class cCollider extends PComponent {
     public Object deepCopy() {
         return new cCollider((PComponent) super.deepCopy(),(PShape)this.shape.deepCopy());
     }
+
 }

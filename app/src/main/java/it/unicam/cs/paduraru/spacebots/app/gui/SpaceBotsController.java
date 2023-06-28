@@ -3,15 +3,15 @@ package it.unicam.cs.paduraru.spacebots.app.gui;
 import it.unicam.cs.paduraru.engine.GameController;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.Pair;
-import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
-import it.unicam.cs.paduraru.engine.spacebots.api.commands.Done;
-import it.unicam.cs.paduraru.engine.spacebots.api.commands.Forever;
-import it.unicam.cs.paduraru.engine.spacebots.api.commands.Move;
+import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
+import it.unicam.cs.paduraru.engine.spacebots.api.commands.*;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCollider;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
@@ -35,8 +35,11 @@ public class SpaceBotsController {
 
     @FXML
     Tab entitiesTab;
+    @FXML
+    Label lblSteps;
     //endregion
 
+    int simulationStep = 0;
     Shape selectedTool;
 
     SpaceBotsEnvironmentBuilder envBuilder;
@@ -130,6 +133,9 @@ public class SpaceBotsController {
 
     @FXML
     void onClick_StepBack(MouseEvent event) {
+        if(simulationStep == 0) return;
+
+        simulationStep--;
         try {
             GameController.stepBackCurrentEnvironment();
         } catch (Exception e) {
@@ -140,6 +146,7 @@ public class SpaceBotsController {
 
     @FXML
     void onClick_StepForward(MouseEvent event) {
+        simulationStep++;
         try {
             GameController.stepForwardCurrentEnvironment();
         } catch (Exception e) {
@@ -191,8 +198,11 @@ public class SpaceBotsController {
             selectedTool.setVisible(false);
     }
 
-    public void onClick_CreateCircle(MouseEvent mouseEvent) {
-        testAlert("Create Circle");
+    public void onClick_CreateCircle(MouseEvent mouseEvent) throws Exception {
+        PVector origin = new PVector(circleTool.getLayoutX() - circleTool.getRadius(),
+                circleTool.getLayoutY() - circleTool.getRadius());
+        envBuilder.addLabelledArea(new ELabelledArea(origin, new PLabel("prova")));
+        UpdateSimArea();
     }
 
     public void onClick_CreateSwarm(MouseEvent mouseEvent) {
@@ -201,10 +211,11 @@ public class SpaceBotsController {
                 new Pair<>(swarmTool.getLayoutX() - swarmTool.getRadius(), swarmTool.getLayoutX() + swarmTool.getRadius()),
             rangeY =
                 new Pair<>(swarmTool.getLayoutY() - swarmTool.getRadius(), swarmTool.getLayoutY() + swarmTool.getRadius());
-
+        Until loop = new Until(new PLabel("prova"));
+        loop.setDoneIp(2);
         try {
             envBuilder.createSwarm(rangeX, rangeY, 5,
-                    Arrays.stream(new BotCommand[]{new Forever(), new Move(new PVector(1,1), 5), new Done(0)}).toList());
+                    Arrays.stream(new BotCommand[]{new Forever(),loop, new Move(new PVector(1,1), 5), new Done(1),new Done(0)}).toList());
         } catch (Exception e) {
             testAlert("Error Creating Swarm :( :");
             System.out.println(e.getMessage());
@@ -215,6 +226,7 @@ public class SpaceBotsController {
     }
 
     private void UpdateSimArea() {
+        lblSteps.setText(""+simulationStep);
         //I primi 3 sono i tool
         simPane.getChildren().remove(3, simPane.getChildren().size());
         simPane.getChildren().addAll(GameController.getEnvironment(GameController.getCurrentEnvironment()).getEntities().stream()

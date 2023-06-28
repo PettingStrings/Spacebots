@@ -25,6 +25,7 @@ public class PComponent implements DeepCopy{
     }
     @Override
     public boolean equals(Object object){
+        if(this == object) return true;
         if(!(object instanceof PComponent)) return false;
         return ID == ((PComponent)object).ID;
     }

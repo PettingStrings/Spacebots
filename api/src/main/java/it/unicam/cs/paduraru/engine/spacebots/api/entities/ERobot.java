@@ -4,6 +4,7 @@ import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.PEntity;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,14 @@ public class ERobot extends PEntity {
     public ERobot(PVector origin) {
         super();
         SetPosition(origin);
+        currentLabels = new ArrayList<>();
+        signaledLabels = new ArrayList<>();
+        velocity = 0;
+        direction = new PVector(0,0);
+    }
+
+    protected ERobot(PEntity o) {
+        super(o);
         currentLabels = new ArrayList<>();
         signaledLabels = new ArrayList<>();
         velocity = 0;
@@ -80,5 +89,12 @@ public class ERobot extends PEntity {
 
     public void setVelocity(int velocity) {
         this.velocity = velocity;
+    }
+
+    @Override
+    public Object deepCopy() {
+        ERobot robot = new ERobot((PEntity)(super.deepCopy()));
+
+        return robot;
     }
 }

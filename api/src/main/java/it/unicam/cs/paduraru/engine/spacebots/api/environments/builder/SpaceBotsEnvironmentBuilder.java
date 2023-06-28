@@ -7,6 +7,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
 import it.unicam.cs.paduraru.engine.spacebots.api.Util;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderRobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.components.cColliderWorkingArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
@@ -17,10 +18,8 @@ import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
 import java.util.List;
 
 public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
-    private boolean isFinalized;
     public SpaceBotsEnvironmentBuilder(){
         super();
-        isFinalized = false;
         environment.addSystem(new SysCollision());
         environment.addSystem(new SysCEU());
     }
@@ -42,19 +41,14 @@ public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
 
     }
 
-    public void addLabelledArea(ELabelledArea area) throws Exception {
-        isFinalized();
+    public void addLabelledArea(ELabelledArea area) {
         environment.addEntity(area);
+        environment.addComponent(new cColliderWorkingArea(area, new PCircle(20)));
     }
 
-    private void isFinalized() throws Exception {
-        if(isFinalized) throw new Exception("Cannot modify finalized environment");
-    }
 
     public void finalizeEnvironment() {
-        if(isFinalized) return;
-
-        isFinalized = true;
-        environment.initialize();
     }
+
+
 }
