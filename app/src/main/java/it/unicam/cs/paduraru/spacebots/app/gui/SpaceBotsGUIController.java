@@ -200,6 +200,7 @@ public class SpaceBotsGUIController {
     public void onClick_CreateCircle(MouseEvent mouseEvent) throws Exception {
         PVector origin = new PVector(circleTool.getLayoutX(), circleTool.getLayoutY());
         envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PCircle(20));
+        swarmTool.toFront();
         UpdateSimArea();
     }
 
@@ -218,7 +219,7 @@ public class SpaceBotsGUIController {
             testAlert("Error Creating Swarm :( :");
             System.out.println(e.getMessage());
         }
-
+        swarmTool.toFront();
         UpdateSimArea();
 
     }
@@ -240,6 +241,7 @@ public class SpaceBotsGUIController {
         PVector origin = new PVector(rectTool.getLayoutX() + rectTool.getWidth()/2,
                 rectTool.getLayoutY() + rectTool.getHeight()/2);
         envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PRectangle(rectTool.getWidth(), rectTool.getHeight()));
+        rectTool.toFront();
         UpdateSimArea();
     }
 }
