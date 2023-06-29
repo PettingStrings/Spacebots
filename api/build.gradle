@@ -14,14 +14,6 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir 'src/test/java'
-        }
-    }
-}
-
 test {
     useJUnitPlatform()
     testLogging {

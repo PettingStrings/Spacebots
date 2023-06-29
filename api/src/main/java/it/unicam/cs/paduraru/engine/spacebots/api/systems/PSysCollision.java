@@ -164,12 +164,13 @@ public class PSysCollision extends PSystem {
                 position2 = pair.second().getPosition();
 
         PRectangle rect1 = (PRectangle)pair.first().getShape(),
-                rect2 = (PRectangle)pair.first().getShape();
+                rect2 = (PRectangle)pair.second().getShape();
 
-        return  position1.getX() < position2.getX() + rect2.getWidth() &&
-                position2.getX() + rect1.getWidth() > position2.getY() &&
-                position1.getY() < position2.getY() + rect2.getHeight() &&
-                position2.getY() + rect1.getHeight() > position2.getY();
+        PVector centerDist = new PVector(Math.abs(position1.getX() - position2.getX()),
+                Math.abs(position1.getY() - position2.getY()));
+
+        return  (centerDist.getX() < (rect1.getWidth() + rect2.getWidth())/2 &&
+                centerDist.getY() < (rect1.getHeight() + rect2.getHeight())/2);
     }
     //endregion
 }

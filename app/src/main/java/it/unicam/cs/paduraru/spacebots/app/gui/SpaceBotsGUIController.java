@@ -43,7 +43,6 @@ public class SpaceBotsGUIController {
 
     int simulationStep = 0;
     Shape selectedTool;
-
     SpaceBotsEnvironmentBuilder envBuilder;
 
     @FXML
@@ -225,24 +224,12 @@ public class SpaceBotsGUIController {
     }
 
     private void UpdateSimArea() {
-        lblSteps.setText(""+simulationStep);
+        lblSteps.setText(String.valueOf(simulationStep));
         //I primi 3 sono i tool
         simPane.getChildren().remove(3, simPane.getChildren().size());
         simPane.getChildren().addAll(GameController.getEnvironment(GameController.getCurrentEnvironment()).getEntities().stream()
-                .map(ent -> {
-                    try {
-                        return new Pair<>(
-                                ent.getPosition(), GUIAppUtil.convertToFXShape (
-                                ((PCollider)GameController.getEnvironment(GameController.getCurrentEnvironment())
-                                .getComponentOf(ent, PCollider.class).get(0)).getShape())
-                        );
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }).map(pair ->{ pair.second().setLayoutX(pair.first().getX());
-                    pair.second().setLayoutY(pair.first().getY());
-                    return pair.second();
-                }).collect(Collectors.toList()) );
+                .map(GUIAppUtil::generateFxShape)
+                .toList());
     }
 
     private void showEntities() {
@@ -250,8 +237,8 @@ public class SpaceBotsGUIController {
     }
 
     public void onClick_CreateRect(MouseEvent mouseEvent) {
-        PVector origin = new PVector(rectTool.getLayoutX(),
-                rectTool.getLayoutY());
+        PVector origin = new PVector(rectTool.getLayoutX() + rectTool.getWidth()/2,
+                rectTool.getLayoutY() + rectTool.getHeight()/2);
         envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PRectangle(rectTool.getWidth(), rectTool.getHeight()));
         UpdateSimArea();
     }

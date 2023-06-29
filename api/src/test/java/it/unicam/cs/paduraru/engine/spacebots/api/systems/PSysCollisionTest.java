@@ -73,7 +73,7 @@ class PSysCollisionTest {
     //endregion
 
     //region Overlapping rect-circle
-    PRobot ovrcRect = new PRobot(new PVector(0,0)), ovrcCircle = new PRobot(new PVector(5,5));
+    PRobot ovrcRect = new PRobot(new PVector(0,0)), ovrcCircle = new PRobot(new PVector(10,5));
     PShape ovrcRectShape = new PRectangle(10,10), ovrcCircleShape = new PCircle(5);
     PColliderRobot ovrcRectCollider = new PColliderRobot(ovrcRect,ovrcRectShape),
     ovrcCircleCollider = new PColliderRobot(ovrcCircle,ovrcCircleShape);
@@ -115,7 +115,7 @@ class PSysCollisionTest {
     }
 
     @Test
-    void test_getCollisionType() throws Exception {
+    void test_getCollisionType(){
         assertEquals(PSysCollision.getCollisionType(ovCirclesPair), PSysCollision.CollisionType.CIRCLE_CIRCLE);
         assertEquals(PSysCollision.getCollisionType(ovRectPair), PSysCollision.CollisionType.RECT_RECT);
         assertEquals(PSysCollision.getCollisionType(novCirclesPair), PSysCollision.CollisionType.CIRCLE_CIRCLE);
@@ -154,7 +154,7 @@ class PSysCollisionTest {
     }
 
     @Test
-    void test_isColliding() throws Exception {
+    void test_isColliding(){
         assertTrue(PSysCollision.isColliding(ovCirclesPair));
         assertFalse(PSysCollision.isColliding(novCirclesPair));
         assertTrue(PSysCollision.isColliding(ovCrPair));
@@ -163,10 +163,16 @@ class PSysCollisionTest {
         assertFalse(PSysCollision.isColliding(novRcPair));
         assertTrue(PSysCollision.isColliding(ovRectPair));
         assertTrue(PSysCollision.isColliding(novRectPair));
+
+        //Additional testing
+        PRobot robot1 = new PRobot(new PVector(0,0)), robot2 = new PRobot(new PVector(4,0));
+        Pair<PCollider, PCollider> rectToRect = new Pair<>(new PColliderRobot(robot1,new PRectangle(5,5)),
+                new PColliderRobot(robot2,new PRectangle(5,5)));
+        assertTrue(PSysCollision.isColliding(rectToRect));
     }
 
     @Test
-    void test_doesItCallEventsCorrectly() throws Exception {
+    void test_doesItCallEventsCorrectly(){
         PSysCollision testSystem = new PSysCollision();
         PRobot robot1 = new PRobot(new PVector(0,0)), robot2 = new PRobot(new PVector(100,100));
 
@@ -216,7 +222,7 @@ class PSysCollisionTest {
 
     }
     @Test
-    void test_checkInCircle() throws Exception {
+    void test_checkInCircle(){
         PSysCollision sys = new PSysCollision();
         PRobot robot1 = new PRobot(new PVector(0,0)), robot2 = new PRobot(new PVector(100,100))
         ,robot3 = new PRobot(new PVector(30,30));

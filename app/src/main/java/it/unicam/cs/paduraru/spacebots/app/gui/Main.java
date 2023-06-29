@@ -15,7 +15,7 @@ public class Main extends Application {
         System.out.println("==== MAIN APP =====");
         System.out.println("====   START  =====");
 
-        launch();
+        launch(args);
 
         System.out.println("====    END   =====");
     }
