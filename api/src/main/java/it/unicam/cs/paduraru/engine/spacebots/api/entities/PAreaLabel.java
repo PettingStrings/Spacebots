@@ -8,7 +8,7 @@ public class PAreaLabel extends PEntity {
     private PLabel label;
 
     public PAreaLabel(PVector origin, PLabel label){
-        SetPosition(origin);
+        setPosition(origin);
         this.label = label;
     }
     protected PAreaLabel(PEntity entity) {

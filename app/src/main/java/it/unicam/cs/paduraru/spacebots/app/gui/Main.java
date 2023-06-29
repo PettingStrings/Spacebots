@@ -11,19 +11,7 @@ import java.util.Objects;
 public class Main extends Application {
 
     public static void main(String[] args){
-        class a{
-            int i = 3;
 
-            public int get(){
-                return i;
-            }
-        }
-
-        class b extends a{
-            public int get(){
-                return i+5;
-            }
-        }
         System.out.println("==== MAIN APP =====");
         System.out.println("====   START  =====");
 

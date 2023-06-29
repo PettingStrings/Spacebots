@@ -27,7 +27,7 @@ public class Follow extends BotCommand{
         List<PCollider> foundTargets;
 
         try {
-             foundTargets = GameController.checkInCircle(target.getPosition(), dist);
+             foundTargets = GameController.scanInRoundArea(target.getPosition(), dist);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

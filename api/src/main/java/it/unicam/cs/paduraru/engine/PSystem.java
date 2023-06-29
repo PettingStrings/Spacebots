@@ -2,7 +2,6 @@ package it.unicam.cs.paduraru.engine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class PSystem implements DeepCopy{
     private List<PComponent> components;
@@ -13,7 +12,7 @@ public abstract class PSystem implements DeepCopy{
         this.components = components;
     }
     public abstract void addComponents(List<PComponent> components);
-    public abstract void run() throws Exception;
+    public abstract void run();
     public abstract void addComponent(PComponent comp);
     public List<PComponent> getComponents() {
         return components;

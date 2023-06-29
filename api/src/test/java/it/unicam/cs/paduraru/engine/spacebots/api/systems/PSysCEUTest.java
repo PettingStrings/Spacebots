@@ -13,11 +13,11 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SysCEUTest {
+class PSysCEUTest {
 
     @Test
     void run() {
-        SysCEU sys = new SysCEU();
+        PSysCEU sys = new PSysCEU();
         PVector origin1 = new PVector(0,0), origin2 = new PVector(10,10);
         PRobot bot1 = new PRobot(origin1), bot2 = new PRobot(origin2);
 

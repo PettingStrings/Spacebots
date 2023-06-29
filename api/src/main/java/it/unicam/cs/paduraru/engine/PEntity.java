@@ -3,11 +3,10 @@ package it.unicam.cs.paduraru.engine;
 public class PEntity implements DeepCopy{
     private long ID;
     private PVector position;
+    public PEntity(){}
     public PEntity(PVector origin){
         position = origin;
     }
-
-    public PEntity(){};
 
     protected PEntity(PEntity o) {
         this.setID(o.ID);
@@ -17,17 +16,6 @@ public class PEntity implements DeepCopy{
     public void setID(long newID){
         ID = newID;
     }
-    public long setID(){
-        return ID;
-    }
-
-    protected void SetPosition(PVector newPosition){
-        position = newPosition;
-    }
-
-    public PVector GetPosition(){
-        return position;
-    }
 
     public PVector getPosition() {
         return position;
@@ -36,10 +24,7 @@ public class PEntity implements DeepCopy{
     public void setPosition(PVector other) {
         this.position = other;
     }
-    public <T extends PComponent> T getComponent(){
-        //Call game, environment, susmem la caca
-        return null;
-    }
+
     @Override
     public boolean equals(Object object){
         if(!(object instanceof PEntity)) return false;

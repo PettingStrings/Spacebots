@@ -12,24 +12,24 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.PAreaLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
-import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCEU;
-import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
+import it.unicam.cs.paduraru.engine.spacebots.api.systems.PSysCEU;
+import it.unicam.cs.paduraru.engine.spacebots.api.systems.PSysCollision;
 
 import java.util.List;
 
 public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder {
     public SpaceBotsEnvironmentBuilder(){
         super();
-        addSystem(new SysCEU());
-        addSystem(new SysCollision());
+        addSystem(new PSysCEU());
+        addSystem(new PSysCollision());
     }
     public void createSwarm(Pair<Double, Double> rangeX, Pair<Double, Double> rangeY, int numBots, List<BotCommand> commands, PShape shape){
         PVector origin;
         PRobot bot;
 
         for(int i = 0; i < numBots; i++){
-            origin = new PVector(Util.randInt(rangeX.getFirst(),rangeX.getSecond()),
-                    Util.randInt(rangeY.getFirst(), rangeY.getSecond() ));
+            origin = new PVector(Util.randDouble(rangeX.first(),rangeX.second()),
+                    Util.randDouble(rangeY.first(), rangeY.second() ));
 
             bot = new PRobot(origin);
 

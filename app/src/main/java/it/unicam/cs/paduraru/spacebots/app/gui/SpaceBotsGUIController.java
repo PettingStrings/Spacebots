@@ -195,10 +195,7 @@ public class SpaceBotsGUIController {
     }
 
     public void onSelectionChanged_EntitiesTab(Event event) {
-        if(entitiesTab.isSelected())
-            selectedTool.setVisible(true);
-        else
-            selectedTool.setVisible(false);
+        selectedTool.setVisible(entitiesTab.isSelected());
     }
 
     public void onClick_CreateCircle(MouseEvent mouseEvent) throws Exception {
@@ -234,17 +231,17 @@ public class SpaceBotsGUIController {
         simPane.getChildren().addAll(GameController.getEnvironment(GameController.getCurrentEnvironment()).getEntities().stream()
                 .map(ent -> {
                     try {
-                        return new Pair<PVector, Shape>(
-                                ent.GetPosition(), GUIAppUtil.convertToFXShape (
+                        return new Pair<>(
+                                ent.getPosition(), GUIAppUtil.convertToFXShape (
                                 ((PCollider)GameController.getEnvironment(GameController.getCurrentEnvironment())
                                 .getComponentOf(ent, PCollider.class).get(0)).getShape())
                         );
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-                }).map(pair ->{ pair.getSecond().setLayoutX(pair.getFirst().getX());
-                    pair.getSecond().setLayoutY(pair.getFirst().getY());
-                    return pair.getSecond();
+                }).map(pair ->{ pair.second().setLayoutX(pair.first().getX());
+                    pair.second().setLayoutY(pair.first().getY());
+                    return pair.second();
                 }).collect(Collectors.toList()) );
     }
 

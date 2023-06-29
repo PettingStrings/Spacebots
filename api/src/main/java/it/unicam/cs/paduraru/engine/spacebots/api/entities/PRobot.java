@@ -18,7 +18,7 @@ public class PRobot extends PEntity {
 
     public PRobot(PVector origin) {
         super();
-        SetPosition(origin);
+        setPosition(origin);
         currentLabels = new ArrayList<>();
         signaledLabels = new ArrayList<>();
         velocity = 0;

@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine;
 
 public class EnvironmentBuilder {
-    protected PEnvironment environment;
+    private PEnvironment environment;
     public EnvironmentBuilder(){
         environment = new PEnvironment();
     }

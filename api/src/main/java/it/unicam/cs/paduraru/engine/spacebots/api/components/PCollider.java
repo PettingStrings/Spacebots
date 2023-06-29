@@ -25,7 +25,7 @@ public abstract class PCollider extends PComponent {
     }
 
     public PVector getPosition() {
-        return parent.getPosition();
+        return getParent().getPosition();
     }
 
     public abstract void OnExit(PCollider second);

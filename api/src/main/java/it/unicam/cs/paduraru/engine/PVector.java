@@ -13,15 +13,10 @@ public class PVector implements DeepCopy{
         this.y = y;
     }
     //region Getters-Setters
-    public void SetX(double newVal){
-        x = newVal;
-    }
     public double getX(){
         return x;
     }
-    public void SetY(double newVal){
-        y = newVal;
-    }
+
     public double getY(){
         return y;
     }

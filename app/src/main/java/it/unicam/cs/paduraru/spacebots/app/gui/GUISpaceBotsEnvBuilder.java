@@ -20,8 +20,8 @@ public class GUISpaceBotsEnvBuilder extends SpaceBotsEnvironmentBuilder{
     @Override
     public void createSwarm(Pair<Double, Double> rangeX, Pair<Double, Double> rangeY, int numBots, List<BotCommand> commands){
         super.createSwarm(rangeX, rangeY, numBots, commands);
-        for (var ent: environment.getEntities()) {
-            PShape shape = ((PColliderRobot)environment.getComponentOf(ent, PColliderRobot.class).get(0)).getShape();
+        for (var ent: getEnvironment().getEntities()) {
+            PShape shape = ((PColliderRobot)getEnvironment().getComponentOf(ent, PColliderRobot.class).get(0)).getShape();
             guiEntities.add(new GUIEntity(ent, GUIAppUtil.convertToFXShape(shape)));
         }
     }

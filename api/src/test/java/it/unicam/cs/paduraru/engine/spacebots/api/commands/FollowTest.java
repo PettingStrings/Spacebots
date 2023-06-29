@@ -5,7 +5,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PColliderRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
-import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
+import it.unicam.cs.paduraru.engine.spacebots.api.systems.PSysCollision;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,9 +34,7 @@ class FollowTest {
         env.addComponent(followerCollider);
         env.addComponent(signaler1Collider);
 
-        env.addSystem(new SysCollision());
-
-        env.initialize();
+        env.addSystem(new PSysCollision());
 
         GameController.addEnvironment(env);
 
@@ -72,9 +70,7 @@ class FollowTest {
         env.addComponent(signaler1Collider);
         env.addComponent(signaler2Collider);
 
-        env.addSystem(new SysCollision());
-
-        env.initialize();
+        env.addSystem(new PSysCollision());
 
         GameController.addEnvironment(env);
 

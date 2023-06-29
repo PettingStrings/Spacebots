@@ -9,8 +9,8 @@ import it.unicam.cs.paduraru.engine.spacebots.api.commands.Done;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Forever;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Move;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
-import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCEU;
-import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
+import it.unicam.cs.paduraru.engine.spacebots.api.systems.PSysCEU;
+import it.unicam.cs.paduraru.engine.spacebots.api.systems.PSysCollision;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +38,8 @@ public class Main {
             System.exit(1);
         }
 
-        envBuilder.addSystem(new SysCollision());
-        envBuilder.addSystem(new SysCEU());
+        envBuilder.addSystem(new PSysCollision());
+        envBuilder.addSystem(new PSysCEU());
 
         GameController.addEnvironment(envBuilder.getEnvironment());
 

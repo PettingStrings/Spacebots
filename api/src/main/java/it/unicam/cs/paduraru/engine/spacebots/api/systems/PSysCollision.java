@@ -9,14 +9,15 @@ import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PRectangle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class SysCollision extends PSystem {
+public class PSysCollision extends PSystem {
 
     public enum CollisionType{ RECT_RECT, RECT_CIRCLE, CIRCLE_RECT, CIRCLE_CIRCLE }
     List<Pair<PCollider, PCollider>> lastColliding;
 
-    public SysCollision(){
+    public PSysCollision(){
         lastColliding = new ArrayList<>();
     }
     @Override
@@ -27,33 +28,27 @@ public class SysCollision extends PSystem {
     }
 
     @Override
-    public void run() throws Exception {
+    public void run() {
         List<Pair<PCollider, PCollider>> currentColliding = getIntersectingColliderPairs();
-        resolveCollidingCollisions(currentColliding);
+        fireOnColliding(currentColliding);
         lastColliding.removeAll(currentColliding);
         fireOnExit(lastColliding);
         lastColliding = currentColliding;
     }
 
     private void fireOnExit(List<Pair<PCollider, PCollider>> lastColliding) {
-        lastColliding.forEach(pair -> pair.getFirst().OnExit(pair.getSecond()));
+        lastColliding.forEach(pair -> pair.first().OnExit(pair.second()));
     }
 
-    public List<PCollider> checkInCircle(PVector origin, int radius) throws Exception {
+    public List<PCollider> checkInCircle(PVector origin, int radius){
         PEntity temp = new PEntity(origin);
         PColliderGeneric coll = new PColliderGeneric(temp, new PCircle(radius));
-        List<Pair<PCollider, PCollider>> pairs =
-                getComponents().stream()
-                        .map(component -> new Pair<PCollider, PCollider>(coll, (PCollider) component))
-                        .toList();
 
-        List<PCollider> collidingColliders = new ArrayList<>();
-        for (Pair<PCollider, PCollider> pair: pairs) {
-            if(isColliding(pair))
-                collidingColliders.add(pair.getSecond());
-        }
-
-        return collidingColliders;
+        return getComponents().stream()
+                .map(component -> new Pair<PCollider, PCollider>(coll, (PCollider) component))
+                .filter(PSysCollision::isColliding)
+                .map(Pair::second)
+                .toList();
     }
 
     @Override
@@ -65,7 +60,7 @@ public class SysCollision extends PSystem {
     @Override
     @SuppressWarnings("unchecked")
     public Object deepCopy() {
-        SysCollision sys = new SysCollision();
+        PSysCollision sys = new PSysCollision();
 
         sys.setComponents(getComponents().stream()
                 .map(com -> (PComponent)com.deepCopy()).collect(Collectors.toList()));
@@ -77,11 +72,11 @@ public class SysCollision extends PSystem {
     }
 
 //region Collision Detection-Resolution
-    private void resolveCollidingCollisions(List<Pair<PCollider, PCollider>> pairs) {
-        pairs.forEach(pair -> pair.getFirst().OnColliding(pair.getSecond()));
+    private void fireOnColliding(List<Pair<PCollider, PCollider>> pairs) {
+        pairs.forEach(pair -> pair.first().OnColliding(pair.second()));
     }
 
-    private List<Pair<PCollider, PCollider>> getIntersectingColliderPairs() throws Exception {
+    private List<Pair<PCollider, PCollider>> getIntersectingColliderPairs(){
         List<Pair<PCollider, PCollider>> toResolve = new ArrayList<>();
 
         for (PComponent comp1: getComponents()) {
@@ -97,41 +92,42 @@ public class SysCollision extends PSystem {
         return toResolve;
     }
 
-    public static boolean isColliding(Pair<PCollider, PCollider> pair) throws Exception {
+    public static boolean isColliding(Pair<PCollider, PCollider> pair){
         boolean isColliding = false;
-        switch (getCollisionType(pair)){
+        switch (Objects.requireNonNull(getCollisionType(pair))){
 
-            case RECT_RECT -> isColliding = SysCollision.collisionRectToRect(pair);
+            case RECT_RECT -> isColliding = PSysCollision.collisionRectToRect(pair);
 
-            case RECT_CIRCLE -> isColliding = SysCollision.collisionRectToCircle(pair);
+            case RECT_CIRCLE -> isColliding = PSysCollision.collisionRectToCircle(pair);
 
-            case CIRCLE_RECT -> isColliding = SysCollision.collisionCircleToRect(pair);
+            case CIRCLE_RECT -> isColliding = PSysCollision.collisionCircleToRect(pair);
 
-            case CIRCLE_CIRCLE -> isColliding = SysCollision.collisionCircleToCircle(pair);
+            case CIRCLE_CIRCLE -> isColliding = PSysCollision.collisionCircleToCircle(pair);
 
         }
         return isColliding;
     }
-    public static CollisionType getCollisionType(Pair<PCollider, PCollider> pair) throws Exception {
-        if(pair.getFirst().getShape() instanceof PCircle){
+    public static CollisionType getCollisionType(Pair<PCollider, PCollider> pair){
+        if(pair.first().getShape() instanceof PCircle){
 
-            if(pair.getSecond().getShape() instanceof PCircle)
+            if(pair.second().getShape() instanceof PCircle)
                 return CollisionType.CIRCLE_CIRCLE;
-            else if(pair.getSecond().getShape() instanceof PRectangle)
+            else if(pair.second().getShape() instanceof PRectangle)
                 return CollisionType.CIRCLE_RECT;
 
-        }else if(pair.getFirst().getShape() instanceof PRectangle){
-            if(pair.getSecond().getShape() instanceof PCircle)
+        }else if(pair.first().getShape() instanceof PRectangle){
+            if(pair.second().getShape() instanceof PCircle)
                 return CollisionType.RECT_CIRCLE;
-            else if(pair.getSecond().getShape() instanceof PRectangle)
+            else if(pair.second().getShape() instanceof PRectangle)
                 return CollisionType.RECT_RECT;
         }
-        throw new Exception("Unknown shapes: " + pair.getFirst().toString() + " " + pair.getSecond().getClass().toString());
+        //Null al posto di un eccezione
+        return null;
     }
     public static boolean collisionCircleToCircle(Pair<PCollider, PCollider> pair) {
-        PVector position1 = pair.getFirst().getPosition(), position2 = pair.getSecond().getPosition();
-        double r1  = ((PCircle)pair.getFirst().getShape()).getRadius(),
-                r2 = ((PCircle)pair.getSecond().getShape()).getRadius();
+        PVector position1 = pair.first().getPosition(), position2 = pair.second().getPosition();
+        double r1  = ((PCircle)pair.first().getShape()).getRadius(),
+                r2 = ((PCircle)pair.second().getShape()).getRadius();
 
         return Math.abs(Math.pow(position1.getX() - position2.getX(), 2) +
                 Math.pow(position1.getY() - position2.getY(), 2))
@@ -139,10 +135,10 @@ public class SysCollision extends PSystem {
     }
 
     public static boolean collisionCircleToRect(Pair<PCollider, PCollider> pair) {
-        PCircle circle = (PCircle)pair.getFirst().getShape();
-        PRectangle rect = (PRectangle)pair.getSecond().getShape();
+        PCircle circle = (PCircle)pair.first().getShape();
+        PRectangle rect = (PRectangle)pair.second().getShape();
 
-        PVector cPos = pair.getFirst().getPosition(), rPos = pair.getSecond().getPosition();
+        PVector cPos = pair.first().getPosition(), rPos = pair.second().getPosition();
 
         PVector distance = new PVector(Math.abs(cPos.getX() - rPos.getX()), Math.abs(cPos.getY() - rPos.getY()));
 
@@ -159,16 +155,16 @@ public class SysCollision extends PSystem {
     }
 
     public static boolean collisionRectToCircle(Pair<PCollider, PCollider> pair) {
-        return collisionCircleToRect(new Pair<>(pair.getSecond(), pair.getFirst()));
+        return collisionCircleToRect(new Pair<>(pair.second(), pair.first()));
     }
 
     public static boolean collisionRectToRect(Pair<PCollider, PCollider> pair) {
         //AABB method
-        PVector position1 = pair.getFirst().getPosition(),
-                position2 = pair.getSecond().getPosition();
+        PVector position1 = pair.first().getPosition(),
+                position2 = pair.second().getPosition();
 
-        PRectangle rect1 = (PRectangle)pair.getFirst().getShape(),
-                rect2 = (PRectangle)pair.getFirst().getShape();
+        PRectangle rect1 = (PRectangle)pair.first().getShape(),
+                rect2 = (PRectangle)pair.first().getShape();
 
         return  position1.getX() < position2.getX() + rect2.getWidth() &&
                 position2.getX() + rect1.getWidth() > position2.getY() &&

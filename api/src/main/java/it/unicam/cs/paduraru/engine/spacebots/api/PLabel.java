@@ -20,11 +20,6 @@ public class PLabel implements DeepCopy {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
     public Object deepCopy() {
         return new PLabel(this.name);
     }

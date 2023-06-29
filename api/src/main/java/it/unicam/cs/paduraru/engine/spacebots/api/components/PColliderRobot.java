@@ -22,7 +22,7 @@ public class PColliderRobot extends PCollider {
         if(secondParent instanceof PAreaLabel)
         {
             PAreaLabel area = (PAreaLabel) secondParent;
-            PRobot robotParent = (PRobot) parent;
+            PRobot robotParent = (PRobot) getParent();
             robotParent.addLabel(area.getLabel());
         }
     }
@@ -33,7 +33,7 @@ public class PColliderRobot extends PCollider {
         if(secondParent instanceof PAreaLabel)
         {
             PAreaLabel area = (PAreaLabel) secondParent;
-            PRobot robotParent = (PRobot) parent;
+            PRobot robotParent = (PRobot) getParent();
             robotParent.removeLabel(area.getLabel());
         }
     }

@@ -26,8 +26,8 @@ public class PEnvironment implements DeepCopy{
         environment.components = this.components.stream().map(comp -> (PComponent)comp.deepCopy()).collect(Collectors.toList());
         //copiare i nuovi parent dentro le nuove entità per avere i riferimenti corretti
         environment.components.forEach(
-                comp -> comp.parent = environment.entities.get(
-                        environment.entities.indexOf(comp.parent)));
+                comp -> comp.setParent(environment.entities.get(
+                        environment.entities.indexOf(comp.getParent()))));
 
         for (var s: this.systems) {
             environment.systems.add((PSystem) s.deepCopy());
@@ -44,12 +44,6 @@ public class PEnvironment implements DeepCopy{
         systems.clear();
         components.clear();
         lastID.set(0);
-    }
-
-    public void initialize() {
-        /*for(int i = 0; i < systems.stream().count(); i++){
-            systems.get(i).addComponents(components);
-        }*/
     }
 
     public List<PEntity> getEntities() {
@@ -77,7 +71,7 @@ public class PEnvironment implements DeepCopy{
         return systems;
     }
 
-    public void run() throws Exception {
+    public void run(){
         for (PSystem system : systems) {
             system.run();
         }
@@ -85,7 +79,7 @@ public class PEnvironment implements DeepCopy{
 
     public List<PComponent> getComponentOf(PEntity pEntity, Class<?> type) {
         return components.stream()
-                .filter(pComponent -> type.isInstance(pComponent) && pComponent.parent.equals(pEntity))
+                .filter(pComponent -> type.isInstance(pComponent) && pComponent.getParent().equals(pEntity))
                 .toList();
     }
 }

@@ -1,8 +1,8 @@
 package it.unicam.cs.paduraru.engine;
 
 public class PComponent implements DeepCopy{
-    long ID;
-    protected PEntity parent;
+    private long ID;
+    private PEntity parent;
     protected PComponent(PEntity parent){
         this.parent = parent;
     }
@@ -19,10 +19,6 @@ public class PComponent implements DeepCopy{
         return ID;
     }
 
-
-    public PEntity getParent() {
-        return parent;
-    }
     @Override
     public boolean equals(Object object){
         if(this == object) return true;
@@ -35,5 +31,13 @@ public class PComponent implements DeepCopy{
         PComponent component = new PComponent((PEntity) parent.deepCopy());
         component.ID = this.ID;
         return component;
+    }
+
+    public PEntity getParent() {
+        return parent;
+    }
+
+    public void setParent(PEntity parent) {
+        this.parent = parent;
     }
 }

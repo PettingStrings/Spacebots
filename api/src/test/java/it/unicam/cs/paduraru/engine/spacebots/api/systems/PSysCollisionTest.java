@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SysCollisionTest {
+class PSysCollisionTest {
 
     public class pColliderTest extends PCollider {
         public boolean onExitCalled = false, onCollidingCalled = false;
@@ -94,7 +94,7 @@ class SysCollisionTest {
 
     @Test
     void test_addComponents() {
-        PSystem temp = new SysCollision();
+        PSystem temp = new PSysCollision();
         temp.addComponents(List.of(new PComponent[]{parentCollider, new PCEU(parent, null)}));
         assertEquals(1, temp.getComponents().size());
     }
@@ -102,7 +102,7 @@ class SysCollisionTest {
     @Test
     void test_addComponent() {
         //Memo: la gestione degli ID lo fa l'environment
-        PSystem temp = new SysCollision();
+        PSystem temp = new PSysCollision();
         temp.addComponent(new PColliderRobot(parent, null));
 
         assertEquals(1, temp.getComponents().size());
@@ -116,38 +116,38 @@ class SysCollisionTest {
 
     @Test
     void test_getCollisionType() throws Exception {
-        assertEquals(SysCollision.getCollisionType(ovCirclesPair), SysCollision.CollisionType.CIRCLE_CIRCLE);
-        assertEquals(SysCollision.getCollisionType(ovRectPair), SysCollision.CollisionType.RECT_RECT);
-        assertEquals(SysCollision.getCollisionType(novCirclesPair), SysCollision.CollisionType.CIRCLE_CIRCLE);
-        assertEquals(SysCollision.getCollisionType(novRectPair), SysCollision.CollisionType.RECT_RECT);
-        assertEquals(SysCollision.getCollisionType(ovRcPair), SysCollision.CollisionType.RECT_CIRCLE);
-        assertEquals(SysCollision.getCollisionType(novRcPair), SysCollision.CollisionType.RECT_CIRCLE);
-        assertEquals(SysCollision.getCollisionType(ovCrPair), SysCollision.CollisionType.CIRCLE_RECT);
-        assertEquals(SysCollision.getCollisionType(novCrPair), SysCollision.CollisionType.CIRCLE_RECT);
+        assertEquals(PSysCollision.getCollisionType(ovCirclesPair), PSysCollision.CollisionType.CIRCLE_CIRCLE);
+        assertEquals(PSysCollision.getCollisionType(ovRectPair), PSysCollision.CollisionType.RECT_RECT);
+        assertEquals(PSysCollision.getCollisionType(novCirclesPair), PSysCollision.CollisionType.CIRCLE_CIRCLE);
+        assertEquals(PSysCollision.getCollisionType(novRectPair), PSysCollision.CollisionType.RECT_RECT);
+        assertEquals(PSysCollision.getCollisionType(ovRcPair), PSysCollision.CollisionType.RECT_CIRCLE);
+        assertEquals(PSysCollision.getCollisionType(novRcPair), PSysCollision.CollisionType.RECT_CIRCLE);
+        assertEquals(PSysCollision.getCollisionType(ovCrPair), PSysCollision.CollisionType.CIRCLE_RECT);
+        assertEquals(PSysCollision.getCollisionType(novCrPair), PSysCollision.CollisionType.CIRCLE_RECT);
     }
 
     @Test
     void test_collisionCircleToCircle() {
-        assertTrue(SysCollision.collisionCircleToCircle(ovCirclesPair));
-        assertFalse(SysCollision.collisionCircleToCircle(novCirclesPair));
+        assertTrue(PSysCollision.collisionCircleToCircle(ovCirclesPair));
+        assertFalse(PSysCollision.collisionCircleToCircle(novCirclesPair));
     }
 
     @Test
     void test_collisionCircleToRect() {
-        assertTrue(SysCollision.collisionCircleToRect(ovCrPair));
-        assertFalse(SysCollision.collisionCircleToRect(novCrPair));
+        assertTrue(PSysCollision.collisionCircleToRect(ovCrPair));
+        assertFalse(PSysCollision.collisionCircleToRect(novCrPair));
     }
 
     @Test
     void test_collisionRectToCircle() {
-        assertTrue(SysCollision.collisionRectToCircle(ovRcPair));
-        assertFalse(SysCollision.collisionRectToCircle(novRcPair));
+        assertTrue(PSysCollision.collisionRectToCircle(ovRcPair));
+        assertFalse(PSysCollision.collisionRectToCircle(novRcPair));
     }
 
     @Test
     void test_collisionRectToRect() {
-        assertTrue(SysCollision.collisionRectToRect(ovRectPair));
-        assertTrue(SysCollision.collisionRectToRect(novRectPair));
+        assertTrue(PSysCollision.collisionRectToRect(ovRectPair));
+        assertTrue(PSysCollision.collisionRectToRect(novRectPair));
     }
     @Test
     void test_run() {
@@ -155,19 +155,19 @@ class SysCollisionTest {
 
     @Test
     void test_isColliding() throws Exception {
-        assertTrue(SysCollision.isColliding(ovCirclesPair));
-        assertFalse(SysCollision.isColliding(novCirclesPair));
-        assertTrue(SysCollision.isColliding(ovCrPair));
-        assertFalse(SysCollision.isColliding(novCrPair));
-        assertTrue(SysCollision.isColliding(ovRcPair));
-        assertFalse(SysCollision.isColliding(novRcPair));
-        assertTrue(SysCollision.isColliding(ovRectPair));
-        assertTrue(SysCollision.isColliding(novRectPair));
+        assertTrue(PSysCollision.isColliding(ovCirclesPair));
+        assertFalse(PSysCollision.isColliding(novCirclesPair));
+        assertTrue(PSysCollision.isColliding(ovCrPair));
+        assertFalse(PSysCollision.isColliding(novCrPair));
+        assertTrue(PSysCollision.isColliding(ovRcPair));
+        assertFalse(PSysCollision.isColliding(novRcPair));
+        assertTrue(PSysCollision.isColliding(ovRectPair));
+        assertTrue(PSysCollision.isColliding(novRectPair));
     }
 
     @Test
     void test_doesItCallEventsCorrectly() throws Exception {
-        SysCollision testSystem = new SysCollision();
+        PSysCollision testSystem = new PSysCollision();
         PRobot robot1 = new PRobot(new PVector(0,0)), robot2 = new PRobot(new PVector(100,100));
 
         robot1.setID(0);
@@ -217,7 +217,7 @@ class SysCollisionTest {
     }
     @Test
     void test_checkInCircle() throws Exception {
-        SysCollision sys = new SysCollision();
+        PSysCollision sys = new PSysCollision();
         PRobot robot1 = new PRobot(new PVector(0,0)), robot2 = new PRobot(new PVector(100,100))
         ,robot3 = new PRobot(new PVector(30,30));
 

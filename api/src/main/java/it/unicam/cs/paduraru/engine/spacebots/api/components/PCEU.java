@@ -24,7 +24,7 @@ public class PCEU extends PComponent {
     }
     public void executeNextLine(){
         if(instructionPointer >= commands.size()) return;
-        instructionPointer = commands.get(instructionPointer).execute((PRobot) parent, instructionPointer);
+        instructionPointer = commands.get(instructionPointer).execute((PRobot) getParent(), instructionPointer);
     }
     public int getInstructionPointer() {
         return instructionPointer;
@@ -35,12 +35,11 @@ public class PCEU extends PComponent {
     }
     @Override
     public Object deepCopy(){
-        PCEU component = new PCEU((PComponent) super.deepCopy(),
+
+        return new PCEU((PComponent) super.deepCopy(),
                 this.commands.stream()
                         .map(comm -> (BotCommand)comm.deepCopy())
                         .collect(Collectors.toList()));
-
-        return component;
     }
 
 }
