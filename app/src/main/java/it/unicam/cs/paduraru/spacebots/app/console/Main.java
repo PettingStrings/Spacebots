@@ -41,8 +41,6 @@ public class Main {
         envBuilder.addSystem(new SysCollision());
         envBuilder.addSystem(new SysCEU());
 
-        envBuilder.finalizeEnvironment();
-
         GameController.addEnvironment(envBuilder.getEnvironment());
 
         for (int i = 0; i < 100; i++) {

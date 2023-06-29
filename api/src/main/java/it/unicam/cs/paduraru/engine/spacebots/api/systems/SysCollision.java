@@ -21,8 +21,9 @@ public class SysCollision extends PSystem {
     }
     @Override
     public void addComponents(List<PComponent> componentsToAdd) {
-        List<PComponent> newColliders = componentsToAdd.stream().filter(component -> component instanceof PCollider).toList();
-        components.addAll(newColliders);
+        getComponents().addAll(componentsToAdd.stream()
+                .filter(component -> component instanceof PCollider)
+                .toList());
     }
 
     @Override
@@ -42,7 +43,9 @@ public class SysCollision extends PSystem {
         PEntity temp = new PEntity(origin);
         PColliderGeneric coll = new PColliderGeneric(temp, new PCircle(radius));
         List<Pair<PCollider, PCollider>> pairs =
-                components.stream().map(component -> new Pair<PCollider, PCollider>(coll, (PCollider) component)).collect(Collectors.toList());
+                getComponents().stream()
+                        .map(component -> new Pair<PCollider, PCollider>(coll, (PCollider) component))
+                        .toList();
 
         List<PCollider> collidingColliders = new ArrayList<>();
         for (Pair<PCollider, PCollider> pair: pairs) {
@@ -56,7 +59,7 @@ public class SysCollision extends PSystem {
     @Override
     public void addComponent(PComponent comp) {
         if(comp instanceof PCollider)
-            this.components.add(comp);
+            getComponents().add(comp);
     }
 
     @Override
@@ -64,8 +67,8 @@ public class SysCollision extends PSystem {
     public Object deepCopy() {
         SysCollision sys = new SysCollision();
 
-        sys.components = this.components.stream()
-                .map(com -> (PComponent)com.deepCopy()).collect(Collectors.toList());
+        sys.setComponents(getComponents().stream()
+                .map(com -> (PComponent)com.deepCopy()).collect(Collectors.toList()));
 
         sys.lastColliding = this.lastColliding.stream()
                 .map(comp -> (Pair<PCollider, PCollider>)comp.deepCopy()).collect(Collectors.toList());
@@ -81,8 +84,8 @@ public class SysCollision extends PSystem {
     private List<Pair<PCollider, PCollider>> getIntersectingColliderPairs() throws Exception {
         List<Pair<PCollider, PCollider>> toResolve = new ArrayList<>();
 
-        for (PComponent comp1: components) {
-            for (PComponent comp2: components) {
+        for (PComponent comp1: getComponents()) {
+            for (PComponent comp2: getComponents()) {
                 if(comp1.equals(comp2)) continue;
 
                 Pair<PCollider, PCollider> pair = new Pair<>((PCollider) comp1,(PCollider) comp2);
@@ -127,7 +130,7 @@ public class SysCollision extends PSystem {
     }
     public static boolean collisionCircleToCircle(Pair<PCollider, PCollider> pair) {
         PVector position1 = pair.getFirst().getPosition(), position2 = pair.getSecond().getPosition();
-        int r1  = ((PCircle)pair.getFirst().getShape()).getRadius(),
+        double r1  = ((PCircle)pair.getFirst().getShape()).getRadius(),
                 r2 = ((PCircle)pair.getSecond().getShape()).getRadius();
 
         return Math.abs(Math.pow(position1.getX() - position2.getX(), 2) +
@@ -152,7 +155,7 @@ public class SysCollision extends PSystem {
         double cornerDist = Math.pow(distance.getX() - rect.getWidth()/2,2) +
                 Math.pow(distance.getY() - rect.getHeight()/2,2);
 
-        return (cornerDist <= (circle.getRadius()^2));
+        return (cornerDist <= (Math.pow(circle.getRadius(), 2)));
     }
 
     public static boolean collisionRectToCircle(Pair<PCollider, PCollider> pair) {

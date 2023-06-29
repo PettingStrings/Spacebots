@@ -5,7 +5,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Done;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Forever;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Move;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ class PCEUTest {
 
     @Test
     void executeNextLine() {
-        ERobot robot = new ERobot(new PVector(0,0));
+        PRobot robot = new PRobot(new PVector(0,0));
         ArrayList<BotCommand> commands = new ArrayList<>();
 
         commands.add(new Forever());
@@ -26,12 +26,12 @@ class PCEUTest {
         PCEU ceu = new PCEU(robot, commands);
 
         for (int i = 0; i < 100; i++) {
-            assertEquals(0, ceu.instructionPointer);
+            assertEquals(0, ceu.getInstructionPointer());
             ceu.executeNextLine();
-            assertEquals(1, ceu.instructionPointer);
+            assertEquals(1, ceu.getInstructionPointer());
             ceu.executeNextLine();
             assertTrue(robot.getPosition().equals(new PVector(1+i,0)));
-            assertEquals(2, ceu.instructionPointer);
+            assertEquals(2, ceu.getInstructionPointer());
             ceu.executeNextLine();
         }
     }

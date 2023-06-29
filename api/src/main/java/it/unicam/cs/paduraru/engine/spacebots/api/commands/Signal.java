@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 //Ho pensato che cmq esssendo hardcoded nel programma del robot la label da segnalare,
 //esso possa segnalare anche label con cui non è entrato a contatto
 public class Signal extends BotCommand{
@@ -10,7 +10,7 @@ public class Signal extends BotCommand{
         this.label = label;
     }
     @Override
-    public int execute(ERobot target, int instructionPointer) {
+    public int execute(PRobot target, int instructionPointer) {
         target.signal(label);
         return instructionPointer+1;
     }

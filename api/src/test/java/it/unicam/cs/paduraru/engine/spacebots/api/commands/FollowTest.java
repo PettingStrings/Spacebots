@@ -3,7 +3,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 import it.unicam.cs.paduraru.engine.*;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PColliderRobot;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.SysCollision;
 import org.junit.jupiter.api.Test;
@@ -14,8 +14,8 @@ class FollowTest {
 
     @Test
     public void test_followsOne() throws Exception {
-        ERobot follower = new ERobot(new PVector(0,0));
-        ERobot signaler1 = new ERobot(new PVector(10,0));
+        PRobot follower = new PRobot(new PVector(0,0));
+        PRobot signaler1 = new PRobot(new PVector(10,0));
 
         PLabel label = new PLabel("0010110_");
 
@@ -48,9 +48,9 @@ class FollowTest {
 
     @Test
     public void test_followsTwo() throws Exception {
-        ERobot follower = new ERobot(new PVector(0,0));
-        ERobot signaler1 = new ERobot(new PVector(10,0)),
-                signaler2 = new ERobot(new PVector(0,10));
+        PRobot follower = new PRobot(new PVector(0,0));
+        PRobot signaler1 = new PRobot(new PVector(10,0)),
+                signaler2 = new PRobot(new PVector(0,10));
 
         PLabel label = new PLabel("0010110_");
 

@@ -6,7 +6,7 @@ import it.unicam.cs.paduraru.engine.Pair;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.*;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PAreaLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PRectangle;
@@ -25,7 +25,7 @@ import javafx.scene.shape.Shape;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class SpaceBotsController {
+public class SpaceBotsGUIController {
 
     //region Injected GUI
     @FXML
@@ -140,6 +140,7 @@ public class SpaceBotsController {
         simulationStep--;
         try {
             GameController.stepBackCurrentEnvironment();
+            envBuilder.setEnvironment(GameController.getEnvironment(GameController.getCurrentEnvironment()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -202,7 +203,7 @@ public class SpaceBotsController {
 
     public void onClick_CreateCircle(MouseEvent mouseEvent) throws Exception {
         PVector origin = new PVector(circleTool.getLayoutX(), circleTool.getLayoutY());
-        envBuilder.addLabelledArea(new ELabelledArea(origin, new PLabel("prova")), new PCircle(20));
+        envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PCircle(20));
         UpdateSimArea();
     }
 
@@ -251,10 +252,10 @@ public class SpaceBotsController {
 
     }
 
-    public void onClick_CreateSquare(MouseEvent mouseEvent) {
+    public void onClick_CreateRect(MouseEvent mouseEvent) {
         PVector origin = new PVector(rectTool.getLayoutX(),
                 rectTool.getLayoutY());
-        envBuilder.addLabelledArea(new ELabelledArea(origin, new PLabel("prova")), new PRectangle(19,19));
+        envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PRectangle(rectTool.getWidth(), rectTool.getHeight()));
         UpdateSimArea();
     }
 }

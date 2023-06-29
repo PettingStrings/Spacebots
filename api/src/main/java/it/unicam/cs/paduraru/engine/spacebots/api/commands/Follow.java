@@ -4,7 +4,7 @@ import it.unicam.cs.paduraru.engine.GameController;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 import java.util.List;
 /*
@@ -22,7 +22,7 @@ public class Follow extends BotCommand{
         this.velocity = velocity;
     }
     @Override
-    public int execute(ERobot target, int instructionPointer) {
+    public int execute(PRobot target, int instructionPointer) {
 
         List<PCollider> foundTargets;
 
@@ -46,8 +46,8 @@ public class Follow extends BotCommand{
 
         foundTargets.remove(target);
         List<PVector> suitableRobotsPositions = foundTargets.stream()
-                .filter(collider -> collider.getParent() instanceof ERobot)
-                .map(collider -> (ERobot)collider.getParent())
+                .filter(collider -> collider.getParent() instanceof PRobot)
+                .map(collider -> (PRobot)collider.getParent())
                 .filter(robot -> robot.getSignaledLabels().contains(label))
                 .map(robot -> robot.getPosition())
                 .toList();

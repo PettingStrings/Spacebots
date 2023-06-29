@@ -25,8 +25,7 @@ public class PEnvironment implements DeepCopy{
         environment.entities = this.entities.stream().map(entity -> (PEntity)entity.deepCopy()).collect(Collectors.toList());
         environment.components = this.components.stream().map(comp -> (PComponent)comp.deepCopy()).collect(Collectors.toList());
         //copiare i nuovi parent dentro le nuove entità per avere i riferimenti corretti
-
-        environment.components.stream().forEach(
+        environment.components.forEach(
                 comp -> comp.parent = environment.entities.get(
                         environment.entities.indexOf(comp.parent)));
 

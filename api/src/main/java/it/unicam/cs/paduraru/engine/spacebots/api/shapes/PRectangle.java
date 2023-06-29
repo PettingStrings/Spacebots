@@ -1,21 +1,17 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.shapes;
 
 public class PRectangle extends PShape {
-    public PRectangle(int width, int height){
-        data = new int[]{width, height};
+    public PRectangle(double width, double height){
+        setData(new double[]{width, height});
     }
-
-    public int GetWidth(){ return data[0]; }
-    public int GetHeight(){ return data[1]; }
-
-    public int getWidth() {
-        return data[0];
+    public double GetWidth(){ return getData()[0]; }
+    public double GetHeight(){ return getData()[1]; }
+    public double getWidth() {
+        return getData()[0];
     }
-
-    public int getHeight() {
-        return data[1];
+    public double getHeight() {
+        return getData()[1];
     }
-
     @Override
     public Object deepCopy() {
         return new PRectangle(getWidth(),getHeight());

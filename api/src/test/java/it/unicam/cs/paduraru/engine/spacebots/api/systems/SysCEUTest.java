@@ -6,7 +6,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.commands.Done;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Forever;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.Move;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ class SysCEUTest {
     void run() {
         SysCEU sys = new SysCEU();
         PVector origin1 = new PVector(0,0), origin2 = new PVector(10,10);
-        ERobot bot1 = new ERobot(origin1), bot2 = new ERobot(origin2);
+        PRobot bot1 = new PRobot(origin1), bot2 = new PRobot(origin2);
 
         ArrayList<ArrayList<BotCommand>> programs = new ArrayList<>();
 

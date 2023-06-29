@@ -14,13 +14,7 @@ class SpaceBotsPEnvironmentBuilderTest {
     void createSwarm() throws Exception {
         SpaceBotsEnvironmentBuilder builder = new SpaceBotsEnvironmentBuilder();
 
-        try {
-            builder.createSwarm(new Pair<>(-10.0,10.0), new Pair<>(-10.0, 10.0), 50, new ArrayList<>());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        builder.finalizeEnvironment();
+        builder.createSwarm(new Pair<>(-10.0,10.0), new Pair<>(-10.0, 10.0), 50, new ArrayList<>());
 
         assertTrue(builder.getEnvironment().getEntities().stream().count() == 50);
 

@@ -2,7 +2,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +13,7 @@ class UntilTest {
     void execute() throws Exception {
         int ip = 0;
         PLabel condition = new PLabel("Harooo everynyan_"), fakeLabel = new PLabel("Oh My Gaaah!_");
-        ERobot robot = new ERobot(new PVector(0,0));
+        PRobot robot = new PRobot(new PVector(0,0));
         BotCommand[] commands = new BotCommand[]{
                 new Until(condition), new Move(new PVector(1,1),1), new Done(0)
         };

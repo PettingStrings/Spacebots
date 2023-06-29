@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.PVector;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 public class Move extends BotCommand{
     PVector direction;
@@ -11,7 +11,7 @@ public class Move extends BotCommand{
         this.velocity = velocity;
     }
     @Override
-    public int execute(ERobot target, int instructionPointer) {
+    public int execute(PRobot target, int instructionPointer) {
         target.setDirection(direction);
         target.setVelocity(velocity);
         target.move();

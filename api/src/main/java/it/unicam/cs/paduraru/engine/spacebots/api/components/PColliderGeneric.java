@@ -22,6 +22,6 @@ public class PColliderGeneric extends PCollider {
     }
     @Override
     public Object deepCopy() {
-        return new PColliderGeneric((PComponent) super.deepCopy(),(PShape)this.shape.deepCopy());
+        return new PColliderGeneric((PComponent) super.deepCopy(),(PShape)this.getShape().deepCopy());
     }
 }

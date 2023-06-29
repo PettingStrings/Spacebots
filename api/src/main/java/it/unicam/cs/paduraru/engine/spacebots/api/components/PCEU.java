@@ -2,16 +2,16 @@ package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
 import it.unicam.cs.paduraru.engine.PComponent;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 //Code Execution Unit
 public class PCEU extends PComponent {
-    List<BotCommand> commands;
-    int instructionPointer;
-    public PCEU(ERobot parent, List<BotCommand> commands) {
+    private List<BotCommand> commands;
+    private int instructionPointer;
+    public PCEU(PRobot parent, List<BotCommand> commands) {
         super(parent);
         instructionPointer = 0;
         this.commands = commands;
@@ -24,7 +24,7 @@ public class PCEU extends PComponent {
     }
     public void executeNextLine(){
         if(instructionPointer >= commands.size()) return;
-        instructionPointer = commands.get(instructionPointer).execute((ERobot) parent, instructionPointer);
+        instructionPointer = commands.get(instructionPointer).execute((PRobot) parent, instructionPointer);
     }
     public int getInstructionPointer() {
         return instructionPointer;

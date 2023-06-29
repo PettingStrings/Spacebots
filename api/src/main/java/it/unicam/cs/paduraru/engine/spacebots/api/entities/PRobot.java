@@ -6,8 +6,9 @@ import it.unicam.cs.paduraru.engine.PEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ERobot extends PEntity {
+public class PRobot extends PEntity {
 
     private List<PLabel> currentLabels;
     private List<PLabel> signaledLabels;
@@ -15,7 +16,7 @@ public class ERobot extends PEntity {
     private PVector direction;//Per colpa del move random devo memorizzare la velocità qui
     private double velocity;
 
-    public ERobot(PVector origin) {
+    public PRobot(PVector origin) {
         super();
         SetPosition(origin);
         currentLabels = new ArrayList<>();
@@ -24,7 +25,7 @@ public class ERobot extends PEntity {
         direction = new PVector(0,0);
     }
 
-    protected ERobot(PEntity o) {
+    protected PRobot(PEntity o) {
         super(o);
         currentLabels = new ArrayList<>();
         signaledLabels = new ArrayList<>();
@@ -92,8 +93,13 @@ public class ERobot extends PEntity {
 
     @Override
     public Object deepCopy() {
-        ERobot robot = new ERobot((PEntity)(super.deepCopy()));
-
+        PRobot robot = new PRobot((PEntity)(super.deepCopy()));
+        robot.currentLabels = currentLabels.stream().map(lab -> (PLabel)lab.deepCopy()).collect(Collectors.toList());
+        robot.signaledLabels = signaledLabels.stream().map(lab -> (PLabel)lab.deepCopy()).collect(Collectors.toList());
+        if(followingLabel != null)
+            robot.followingLabel = (PLabel) followingLabel.deepCopy();
+        robot.direction = (PVector) direction.deepCopy();
+        robot.velocity = velocity;
         return robot;
     }
 }

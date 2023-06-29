@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 //Come Move prende l'ultimo che è stato aggiunto. Il continue non va mai chiamato senza un precedente move
 public class Continue  extends BotCommand{
@@ -13,7 +13,7 @@ public class Continue  extends BotCommand{
         initialize();
     }
     @Override
-    public int execute(ERobot target, int instructionPointer) {
+    public int execute(PRobot target, int instructionPointer) {
         if(isFinished) initialize();
 
         currentStep--;

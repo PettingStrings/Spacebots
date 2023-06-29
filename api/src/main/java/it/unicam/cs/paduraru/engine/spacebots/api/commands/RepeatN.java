@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 public class RepeatN extends BotCommand{
     int doneIp, currentIteration;
@@ -13,7 +13,7 @@ public class RepeatN extends BotCommand{
         initialize();
     }
     @Override
-    public int execute(ERobot target, int instructionPointer) {
+    public int execute(PRobot target, int instructionPointer) {
         if(isFinished) initialize();
 
         currentIteration++;

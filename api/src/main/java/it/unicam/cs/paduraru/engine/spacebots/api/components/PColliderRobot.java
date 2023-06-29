@@ -2,12 +2,12 @@ package it.unicam.cs.paduraru.engine.spacebots.api.components;
 
 import it.unicam.cs.paduraru.engine.PComponent;
 import it.unicam.cs.paduraru.engine.PEntity;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ELabelledArea;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PAreaLabel;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
 public class PColliderRobot extends PCollider {
-    public PColliderRobot(ERobot parent, PShape shape) {
+    public PColliderRobot(PRobot parent, PShape shape) {
         super(parent, shape);
     }
 
@@ -19,28 +19,27 @@ public class PColliderRobot extends PCollider {
     public void OnColliding(PCollider second) {
         //Possibiletà di aggiugnere collider specifici per ogni forma
         PEntity secondParent = second.getParent();
-        if(secondParent instanceof ELabelledArea)
+        if(secondParent instanceof PAreaLabel)
         {
-            ELabelledArea area = (ELabelledArea) secondParent;
-            ERobot robotParent = (ERobot) parent;
+            PAreaLabel area = (PAreaLabel) secondParent;
+            PRobot robotParent = (PRobot) parent;
             robotParent.addLabel(area.getLabel());
         }
     }
 
     @Override
     public void OnExit(PCollider second) {
-        //Possibiletà di aggiugnere collider specifici per ogni forma
         PEntity secondParent = second.getParent();
-        if(secondParent instanceof ELabelledArea)
+        if(secondParent instanceof PAreaLabel)
         {
-            ELabelledArea area = (ELabelledArea) secondParent;
-            ERobot robotParent = (ERobot) parent;
+            PAreaLabel area = (PAreaLabel) secondParent;
+            PRobot robotParent = (PRobot) parent;
             robotParent.removeLabel(area.getLabel());
         }
     }
 
     @Override
     public Object deepCopy() {
-        return new PColliderRobot((PComponent) super.deepCopy(),(PShape)this.shape.deepCopy());
+        return new PColliderRobot((PComponent) super.deepCopy(),(PShape)this.getShape().deepCopy());
     }
 }

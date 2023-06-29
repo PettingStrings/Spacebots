@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 public class Unsignal extends BotCommand{
     PLabel label;
@@ -9,7 +9,7 @@ public class Unsignal extends BotCommand{
         this.label = label;
     }
     @Override
-    public int execute(ERobot target, int instructionPointer) {
+    public int execute(PRobot target, int instructionPointer) {
         target.unsignal(label);
         return instructionPointer+1;
     }

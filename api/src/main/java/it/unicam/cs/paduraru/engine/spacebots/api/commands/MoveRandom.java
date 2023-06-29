@@ -1,7 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.PVector;
-import it.unicam.cs.paduraru.engine.spacebots.api.entities.ERobot;
+import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 //MOVE RANDOM x1 x2 y1 y2 s: si muove alla velocità s espressa in m/s verso una posizione (x,y)
 //scelta casualmente nell’intervallo [x1, x2] e [y1, y2];
@@ -20,7 +20,7 @@ public class MoveRandom extends BotCommand{
         this.velocity = velocity;
     }
     @Override
-    public int execute(ERobot target, int instructionPointer) {
+    public int execute(PRobot target, int instructionPointer) {
         target.setDirection(PVector.random(minX, maxX, minY, maxY));
         target.setVelocity(velocity);
         target.move();

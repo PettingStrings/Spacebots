@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="main" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="554.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.paduraru.spacebots.app.gui.SpaceBotsController">
+<AnchorPane id="main" fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="554.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.paduraru.spacebots.app.gui.SpaceBotsGUIController">
    <children>
       <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="451.0" style="-fx-background-color: #DCDCDC;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -243,7 +243,7 @@
       </TabPane>
       <AnchorPane fx:id="simPane" layoutX="7.0" layoutY="176.0" onMouseMoved="#onMove_HoverTool" prefHeight="358.0" prefWidth="534.0" style="-fx-background-color: #DCDCDC;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="176.0">
          <children>
-            <Rectangle fx:id="rectTool" arcHeight="5.0" arcWidth="5.0" fill="DARKGRAY" height="50.0" layoutX="337.0" layoutY="27.0" onMouseClicked="#onClick_CreateSquare" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+            <Rectangle fx:id="rectTool" arcHeight="5.0" arcWidth="5.0" fill="DARKGRAY" height="50.0" layoutX="337.0" layoutY="27.0" onMouseClicked="#onClick_CreateRect" stroke="BLACK" strokeType="INSIDE" width="50.0" />
             <Circle fx:id="circleTool" fill="DARKGRAY" layoutX="126.0" layoutY="159.0" onMouseClicked="#onClick_CreateCircle" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="swarmTool" fill="#1f93ff00" layoutX="176.0" layoutY="92.0" onMouseClicked="#onClick_CreateSwarm" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
          </children></AnchorPane>

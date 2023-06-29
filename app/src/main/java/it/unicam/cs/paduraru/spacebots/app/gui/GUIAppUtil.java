@@ -10,13 +10,13 @@ import javafx.scene.shape.Shape;
 public class GUIAppUtil {
     private GUIAppUtil(){}
 
-    public static Shape convertToFXShape(PShape shape) throws Exception {
+    public static Shape convertToFXShape(PShape shape){
         if(shape instanceof PCircle)
             return new Circle(((PCircle) shape).getRadius());
 
         if(shape instanceof PRectangle)
             return new Rectangle(((PRectangle) shape).getWidth(), ((PRectangle) shape).getHeight());
 
-        throw new Exception("Shape not found");
+        return new Circle(100);
     }
 }

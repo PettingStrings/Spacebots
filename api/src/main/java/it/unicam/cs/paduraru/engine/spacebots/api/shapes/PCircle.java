@@ -1,14 +1,13 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.shapes;
 
 public class PCircle extends PShape {
-    public PCircle(int radius){
-        data = new int[]{radius};
+    public PCircle(double radius){
+        setData(new double[]{radius});
     }
-
-    public int getRadius() {
-        return data[0];
+    public double getRadius() {
+        return getData()[0];
     }
-
+    public void setRadius(double newRadius){getData()[0] = newRadius;}
     @Override
     public Object deepCopy() {
         return new PCircle(getRadius());
