@@ -1,17 +1,20 @@
 package it.unicam.cs.paduraru.spacebots.app.gui;
 
+import it.unicam.cs.followme.utilities.FollowMeParserException;
 import it.unicam.cs.paduraru.engine.GameController;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.Pair;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.commands.*;
-import it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PAreaLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PRectangle;
+import it.unicam.cs.paduraru.spacebots.app.environmentsParsers.SpaceBotsEnvironmentHandler;
+import it.unicam.cs.paduraru.spacebots.app.environmentsParsers.SpaceBotsEnvironmentParser;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -21,9 +24,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class SpaceBotsGUIController {
 
@@ -42,13 +47,14 @@ public class SpaceBotsGUIController {
     //endregion
 
     int simulationStep = 0;
+    private final File defaultPath = new File(getClass().getClassLoader().getResource("environments").getPath());
     Shape selectedTool;
     SpaceBotsEnvironmentBuilder envBuilder;
+    SpaceBotsEnvironmentParser envParser;
 
     @FXML
     void initialize() {
         envBuilder = new SpaceBotsEnvironmentBuilder();
-
         GameController.addEnvironment(envBuilder.getEnvironment());
         GameController.setCurrentEnvironment(0);
 
@@ -61,6 +67,7 @@ public class SpaceBotsGUIController {
         swarmTool.setVisible(false);
         rectTool.setVisible(false);
         circleTool.setVisible(false);
+        envParser = new SpaceBotsEnvironmentParser(new SpaceBotsEnvironmentHandler());
     }
 
     @FXML
@@ -143,7 +150,7 @@ public class SpaceBotsGUIController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        UpdateSimArea();
+        updateSimArea();
     }
 
     @FXML
@@ -154,7 +161,7 @@ public class SpaceBotsGUIController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        UpdateSimArea();
+        updateSimArea();
     }
 
     @FXML
@@ -201,10 +208,11 @@ public class SpaceBotsGUIController {
         PVector origin = new PVector(circleTool.getLayoutX(), circleTool.getLayoutY());
         envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PCircle(20));
         swarmTool.toFront();
-        UpdateSimArea();
+        updateSimArea();
     }
 
     public void onClick_CreateSwarm(MouseEvent mouseEvent) {
+        swarmTool.toFront();
         Pair<Double,Double>
             rangeX =
                 new Pair<>(swarmTool.getLayoutX() - swarmTool.getRadius(), swarmTool.getLayoutX() + swarmTool.getRadius()),
@@ -213,28 +221,21 @@ public class SpaceBotsGUIController {
         Until loop = new Until(new PLabel("prova"));
         loop.setDoneIp(2);
         try {
-            envBuilder.createSwarm(rangeX, rangeY, 5,
-                    Arrays.stream(new BotCommand[]{new Forever(),loop, new Move(new PVector(1,1), 5), new Done(1),new Done(0)}).toList());
+            envBuilder.createSwarm(rangeX, rangeY, 5, envParser.getProgram());
         } catch (Exception e) {
             testAlert("Error Creating Swarm :( :");
             System.out.println(e.getMessage());
         }
-        swarmTool.toFront();
-        UpdateSimArea();
+        updateSimArea();
 
     }
 
-    private void UpdateSimArea() {
+    private void updateSimArea() {
         lblSteps.setText(String.valueOf(simulationStep));
-        //I primi 3 sono i tool
-        simPane.getChildren().remove(3, simPane.getChildren().size());
+        simPane.getChildren().removeAll(simPane.getChildren().stream().filter(node -> node.getId() == null).toList());
         simPane.getChildren().addAll(GameController.getEnvironment(GameController.getCurrentEnvironment()).getEntities().stream()
                 .map(GUIAppUtil::generateFxShape)
                 .toList());
-    }
-
-    private void showEntities() {
-
     }
 
     public void onClick_CreateRect(MouseEvent mouseEvent) {
@@ -242,6 +243,55 @@ public class SpaceBotsGUIController {
                 rectTool.getLayoutY() + rectTool.getHeight()/2);
         envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PRectangle(rectTool.getWidth(), rectTool.getHeight()));
         rectTool.toFront();
-        UpdateSimArea();
+        updateSimArea();
+    }
+
+    public void onClick_Shapes(MouseEvent mouseEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(defaultPath);
+        fileChooser.setTitle("Open GOL File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Shape File", "*.txt"),
+                new FileChooser.ExtensionFilter("Shape File", "*.sbs"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        File selectedFile = fileChooser.showOpenDialog(((Node)mouseEvent.getSource()).getScene().getWindow());
+        if (selectedFile != null) {
+            try {
+                envParser.parseEnvironment(selectedFile);
+                envBuilder.setEnvironment(envParser.getEnvironment());
+                GameController.setCurrentEnvironment(envBuilder.getEnvironment());
+                updateSimArea();
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error...");
+                alert.setHeaderText(e.getMessage());
+            } catch (FollowMeParserException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error...");
+                alert.setHeaderText(e.getMessage());
+            }
+        }
+    }
+
+    public void onCLick_LoadCommands(MouseEvent mouseEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(defaultPath);
+        fileChooser.setTitle("Open GOL File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Program File", "*.txt"),
+                new FileChooser.ExtensionFilter("Program File", "*.sbp"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        File selectedFile = fileChooser.showOpenDialog(((Node)mouseEvent.getSource()).getScene().getWindow());
+        if (selectedFile != null) {
+            try {
+                envParser.parseProgram(selectedFile);
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error...");
+                alert.setHeaderText(e.getMessage());
+            } catch (FollowMeParserException e) {
+                System.out.println("Error loading program");
+            }
+        }
     }
 }

@@ -1,5 +1,8 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.shapes;
 
+/**
+ * Rappresenta un Rettangolo.
+ */
 public class PRectangle extends PShape {
     public PRectangle(double width, double height){
         setData(new double[]{width, height});

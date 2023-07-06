@@ -2,6 +2,9 @@ package it.unicam.cs.paduraru.engine.spacebots.api.shapes;
 
 import it.unicam.cs.paduraru.engine.DeepCopy;
 
+/**
+ * Rappresenta una forma generica.
+ */
 public class PShape implements DeepCopy {
     private double[] data;
 
@@ -16,5 +19,10 @@ public class PShape implements DeepCopy {
     @Override
     public Object deepCopy() {
         return new PShape(this.data.clone());
+    }
+
+    @Override
+    public String convertToString() {
+        return null;
     }
 }

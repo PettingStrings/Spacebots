@@ -28,9 +28,9 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="93.0" prefWidth="442.0" style="-fx-background-color: #DCDCDC;">
                      <children>
-                        <ButtonBar layoutX="14.0" layoutY="9.0" prefHeight="70.0" prefWidth="165.0" style="-fx-background-color: #DCDCDC;">
+                        <ButtonBar layoutX="14.0" layoutY="9.0" prefHeight="70.0" prefWidth="510.0" style="-fx-background-color: #DCDCDC;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0">
                            <buttons>
-                              <Button minWidth="72.0" mnemonicParsing="false" onMouseClicked="#onClick_LoadFile" prefHeight="52.0" text="Button">
+                              <Button minWidth="72.0" mnemonicParsing="false" onMouseClicked="#onCLick_LoadCommands" prefHeight="62.0" text="Load commands">
                                  <graphic>
                                     <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -39,11 +39,11 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button minWidth="35.0" mnemonicParsing="false" onMouseClicked="#onClick_SaveFile" prefHeight="30.0" text="Button">
+                              <Button layoutX="378.0" layoutY="14.0" minWidth="72.0" mnemonicParsing="false" onMouseClicked="#onClick_Shapes" prefHeight="62.0" text="Load shapes">
                                  <graphic>
-                                    <ImageView fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../icons/save.png" />
+                                          <Image url="@../icons/load.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

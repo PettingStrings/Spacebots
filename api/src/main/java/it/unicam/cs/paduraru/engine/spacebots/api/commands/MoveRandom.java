@@ -5,14 +5,14 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 //MOVE RANDOM x1 x2 y1 y2 s: si muove alla velocità s espressa in m/s verso una posizione (x,y)
 //scelta casualmente nell’intervallo [x1, x2] e [y1, y2];
-public class MoveRandom extends BotCommand{
+public class MoveRandom implements BotCommand{
     double minX;
     double maxX;
     double minY;
     double maxY;
-    int velocity;
+    double velocity;
 
-    public MoveRandom(double minX, double maxX, double minY, double maxY, int velocity){
+    public MoveRandom(double minX, double maxX, double minY, double maxY, double velocity){
         this.minX = minX;
         this.maxX = maxX;
         this.minY = minY;
@@ -30,5 +30,10 @@ public class MoveRandom extends BotCommand{
     @Override
     public Object deepCopy() {
         return new MoveRandom(this.minX,this.maxX,this.minY,this.maxY,this.velocity);
+    }
+
+    @Override
+    public String convertToString() {
+        return String.format("MOVE RANDOM %f %f %f %f %f", minX, maxX, minY, maxX, velocity);
     }
 }

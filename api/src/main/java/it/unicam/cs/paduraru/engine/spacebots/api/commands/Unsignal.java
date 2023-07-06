@@ -3,7 +3,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
-public class Unsignal extends BotCommand{
+public class Unsignal implements BotCommand{
     PLabel label;
     public  Unsignal(PLabel label){
         this.label = label;
@@ -17,5 +17,10 @@ public class Unsignal extends BotCommand{
     @Override
     public Object deepCopy() {
         return new Unsignal((PLabel) this.label.deepCopy());
+    }
+
+    @Override
+    public String convertToString() {
+        return null;
     }
 }

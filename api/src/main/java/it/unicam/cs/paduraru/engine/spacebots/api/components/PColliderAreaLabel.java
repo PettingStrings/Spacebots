@@ -4,12 +4,15 @@ import it.unicam.cs.paduraru.engine.PComponent;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PAreaLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
-public class PColliderWorkingArea extends PCollider {
-    public PColliderWorkingArea(PAreaLabel parent, PShape shape) {
+/**
+ * Collider specifico per un'AreaLabel.
+ */
+public class PColliderAreaLabel extends PCollider {
+    public PColliderAreaLabel(PAreaLabel parent, PShape shape) {
         super(parent, shape);
     }
 
-    public PColliderWorkingArea(PComponent pComponent, PShape shape) {
+    public PColliderAreaLabel(PComponent pComponent, PShape shape) {
         super(pComponent,shape);
     }
 
@@ -19,6 +22,6 @@ public class PColliderWorkingArea extends PCollider {
     public void OnExit(PCollider second) {/*Non serve*/}
     @Override
     public Object deepCopy() {
-        return new PColliderWorkingArea((PComponent) super.deepCopy(),(PShape)this.getShape().deepCopy());
+        return new PColliderAreaLabel((PComponent) super.deepCopy(),(PShape)this.getShape().deepCopy());
     }
 }

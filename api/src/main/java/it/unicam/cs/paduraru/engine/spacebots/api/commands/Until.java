@@ -6,7 +6,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 *Ripete delle istruzioni fino a quando una certa condizione non è percepita nell’ambiente
 * (ossia il robot è all’interno di un’area con la label richiesta):
  */
-public class Until extends BotCommand{
+public class Until extends LoopCommand{
     int doneIp;
     PLabel label;
 
@@ -34,5 +34,10 @@ public class Until extends BotCommand{
         Until command = new Until((PLabel) this.label.deepCopy());
         command.doneIp = this.doneIp;
         return command;
+    }
+
+    @Override
+    public String convertToString() {
+        return null;
     }
 }

@@ -4,6 +4,9 @@ import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.PEntity;
 
+/**
+ * Rappresenta una forma con associata una label.
+ */
 public class PAreaLabel extends PEntity {
     private PLabel label;
 

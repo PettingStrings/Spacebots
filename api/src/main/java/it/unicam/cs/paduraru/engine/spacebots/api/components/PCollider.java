@@ -4,7 +4,11 @@ import it.unicam.cs.paduraru.engine.PComponent;
 import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
-//Di defualt i collider hanno la stessa posizione del padre
+
+/**
+ * Modello per la creazione di un Collider da usare dentro il sistema SysCollision.
+ * Un collider rende tangibile un'entità. Di default l'origine del collider è quella del Parent.
+ */
 public abstract class PCollider extends PComponent {
     private PShape shape;
 
@@ -28,6 +32,15 @@ public abstract class PCollider extends PComponent {
         return getParent().getPosition();
     }
 
+    /**
+     * Questo evento viene chiamato quando il collider esce da una collisione.
+     * @param second Collider con cui è entrato in collisione.
+     */
     public abstract void OnExit(PCollider second);
+
+    /**
+     * Questo evento viene chiamato mentre il collider è i in collisione.
+     * @param second Collider con cui è entrato in collisione.
+     */
     public abstract void OnColliding(PCollider second);
 }

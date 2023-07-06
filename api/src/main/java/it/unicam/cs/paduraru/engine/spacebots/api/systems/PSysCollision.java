@@ -11,22 +11,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
+/**
+ * Sistema che si occupa di rilevare le collisioni tra {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider}.
+ */
 public class PSysCollision extends PSystem {
 
     public enum CollisionType{ RECT_RECT, RECT_CIRCLE, CIRCLE_RECT, CIRCLE_CIRCLE }
+
+    /**
+     * Lista contenente le coppie che sono entrate in collisione lo step precedente.
+     */
     List<Pair<PCollider, PCollider>> lastColliding;
 
     public PSysCollision(){
         lastColliding = new ArrayList<>();
     }
+    /**
+     * Aggiunge solo elementi di una lista appartenenti a {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider}.
+     * @param components Lista contenente gli elementi da aggiungere.
+     */
     @Override
-    public void addComponents(List<PComponent> componentsToAdd) {
-        getComponents().addAll(componentsToAdd.stream()
+    public void addComponents(List<PComponent> components) {
+        getComponents().addAll(components.stream()
                 .filter(component -> component instanceof PCollider)
                 .toList());
     }
 
+    /**
+     * {@inheritDoc}
+     * Esegue anche gli eventi dei {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider}.
+     */
     @Override
     public void run() {
         List<Pair<PCollider, PCollider>> currentColliding = getIntersectingColliderPairs();
@@ -36,10 +50,13 @@ public class PSysCollision extends PSystem {
         lastColliding = currentColliding;
     }
 
-    private void fireOnExit(List<Pair<PCollider, PCollider>> lastColliding) {
-        lastColliding.forEach(pair -> pair.first().OnExit(pair.second()));
-    }
-
+    /**
+     * Genera una lista di tutti i {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider}
+     * che sono dentro un'area circolare.
+     * @param origin Origine dell'area circolare.
+     * @param radius Raggio dell'area circolare.
+     * @return Lista dei componenti dentro l'area circolare.
+     */
     public List<PCollider> checkInCircle(PVector origin, int radius){
         PEntity temp = new PEntity(origin);
         PColliderGeneric coll = new PColliderGeneric(temp, new PCircle(radius));
@@ -51,6 +68,10 @@ public class PSysCollision extends PSystem {
                 .toList();
     }
 
+    /**
+     * Aggiunge solo elementi appartenenti a {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider}.
+     * @param comp Elemento da aggiungere.
+     */
     @Override
     public void addComponent(PComponent comp) {
         if(comp instanceof PCollider)
@@ -71,11 +92,31 @@ public class PSysCollision extends PSystem {
         return sys;
     }
 
-//region Collision Detection-Resolution
+    @Override
+    public String convertToString() {
+        return "PSysCollisione Not Implemented";
+    }
+
+    //region Collision Detection-Resolution
+    /**
+     * Esegue gli eventi di quando un componente sta collidendo.
+     * @param pairs Coppie che sono in collisione.
+     */
     private void fireOnColliding(List<Pair<PCollider, PCollider>> pairs) {
         pairs.forEach(pair -> pair.first().OnColliding(pair.second()));
     }
 
+    /**
+     * Esegue gli eventi di quando un componente è appena uscito da una collisione.
+     * @param pairs Coppie che erano in collisione lo step precedente ma non in questo.
+     */
+    private void fireOnExit(List<Pair<PCollider, PCollider>> pairs) {
+        pairs.forEach(pair -> pair.first().OnExit(pair.second()));
+    }
+
+    /**
+     * @return Lista {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider} in collisione.
+     */
     private List<Pair<PCollider, PCollider>> getIntersectingColliderPairs(){
         List<Pair<PCollider, PCollider>> toResolve = new ArrayList<>();
 
@@ -92,6 +133,11 @@ public class PSysCollision extends PSystem {
         return toResolve;
     }
 
+    /**
+     * Controlla che la coppia di collider sia in collisione.
+     * @param pair Coppia da controllare.
+     * @return True se sono in collisione. Falso negli altri casi.
+     */
     public static boolean isColliding(Pair<PCollider, PCollider> pair){
         boolean isColliding = false;
         switch (Objects.requireNonNull(getCollisionType(pair))){
@@ -107,6 +153,13 @@ public class PSysCollision extends PSystem {
         }
         return isColliding;
     }
+
+    /**
+     * Data una coppia di {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider}
+     * genera il tipo di collisione tra quelli disponibili in CollisionType.
+     * @param pair Coppia da controllare
+     * @return Il tipo di collisione.
+     */
     public static CollisionType getCollisionType(Pair<PCollider, PCollider> pair){
         if(pair.first().getShape() instanceof PCircle){
 
@@ -124,6 +177,7 @@ public class PSysCollision extends PSystem {
         //Null al posto di un eccezione
         return null;
     }
+
     public static boolean collisionCircleToCircle(Pair<PCollider, PCollider> pair) {
         PVector position1 = pair.first().getPosition(), position2 = pair.second().getPosition();
         double r1  = ((PCircle)pair.first().getShape()).getRadius(),

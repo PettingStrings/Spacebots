@@ -1,5 +1,9 @@
 package it.unicam.cs.paduraru.engine;
 
+/**
+ * Definisce una proprietà all'entità a cui è associato.
+ * Un componente viene gestito da un sistema.
+ */
 public class PComponent implements DeepCopy{
     private long ID;
     private PEntity parent;
@@ -25,7 +29,13 @@ public class PComponent implements DeepCopy{
         if(!(object instanceof PComponent)) return false;
         return ID == ((PComponent)object).ID;
     }
+    public PEntity getParent() {
+        return parent;
+    }
 
+    public void setParent(PEntity parent) {
+        this.parent = parent;
+    }
     @Override
     public Object deepCopy() {
         PComponent component = new PComponent((PEntity) parent.deepCopy());
@@ -33,11 +43,8 @@ public class PComponent implements DeepCopy{
         return component;
     }
 
-    public PEntity getParent() {
-        return parent;
-    }
-
-    public void setParent(PEntity parent) {
-        this.parent = parent;
+    @Override
+    public String convertToString() {
+        return "PComponent Not Implemented";
     }
 }

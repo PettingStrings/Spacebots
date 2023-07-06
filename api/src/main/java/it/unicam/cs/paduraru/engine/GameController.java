@@ -59,11 +59,15 @@ public final class GameController {
                 .map(Pair::second)
                 .collect(Collectors.toList());
     }
-    public static List<PCollider> scanInRoundArea(PVector origin, int radius){
+    public static List<PCollider> scanInRoundArea(PVector origin, double radius){
         return scanInShapeArea(origin, new PCircle(radius));
     }
 
     public static void stepBackCurrentEnvironment() {
         environments.set(currentEnvironment, history.get(currentEnvironment).remove(history.get(currentEnvironment).size()-1));
+    }
+
+    public static void setCurrentEnvironment(PEnvironment environment) {
+        environments.set(currentEnvironment, environment);
     }
 }

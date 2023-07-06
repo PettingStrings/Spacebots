@@ -3,7 +3,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
-public class Move extends BotCommand{
+public class Move implements BotCommand{
     PVector direction;
     double velocity;
     public Move(PVector direction, double velocity){
@@ -21,5 +21,10 @@ public class Move extends BotCommand{
     @Override
     public Object deepCopy() {
         return new Move((PVector) this.direction.deepCopy(),this.velocity);
+    }
+
+    @Override
+    public String convertToString() {
+        return "MOVE " + direction.getX() + " "+ direction.getY()+ " "+velocity;
     }
 }

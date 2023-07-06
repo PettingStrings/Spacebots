@@ -1,5 +1,8 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.shapes;
 
+/**
+ * Rappresenta un Cerchio.
+ */
 public class PCircle extends PShape {
     public PCircle(double radius){
         setData(new double[]{radius});

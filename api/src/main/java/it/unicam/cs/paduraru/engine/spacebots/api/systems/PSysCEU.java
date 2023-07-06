@@ -8,7 +8,14 @@ import it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Sistema che si occupa di eseguire il codice dei componenti {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU}.
+ */
 public class PSysCEU extends PSystem implements DeepCopy {
+    /**
+     * Aggiunge solo elementi di una lista appartenenti a {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU}.
+     * @param components Lista contenente gli elementi da aggiungere.
+     */
     @Override
     public void addComponents(List<PComponent> components) {
         getComponents().addAll(components.stream()
@@ -19,6 +26,11 @@ public class PSysCEU extends PSystem implements DeepCopy {
     public void run(){
         getComponents().stream().map(component -> (PCEU)component).forEach(PCEU::executeNextLine);
     }
+
+    /**
+     * Aggiunge solo elementi appartenenti a {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU}.
+     * @param comp Elemento da aggiungere.
+     */
     @Override
     public void addComponent(PComponent comp) {
         if(!(comp instanceof PCEU)) return;
@@ -32,5 +44,10 @@ public class PSysCEU extends PSystem implements DeepCopy {
                 .map(com -> (PComponent)com.deepCopy()).collect(Collectors.toList()));
 
         return sys;
+    }
+
+    @Override
+    public String convertToString() {
+        return "PSysCEU Not Implemented";
     }
 }

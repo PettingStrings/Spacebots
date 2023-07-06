@@ -2,7 +2,7 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
-public class Forever extends BotCommand{
+public class Forever extends LoopCommand{
 
     @Override
     public int execute(PRobot target, int instructionPointer) {
@@ -12,5 +12,10 @@ public class Forever extends BotCommand{
     @Override
     public Object deepCopy() {
         return new Forever();
+    }
+
+    @Override
+    public String convertToString() {
+        return "DO FOREVER";
     }
 }

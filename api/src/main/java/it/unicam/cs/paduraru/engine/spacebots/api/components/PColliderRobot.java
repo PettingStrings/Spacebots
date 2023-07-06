@@ -6,6 +6,9 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.PAreaLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 
+/**
+ * Collider specifico per un Robot.
+ */
 public class PColliderRobot extends PCollider {
     public PColliderRobot(PRobot parent, PShape shape) {
         super(parent, shape);
@@ -17,7 +20,6 @@ public class PColliderRobot extends PCollider {
 
     @Override
     public void OnColliding(PCollider second) {
-        //Possibiletà di aggiugnere collider specifici per ogni forma
         PEntity secondParent = second.getParent();
         if(secondParent instanceof PAreaLabel)
         {

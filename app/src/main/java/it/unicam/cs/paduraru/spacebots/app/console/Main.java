@@ -30,13 +30,8 @@ public class Main {
 
         SpaceBotsEnvironmentBuilder envBuilder = new SpaceBotsEnvironmentBuilder();
 
-        try {
-            envBuilder.createSwarm(rangeX, rangeY,5,commands);
+        envBuilder.createSwarm(rangeX, rangeY,5,commands);
             //envBuilder.addLabelledArea(new ELabelledArea());
-        } catch (Exception e) {
-            LogLn(e.getMessage());
-            System.exit(1);
-        }
 
         envBuilder.addSystem(new PSysCollision());
         envBuilder.addSystem(new PSysCEU());

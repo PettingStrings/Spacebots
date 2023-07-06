@@ -2,8 +2,10 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
-//Come Move prende l'ultimo che è stato aggiunto. Il continue non va mai chiamato senza un precedente move
-public class Continue  extends BotCommand{
+/**
+ * Questo comando fa continuare il robot a muoversi alla direzione e velocità attuale.
+ */
+public class Continue  implements BotCommand{
     int maxSteps, currentStep;
     boolean isFinished;
 
@@ -12,6 +14,13 @@ public class Continue  extends BotCommand{
         isFinished = false;
         initialize();
     }
+
+    /**
+     *
+     * @param target             Entità sulla quale il comando agirà.
+     * @param instructionPointer Numero di riga in cui viene eseguita l'istruzione.
+     * @return Numero della riga successiva.
+     */
     @Override
     public int execute(PRobot target, int instructionPointer) {
         if(isFinished) initialize();
@@ -28,6 +37,9 @@ public class Continue  extends BotCommand{
         return instructionPointer;
     }
 
+    /**
+     * Riporta la classe allo stato iniziale.
+     */
     public void initialize() {
         currentStep = maxSteps;
         isFinished = false;
@@ -36,5 +48,10 @@ public class Continue  extends BotCommand{
     @Override
     public Object deepCopy() {
         return new Continue(maxSteps);
+    }
+
+    @Override
+    public String convertToString() {
+        return "CONTINUE";
     }
 }

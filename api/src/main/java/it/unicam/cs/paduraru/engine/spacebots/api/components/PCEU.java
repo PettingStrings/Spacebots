@@ -7,8 +7,12 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//Code Execution Unit
+/**
+ * Questa componente permette ad un robot di eseguire un programma.
+ * (Code Execution Unit)
+ */
 public class PCEU extends PComponent {
+
     private List<BotCommand> commands;
     private int instructionPointer;
     public PCEU(PRobot parent, List<BotCommand> commands) {
@@ -30,12 +34,8 @@ public class PCEU extends PComponent {
         return instructionPointer;
     }
 
-    private void setInstructionPointer(int instructionPointer) {
-        this.instructionPointer = instructionPointer;
-    }
     @Override
     public Object deepCopy(){
-
         return new PCEU((PComponent) super.deepCopy(),
                 this.commands.stream()
                         .map(comm -> (BotCommand)comm.deepCopy())

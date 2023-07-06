@@ -12,11 +12,17 @@ FOLLOW label dist s: si muove muove alla velocità s espressa in m/s una direzio
 dei robot che segnalano la condizione label e che di trovano ad una distanza minore o uguale a dist.
 Se non esistono robot viene scelta una direzione a caso nell’intervallo [-dist, dist]x[-dist, dist].
 */
-public class Follow extends BotCommand{
+
+/**
+ * Fa muovere il Robot alla data velocità e in una direzione che è la media dei Robot che segnalano la data Label entro una data distanza.
+ * Se non ci sono robot che segnalano la data condizione viene scelta una direzione casuale nell'area del cerchio con origine
+ * il Parent e raggio uguale alla distanza.
+ */
+public class Follow implements BotCommand{
     PLabel label;
-    int dist;
-    int velocity;
-    public Follow(PLabel label, int dist, int velocity){
+    double dist;
+    double velocity;
+    public Follow(PLabel label, double dist, double velocity){
         this.label = label;
         this.dist = dist;
         this.velocity = velocity;
@@ -26,11 +32,7 @@ public class Follow extends BotCommand{
 
         List<PCollider> foundTargets;
 
-        try {
-             foundTargets = GameController.scanInRoundArea(target.getPosition(), dist);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        foundTargets = GameController.scanInRoundArea(target.getPosition(), dist);
 
         if(foundTargets.size() == 0){
             MoveRandom tmp = new MoveRandom(
@@ -69,5 +71,10 @@ public class Follow extends BotCommand{
     @Override
     public Object deepCopy() {
         return new Follow((PLabel) this.label.deepCopy(), this.dist, this.velocity);
+    }
+
+    @Override
+    public String convertToString() {
+        return "FOLLOW  d"+label.convertToString()+ " " + (dist) + " " + (velocity);
     }
 }

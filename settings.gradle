@@ -1,3 +1,5 @@
 rootProject.name = 'PaduraruDanutRazvan_Spacebots'
 include 'api'
 include 'app'
+include 'followme'
+

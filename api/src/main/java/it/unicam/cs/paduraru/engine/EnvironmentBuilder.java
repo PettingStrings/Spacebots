@@ -1,5 +1,8 @@
 package it.unicam.cs.paduraru.engine;
 
+/**
+ * E' una classe ausiliaria che incapsula i metodi per creare e gestire un Environment.
+ */
 public class EnvironmentBuilder {
     private PEnvironment environment;
     public EnvironmentBuilder(){

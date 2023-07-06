@@ -1,5 +1,8 @@
 package it.unicam.cs.paduraru.engine;
 
+/**
+ * Rappresenta un'oggetto dentro un PEnvironment.
+ */
 public class PEntity implements DeepCopy{
     private long ID;
     private PVector position;
@@ -8,9 +11,8 @@ public class PEntity implements DeepCopy{
         position = origin;
     }
 
-    protected PEntity(PEntity o) {
-        this.setID(o.ID);
-        this.position = o.position;
+    protected PEntity(PEntity o){
+        position = (PVector) getPosition().deepCopy();
     }
 
     public void setID(long newID){
@@ -40,5 +42,10 @@ public class PEntity implements DeepCopy{
 
         return copied;
 
+    }
+
+    @Override
+    public String convertToString() {
+        return "PEntity Not Implemented";
     }
 }

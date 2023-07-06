@@ -8,12 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Rappresenta un robot.
+ */
 public class PRobot extends PEntity {
 
+    /**
+     * Label con cui è attualmente in contatto.
+     */
     private List<PLabel> currentLabels;
+    /**
+     * Label che sta attualmente segnalando. Un robot può segnalare più label.
+     */
     private List<PLabel> signaledLabels;
+    /**
+     * La Label che sta attualemnte seguendo. Se non ne sta seguendo nessuna il valore è null.
+     */
     private PLabel followingLabel;
-    private PVector direction;//Per colpa del move random devo memorizzare la velocità qui
+    /**
+     * Direzione in cui sta viaggiando. Ha un range da -1 a 1 per ogni componente.
+     */
+    private PVector direction;
     private double velocity;
 
     public PRobot(PVector origin) {
@@ -25,8 +40,8 @@ public class PRobot extends PEntity {
         direction = new PVector(0,0);
     }
 
-    protected PRobot(PEntity o) {
-        super(o);
+    protected PRobot(PEntity other) {
+        super(other);
         currentLabels = new ArrayList<>();
         signaledLabels = new ArrayList<>();
         velocity = 0;
@@ -34,6 +49,7 @@ public class PRobot extends PEntity {
     }
 
     public void addLabel(PLabel label) {
+        if(getCurrentLabels().contains(label)) return;
         getCurrentLabels().add(label);
     }
 
@@ -45,38 +61,26 @@ public class PRobot extends PEntity {
         return currentLabels;
     }
 
-    public PVector getDirection() {
-        return direction;
-    }
-
     public void setDirection(PVector newDir) {
         this.direction = newDir.normalize();
     }
 
+    /**
+     * Calcola la prossima posizione in base alla direzione e velocità attuale.
+     */
     public void move() {
         setPosition(getPosition().add(direction.mulScalar(velocity)));
-    }
-
-    public void setCurrentLabels(List<PLabel> currentLabels) {
-        this.currentLabels = currentLabels;
     }
 
     public List<PLabel> getSignaledLabels() {
         return signaledLabels;
     }
 
-    public void setSignaledLabels(List<PLabel> signaledLabels) {
-        this.signaledLabels = signaledLabels;
-    }
-
-    public PLabel getFollowingLabel() {
-        return followingLabel;
-    }
-
-    public void setFollowingLabel(PLabel followingLabel) {
-        this.followingLabel = followingLabel;
-    }
-
+    /**
+     * Segnala una label.
+     * Può segnalare una label con cui non è entrato in contatto.
+     * @param label Label da segnalare.
+     */
     public void signal(PLabel label) {
         if(signaledLabels.contains(label))
             return;
