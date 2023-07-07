@@ -2,8 +2,11 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
+/**
+ * Loop che si ripete per un numero dato di volte.
+ */
 public class RepeatN extends LoopCommand{
-    int doneIp, currentIteration;
+    int currentIteration;
     final int maxIterations;
     boolean isFinished;
 
@@ -12,6 +15,12 @@ public class RepeatN extends LoopCommand{
         this.isFinished = false;
         initialize();
     }
+
+    /**
+     * @param target             Entità sulla quale il comando agirà.
+     * @param instructionPointer Numero di riga in cui viene eseguita l' istruzione.
+     * @return Prossima riga se non è finito. Se è finito ritorna la prossima riga dopo il done.
+     */
     @Override
     public int execute(PRobot target, int instructionPointer) {
         if(isFinished) initialize();
@@ -19,7 +28,7 @@ public class RepeatN extends LoopCommand{
         currentIteration++;
         if(currentIteration > maxIterations){
             isFinished = true;
-            return doneIp+1;
+            return getDoneIp()+1;
         }
 
         return instructionPointer+1;
@@ -30,19 +39,11 @@ public class RepeatN extends LoopCommand{
         isFinished = false;
     }
 
-    public int getDoneIp() {
-        return doneIp;
-    }
-
-    public void setDoneIp(int doneIp) {
-        this.doneIp = doneIp;
-    }
-
     @Override
     public Object deepCopy() {
         RepeatN command = new RepeatN(this.maxIterations);
         command.currentIteration = this.currentIteration;
-        command.doneIp = this.doneIp;
+        command.setDoneIp(this.getDoneIp());
         return command;
     }
 

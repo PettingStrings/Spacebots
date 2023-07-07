@@ -1,6 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.GameController;
+import it.unicam.cs.paduraru.engine.PEntity;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PCollider;
@@ -15,7 +16,7 @@ Se non esistono robot viene scelta una direzione a caso nell’intervallo [-dist
 
 /**
  * Fa muovere il Robot alla data velocità e in una direzione che è la media dei Robot che segnalano la data Label entro una data distanza.
- * Se non ci sono robot che segnalano la data condizione viene scelta una direzione casuale nell'area del cerchio con origine
+ * Se non ci sono robot che segnalano la data condizione viene scelta una direzione casuale nell' area del cerchio con origine
  * il Parent e raggio uguale alla distanza.
  */
 public class Follow implements BotCommand{
@@ -27,12 +28,16 @@ public class Follow implements BotCommand{
         this.dist = dist;
         this.velocity = velocity;
     }
+
+    /**
+     * @param target             Entità sulla quale il comando agirà.
+     * @param instructionPointer Numero di riga in cui viene eseguita l' istruzione.
+     * @return Numero della prossima riga de eseguire.
+     */
     @Override
     public int execute(PRobot target, int instructionPointer) {
 
-        List<PCollider> foundTargets;
-
-        foundTargets = GameController.scanInRoundArea(target.getPosition(), dist);
+        List<PCollider> foundTargets = GameController.scanInRoundArea(target.getPosition(), dist);
 
         if(foundTargets.size() == 0){
             MoveRandom tmp = new MoveRandom(
@@ -51,10 +56,10 @@ public class Follow implements BotCommand{
                 .filter(collider -> collider.getParent() instanceof PRobot)
                 .map(collider -> (PRobot)collider.getParent())
                 .filter(robot -> robot.getSignaledLabels().contains(label))
-                .map(robot -> robot.getPosition())
+                .map(PEntity::getPosition)
                 .toList();
 
-        Move tmp = new Move(getAvgDirection(suitableRobotsPositions), velocity);
+        Move tmp = new Move(target.getPosition().distance(getAvgDirection(suitableRobotsPositions)).normalize(), velocity);
 
         return tmp.execute(target, instructionPointer);
     }

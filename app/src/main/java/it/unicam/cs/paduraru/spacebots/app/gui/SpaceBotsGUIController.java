@@ -15,10 +15,9 @@ import it.unicam.cs.paduraru.spacebots.app.environmentsParsers.SpaceBotsEnvironm
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -28,6 +27,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class SpaceBotsGUIController {
@@ -44,9 +44,12 @@ public class SpaceBotsGUIController {
     Tab entitiesTab;
     @FXML
     Label lblSteps;
+    @FXML
+    TextField txtSteps;
     //endregion
 
     int simulationStep = 0;
+    int stepNum = 1;
     private final File defaultPath = new File(getClass().getClassLoader().getResource("environments").getPath());
     Shape selectedTool;
     SpaceBotsEnvironmentBuilder envBuilder;
@@ -116,6 +119,7 @@ public class SpaceBotsGUIController {
         circleTool.setVisible(true);
         rectTool.setVisible(false);
         selectedTool = circleTool;
+        selectedTool.toFront();
     }
 
     @FXML
@@ -124,6 +128,7 @@ public class SpaceBotsGUIController {
         circleTool.setVisible(false);
         rectTool.setVisible(true);
         selectedTool = rectTool;
+        selectedTool.toFront();
     }
 
     @FXML
@@ -132,6 +137,7 @@ public class SpaceBotsGUIController {
         circleTool.setVisible(false);
         rectTool.setVisible(false);
         selectedTool = swarmTool;
+        selectedTool.toFront();
     }
 
     @FXML
@@ -143,21 +149,24 @@ public class SpaceBotsGUIController {
     void onClick_StepBack(MouseEvent event) {
         if(simulationStep == 0) return;
 
-        simulationStep--;
-        try {
-            GameController.stepBackCurrentEnvironment();
-            envBuilder.setEnvironment(GameController.getEnvironment(GameController.getCurrentEnvironment()));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if(simulationStep < stepNum){
+            GameController.stepBackCurrentEnvironment(simulationStep);
+            simulationStep = 0;
+        }else {
+            GameController.stepBackCurrentEnvironment(stepNum);
+            simulationStep -= stepNum;
         }
+
+        envBuilder.setEnvironment(GameController.getEnvironment(GameController.getCurrentEnvironment()));
+
         updateSimArea();
     }
 
     @FXML
     void onClick_StepForward(MouseEvent event) {
-        simulationStep++;
+        simulationStep+=stepNum;
         try {
-            GameController.stepForwardCurrentEnvironment();
+            GameController.stepForwardCurrentEnvironment(stepNum);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -207,12 +216,11 @@ public class SpaceBotsGUIController {
     public void onClick_CreateCircle(MouseEvent mouseEvent) throws Exception {
         PVector origin = new PVector(circleTool.getLayoutX(), circleTool.getLayoutY());
         envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PCircle(20));
-        swarmTool.toFront();
         updateSimArea();
+        selectedTool.toFront();
     }
 
     public void onClick_CreateSwarm(MouseEvent mouseEvent) {
-        swarmTool.toFront();
         Pair<Double,Double>
             rangeX =
                 new Pair<>(swarmTool.getLayoutX() - swarmTool.getRadius(), swarmTool.getLayoutX() + swarmTool.getRadius()),
@@ -227,7 +235,7 @@ public class SpaceBotsGUIController {
             System.out.println(e.getMessage());
         }
         updateSimArea();
-
+        selectedTool.toFront();
     }
 
     private void updateSimArea() {
@@ -242,8 +250,8 @@ public class SpaceBotsGUIController {
         PVector origin = new PVector(rectTool.getLayoutX() + rectTool.getWidth()/2,
                 rectTool.getLayoutY() + rectTool.getHeight()/2);
         envBuilder.addLabelledArea(new PAreaLabel(origin, new PLabel("prova")), new PRectangle(rectTool.getWidth(), rectTool.getHeight()));
-        rectTool.toFront();
         updateSimArea();
+        selectedTool.toFront();
     }
 
     public void onClick_Shapes(MouseEvent mouseEvent) {
@@ -292,6 +300,14 @@ public class SpaceBotsGUIController {
             } catch (FollowMeParserException e) {
                 System.out.println("Error loading program");
             }
+        }
+    }
+
+    public void onTyped_txtSteps(KeyEvent keyEvent) {
+        try {
+             stepNum = Integer.parseInt(txtSteps.getCharacters().toString());
+        }catch (NumberFormatException e){
+            testAlert("Not a number");
         }
     }
 }

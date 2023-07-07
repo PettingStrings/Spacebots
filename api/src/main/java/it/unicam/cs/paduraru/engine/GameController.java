@@ -53,8 +53,9 @@ public final class GameController {
         PEntity tempEnt = new PEntity(origin);
         PColliderGeneric tempColl = new PColliderGeneric(tempEnt, shape);
 
-        return curEnv.components.stream().map(component ->
-                        new Pair<PCollider, PCollider>(tempColl, (PCollider) component))
+        return curEnv.components.stream()
+                .filter(component -> component instanceof PCollider)
+                .map(component -> new Pair<PCollider, PCollider>(tempColl, (PCollider) component))
                 .filter(PSysCollision::isColliding)
                 .map(Pair::second)
                 .collect(Collectors.toList());
@@ -69,5 +70,17 @@ public final class GameController {
 
     public static void setCurrentEnvironment(PEnvironment environment) {
         environments.set(currentEnvironment, environment);
+    }
+
+    public static void stepForwardCurrentEnvironment(int stepNum) {
+        for (int i = 0; i < stepNum; i++) {
+            stepForwardCurrentEnvironment();
+        }
+    }
+
+    public static void stepBackCurrentEnvironment(int stepNum) {
+        for (int i = 0; i < stepNum; i++) {
+            stepBackCurrentEnvironment();
+        }
     }
 }

@@ -3,6 +3,9 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
+/**
+ * Fa muovere il robot nella direzione e velocità definita.
+ */
 public class Move implements BotCommand{
     PVector direction;
     double velocity;
@@ -10,6 +13,12 @@ public class Move implements BotCommand{
         this.direction = direction;
         this.velocity = velocity;
     }
+
+    /**
+     * @param target             Entità sulla quale il comando agirà.
+     * @param instructionPointer Numero di riga in cui viene eseguita l' istruzione.
+     * @return Numero di riga della prossima istruzione.
+     */
     @Override
     public int execute(PRobot target, int instructionPointer) {
         target.setDirection(direction);

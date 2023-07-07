@@ -1,0 +1,6 @@
+DO FOREVER
+UNTIL wondahoi
+FOLLOW wondahoi 500 5
+done
+SIGNAL wondahoi
+DONE

@@ -66,19 +66,13 @@ class PEnvironmentTest {
     @Test
     void addSystem() {
         env.clear();
-        PEntity tempEnt = new PEntity();
         TestASystem tempSys = new TestASystem();
-        PComponent tempComp = new PComponent(tempEnt);
 
         env.addSystem(tempSys);
 
         assertTrue(env.getSystems().stream().count() == 1 &&
                 env.getSystems().contains(tempSys));
 
-    }
-
-    @Test
-    void addComponent() {
     }
 
     @Test

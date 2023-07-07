@@ -3,7 +3,7 @@ package it.unicam.cs.paduraru.engine;
 import it.unicam.cs.paduraru.engine.spacebots.api.APIUtil;
 
 /**
- * Rrappresenta un vettore.
+ * Rappresenta un vettore.
  */
 public class PVector implements DeepCopy{
     double x,y;
@@ -15,7 +15,7 @@ public class PVector implements DeepCopy{
         this.x = x;
         this.y = y;
     }
-    //region Getters-Setters
+
     public double getX(){
         return x;
     }
@@ -32,7 +32,6 @@ public class PVector implements DeepCopy{
      * @param maxY La coordinata Y maggiore possibile che può essere generata
      * @return Un nuovo vettore con coordinate casuali comprese nel range definito
      */
-    //endregion
     public static PVector random(double minX, double maxX, double minY, double maxY) {
         return new PVector(APIUtil.randDouble(minX, maxX), APIUtil.randDouble(minY, maxY));
     }
@@ -89,7 +88,7 @@ public class PVector implements DeepCopy{
     }
 
     /**
-     * Calcola la distanza tra questo vettore e un altro.
+     * Calcola il vettore distanza tra questo vettore e un altro.
      * @param other Vettore da cui calcolare la distanza
      * @return Un nuovo vettore con le componenti della distanza
      */
@@ -110,6 +109,6 @@ public class PVector implements DeepCopy{
 
     @Override
     public String convertToString() {
-        return null;
+        return "PVector Not Implemented";
     }
 }

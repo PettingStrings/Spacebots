@@ -17,14 +17,14 @@ class PVectorTest {
     @Test
     void divScalar() {
         PVector v1 = new PVector(50,50);
-        assertTrue(v1.divScalar(2).equals(new PVector(25,25)));
-        assertTrue(v1.divScalar(0).equals(new PVector(0,0)));
+        assertEquals(v1.divScalar(2), new PVector(25, 25));
+        assertEquals(v1.divScalar(0), new PVector(0, 0));
     }
 
     @Test
     void mulScalar() {
         PVector v1 = new PVector(25,25);
-        assertTrue(v1.mulScalar(2).equals(new PVector(50,50)));
+        assertEquals(v1.mulScalar(2), new PVector(50, 50));
     }
 
     @Test
@@ -38,14 +38,14 @@ class PVectorTest {
     @Test
     void normalize() {
         PVector v1 = new PVector(2,0), v2 = new PVector(0,2), v3 = new PVector(4,4);
-        assertTrue(v1.normalize().equals(new PVector(1,0)));
-        assertTrue(v2.normalize().equals(new PVector(0,1)));
+        assertEquals(v1.normalize(), new PVector(1, 0));
+        assertEquals(v2.normalize(), new PVector(0, 1));
        // assertTrue(v3.normalize().equals(new Vector(0.7071067811865475,0.7071067811865475)));
     }
 
     @Test
     void distance() {
         PVector v1 = new PVector(0,0), v2 = new PVector(10,10);
-        assertTrue(v1.distance(v2).equals(new PVector(10,10)));
+        assertEquals(v1.distance(v2), new PVector(10, 10));
     }
 }

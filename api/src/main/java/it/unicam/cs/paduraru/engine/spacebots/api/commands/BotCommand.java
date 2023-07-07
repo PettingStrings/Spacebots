@@ -10,7 +10,7 @@ public interface BotCommand extends DeepCopy {
     /**
      * Esegue il comando.
      * @param target Entità sulla quale il comando agirà.
-     * @param instructionPointer Numero di riga in cui viene eseguita l'istruzione.
+     * @param instructionPointer Numero di riga in cui viene eseguita l' istruzione.
      * @return Numero di riga della prossima istruzione.
      */
     int execute(PRobot target, int instructionPointer);

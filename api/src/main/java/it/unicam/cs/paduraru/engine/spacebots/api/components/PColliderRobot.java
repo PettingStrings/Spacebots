@@ -21,9 +21,8 @@ public class PColliderRobot extends PCollider {
     @Override
     public void OnColliding(PCollider second) {
         PEntity secondParent = second.getParent();
-        if(secondParent instanceof PAreaLabel)
+        if(secondParent instanceof PAreaLabel area)
         {
-            PAreaLabel area = (PAreaLabel) secondParent;
             PRobot robotParent = (PRobot) getParent();
             robotParent.addLabel(area.getLabel());
         }
@@ -32,9 +31,8 @@ public class PColliderRobot extends PCollider {
     @Override
     public void OnExit(PCollider second) {
         PEntity secondParent = second.getParent();
-        if(secondParent instanceof PAreaLabel)
+        if(secondParent instanceof PAreaLabel area)
         {
-            PAreaLabel area = (PAreaLabel) secondParent;
             PRobot robotParent = (PRobot) getParent();
             robotParent.removeLabel(area.getLabel());
         }

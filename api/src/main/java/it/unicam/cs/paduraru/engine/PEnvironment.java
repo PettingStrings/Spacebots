@@ -22,9 +22,9 @@ public class PEnvironment implements DeepCopy{
 
     public PEnvironment(){
         lastID = new AtomicLong(0);
-        entities = new ArrayList<PEntity>();
-        systems = new ArrayList<PSystem>();
-        components = new ArrayList<PComponent>();
+        entities = new ArrayList<>();
+        systems = new ArrayList<>();
+        components = new ArrayList<>();
     }
 
     /**
@@ -94,28 +94,29 @@ public class PEnvironment implements DeepCopy{
                 .toList();
     }
     public Object deepCopy() {
-        PEnvironment environment = new PEnvironment();
-        environment.lastID = new AtomicLong(this.lastID.get());
-        environment.entities = this.entities.stream().map(entity -> (PEntity)entity.deepCopy()).collect(Collectors.toList());
-        environment.components = this.components.stream().map(comp -> (PComponent)comp.deepCopy()).collect(Collectors.toList());
+        PEnvironment newEnvironment = new PEnvironment();
+        newEnvironment.lastID = new AtomicLong(this.lastID.get());
+        newEnvironment.entities = this.entities.stream().map(entity -> (PEntity)entity.deepCopy()).collect(Collectors.toList());
+        newEnvironment.components = this.components.stream().map(comp -> (PComponent)comp.deepCopy()).collect(Collectors.toList());
         //copiare i nuovi parent dentro le nuove entità per avere i riferimenti corretti
-        environment.components.forEach(
-                comp -> comp.setParent(environment.entities.get(
-                        environment.entities.indexOf(comp.getParent()))));
+        newEnvironment.components.forEach(
+                comp -> comp.setParent(newEnvironment.entities.get(
+                        newEnvironment.entities.indexOf(comp.getParent()))));
 
         for (var s: this.systems) {
-            environment.systems.add((PSystem) s.deepCopy());
+            newEnvironment.systems.add((PSystem) s.deepCopy());
         }
-        environment.systems = environment.systems.stream().map(sys -> {sys.clear(); return sys;})
-                .map(sys -> {sys.addComponents(environment.components); return sys;})
+
+        newEnvironment.systems = newEnvironment.systems.stream()
+                .peek(PSystem::clear)
+                .peek(sys -> sys.addComponents(newEnvironment.components))
                 .collect(Collectors.toList());
 
-        return environment;
+        return newEnvironment;
     }
 
     @Override
     public String convertToString() {
-        String string = "PEnvironent Not Implemented";
-        return string;
+        return "PEnvironent Not Implemented";
     }
 }

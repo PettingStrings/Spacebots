@@ -3,6 +3,9 @@ package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
+/**
+ * Muove il robot verso una posizione scelta casualmente nell' intervallo dato.
+ */
 //MOVE RANDOM x1 x2 y1 y2 s: si muove alla velocità s espressa in m/s verso una posizione (x,y)
 //scelta casualmente nell’intervallo [x1, x2] e [y1, y2];
 public class MoveRandom implements BotCommand{
@@ -19,6 +22,12 @@ public class MoveRandom implements BotCommand{
         this.maxY = maxY;
         this.velocity = velocity;
     }
+
+    /**
+     * @param target             Entità sulla quale il comando agirà.
+     * @param instructionPointer Numero di riga in cui viene eseguita l' istruzione.
+     * @return Numero della prossima riga.
+     */
     @Override
     public int execute(PRobot target, int instructionPointer) {
         target.setDirection(PVector.random(minX, maxX, minY, maxY));

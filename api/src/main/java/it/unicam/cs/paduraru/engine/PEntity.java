@@ -12,7 +12,8 @@ public class PEntity implements DeepCopy{
     }
 
     protected PEntity(PEntity o){
-        position = (PVector) getPosition().deepCopy();
+        this.setID(o.ID);
+        this.position = o.position;
     }
 
     public void setID(long newID){

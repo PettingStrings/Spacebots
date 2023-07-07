@@ -30,7 +30,7 @@
                      <children>
                         <ButtonBar layoutX="14.0" layoutY="9.0" prefHeight="70.0" prefWidth="510.0" style="-fx-background-color: #DCDCDC;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0">
                            <buttons>
-                              <Button minWidth="72.0" mnemonicParsing="false" onMouseClicked="#onCLick_LoadCommands" prefHeight="62.0" text="Load commands">
+                              <Button minWidth="72.0" mnemonicParsing="false" onMouseClicked="#onCLick_LoadCommands" prefHeight="62.0" text="Load program">
                                  <graphic>
                                     <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -161,7 +161,7 @@
                               </Button>
                            </buttons>
                         </ButtonBar>
-                        <TextField alignment="CENTER_RIGHT" layoutX="228.0" layoutY="34.0" onInputMethodTextChanged="#onInput_Check" prefHeight="10.0" prefWidth="47.0" text="1">
+                        <TextField fx:id="txtSteps" alignment="CENTER_RIGHT" layoutX="228.0" layoutY="34.0" onKeyTyped="#onTyped_txtSteps" prefHeight="10.0" prefWidth="47.0" text="1">
                            <font>
                               <Font size="10.0" />
                            </font>
