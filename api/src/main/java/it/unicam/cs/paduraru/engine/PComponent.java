@@ -42,9 +42,4 @@ public class PComponent implements PDeepCopy {
         component.ID = this.ID;
         return component;
     }
-
-    @Override
-    public String convertToString() {
-        return "PComponent Not Implemented";
-    }
 }

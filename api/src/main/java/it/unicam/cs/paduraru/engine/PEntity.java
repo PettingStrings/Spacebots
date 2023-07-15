@@ -44,9 +44,4 @@ public class PEntity implements PDeepCopy {
         return copied;
 
     }
-
-    @Override
-    public String convertToString() {
-        return "PEntity Not Implemented";
-    }
 }

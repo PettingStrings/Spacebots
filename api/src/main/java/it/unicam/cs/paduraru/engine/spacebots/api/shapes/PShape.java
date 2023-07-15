@@ -20,9 +20,4 @@ public class PShape implements PDeepCopy {
     public Object deepCopy() {
         return new PShape(this.data.clone());
     }
-
-    @Override
-    public String convertToString() {
-        return null;
-    }
 }

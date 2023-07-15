@@ -91,12 +91,6 @@ public class PSysCollision extends PSystem {
 
         return sys;
     }
-
-    @Override
-    public String convertToString() {
-        return "PSysCollisione Not Implemented";
-    }
-
     //region Collision Detection-Resolution
     /**
      * Esegue gli eventi di quando un componente sta collidendo.

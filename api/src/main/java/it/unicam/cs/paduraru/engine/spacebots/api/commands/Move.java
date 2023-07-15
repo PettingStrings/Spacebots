@@ -31,9 +31,4 @@ public class Move implements BotCommand{
     public Object deepCopy() {
         return new Move((PVector) this.direction.deepCopy(),this.velocity);
     }
-
-    @Override
-    public String convertToString() {
-        return "MOVE " + direction.getX() + " "+ direction.getY()+ " "+velocity;
-    }
 }

@@ -32,9 +32,4 @@ public class Until extends LoopCommand{
         command.setDoneIp(getDoneIp());
         return command;
     }
-
-    @Override
-    public String convertToString() {
-        return null;
-    }
 }

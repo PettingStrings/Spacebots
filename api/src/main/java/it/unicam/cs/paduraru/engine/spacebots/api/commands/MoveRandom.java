@@ -38,21 +38,13 @@ public class MoveRandom implements BotCommand{
         return instructionPointer+1;
     }
 
-    private MoveRandom(PVector dir, double velocity){
-        this.dir = dir;
-        this.velocity = velocity;
-    }
     public void RandomizeDirection(){
         this.dir = PVector.random(rangeX.first(), rangeX.second(), rangeY.first(), rangeY.second());
     }
     @Override
+    @SuppressWarnings("unchecked")
     public Object deepCopy() {
         return new MoveRandom((Pair<Double, Double>) rangeX.deepCopy(),
                 (Pair<Double, Double>) rangeY.deepCopy(), velocity);
-    }
-
-    @Override
-    public String convertToString() {
-        return "Move Random not implemented";
     }
 }

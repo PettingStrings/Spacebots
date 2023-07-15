@@ -77,9 +77,4 @@ public class Follow implements BotCommand{
     public Object deepCopy() {
         return new Follow((PLabel) this.label.deepCopy(), this.dist, this.velocity);
     }
-
-    @Override
-    public String convertToString() {
-        return "FOLLOW  d"+label.convertToString()+ " " + (dist) + " " + (velocity);
-    }
 }

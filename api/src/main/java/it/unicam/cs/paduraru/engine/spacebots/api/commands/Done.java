@@ -27,9 +27,4 @@ public class Done implements BotCommand{
     public Object deepCopy() {
         return new Done(ip);
     }
-
-    @Override
-    public String convertToString() {
-        return "DONE";
-    }
 }

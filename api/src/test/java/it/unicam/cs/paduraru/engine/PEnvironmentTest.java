@@ -35,11 +35,6 @@ class PEnvironmentTest {
         public Object deepCopy() {
             return new TestASystem();
         }
-
-        @Override
-        public String convertToString() {
-            return null;
-        }
     }
 
     PEnvironment env = new PEnvironment();

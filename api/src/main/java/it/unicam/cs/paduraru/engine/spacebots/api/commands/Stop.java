@@ -23,9 +23,4 @@ public class Stop implements BotCommand{
     public Object deepCopy() {
         return new Stop();
     }
-
-    @Override
-    public String convertToString() {
-        return null;
-    }
 }

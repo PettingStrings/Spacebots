@@ -21,9 +21,4 @@ public class Forever extends LoopCommand{
     public Object deepCopy() {
         return new Forever();
     }
-
-    @Override
-    public String convertToString() {
-        return "DO FOREVER";
-    }
 }

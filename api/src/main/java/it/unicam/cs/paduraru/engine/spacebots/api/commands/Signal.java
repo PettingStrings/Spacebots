@@ -27,9 +27,4 @@ public class Signal implements BotCommand{
     public Object deepCopy() {
         return new Signal((PLabel) this.label.deepCopy());
     }
-
-    @Override
-    public String convertToString() {
-        return "SIGNAL "+label.convertToString();
-    }
 }

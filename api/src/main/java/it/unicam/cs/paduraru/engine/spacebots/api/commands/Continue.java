@@ -49,9 +49,4 @@ public class Continue  implements BotCommand{
     public Object deepCopy() {
         return new Continue(maxSteps);
     }
-
-    @Override
-    public String convertToString() {
-        return "CONTINUE";
-    }
 }

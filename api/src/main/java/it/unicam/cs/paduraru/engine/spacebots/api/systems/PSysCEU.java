@@ -45,9 +45,4 @@ public class PSysCEU extends PSystem implements PDeepCopy {
 
         return sys;
     }
-
-    @Override
-    public String convertToString() {
-        return "PSysCEU Not Implemented";
-    }
 }

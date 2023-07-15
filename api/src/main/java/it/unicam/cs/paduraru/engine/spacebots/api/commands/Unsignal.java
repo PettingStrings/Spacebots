@@ -27,9 +27,4 @@ public class Unsignal implements BotCommand{
     public Object deepCopy() {
         return new Unsignal((PLabel) this.label.deepCopy());
     }
-
-    @Override
-    public String convertToString() {
-        return null;
-    }
 }

@@ -46,9 +46,4 @@ public class RepeatN extends LoopCommand{
         command.setDoneIp(this.getDoneIp());
         return command;
     }
-
-    @Override
-    public String convertToString() {
-        return "REPEAT " + maxIterations;
-    }
 }

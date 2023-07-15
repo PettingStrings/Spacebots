@@ -25,9 +25,4 @@ public class PLabel implements PDeepCopy {
     public Object deepCopy() {
         return new PLabel(this.name);
     }
-
-    @Override
-    public String convertToString() {
-        return null;
-    }
 }

@@ -41,9 +41,4 @@ public record Pair<T, R>(T first, R second) implements PDeepCopy {
 
         return new Pair<>(this.first, this.second);
     }
-
-    @Override
-    public String convertToString() {
-        return "Pair Not Implemented";
-    }
 }
