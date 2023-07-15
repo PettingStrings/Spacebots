@@ -27,8 +27,6 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.Arrays;
 
 public class SpaceBotsGUIController {
 
@@ -49,7 +47,7 @@ public class SpaceBotsGUIController {
     //endregion
 
     int simulationStep = 0;
-    int stepNum = 1;
+    int stepNum = 5;
     private final File defaultPath = new File(getClass().getClassLoader().getResource("environments").getPath());
     Shape selectedTool;
     SpaceBotsEnvironmentBuilder envBuilder;
@@ -71,6 +69,8 @@ public class SpaceBotsGUIController {
         rectTool.setVisible(false);
         circleTool.setVisible(false);
         envParser = new SpaceBotsEnvironmentParser(new SpaceBotsEnvironmentHandler());
+
+        txtSteps.setText(Integer.toString(stepNum));
     }
 
     @FXML
@@ -81,11 +81,6 @@ public class SpaceBotsGUIController {
     @FXML
     void onClick_ClearSimulation(MouseEvent event) {
         testAlert("Clear");
-    }
-
-    @FXML
-    void onClick_LoadFile(MouseEvent event) {
-        testAlert("Load File");
     }
 
     @FXML
@@ -106,11 +101,6 @@ public class SpaceBotsGUIController {
     @FXML
     void onClick_MoveUp(MouseEvent event) {
         testAlert("Move Up");
-    }
-
-    @FXML
-    void onClick_SaveFile(MouseEvent event) {
-        testAlert("Save File");
     }
 
     @FXML
@@ -195,6 +185,13 @@ public class SpaceBotsGUIController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    void errorAlert(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
     public void onMove_HoverTool(MouseEvent mouseEvent) {
         double x = mouseEvent.getX(), y = mouseEvent.getY();
@@ -254,7 +251,7 @@ public class SpaceBotsGUIController {
         selectedTool.toFront();
     }
 
-    public void onClick_Shapes(MouseEvent mouseEvent) {
+    public void onClick_LoadShapes(MouseEvent mouseEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(defaultPath);
         fileChooser.setTitle("Open GOL File");
@@ -269,14 +266,8 @@ public class SpaceBotsGUIController {
                 envBuilder.setEnvironment(envParser.getEnvironment());
                 GameController.setCurrentEnvironment(envBuilder.getEnvironment());
                 updateSimArea();
-            } catch (IOException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error...");
-                alert.setHeaderText(e.getMessage());
-            } catch (FollowMeParserException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error...");
-                alert.setHeaderText(e.getMessage());
+            } catch (IOException | FollowMeParserException e) {
+                errorAlert(e.getMessage());
             }
         }
     }
@@ -293,12 +284,8 @@ public class SpaceBotsGUIController {
         if (selectedFile != null) {
             try {
                 envParser.parseProgram(selectedFile);
-            } catch (IOException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error...");
-                alert.setHeaderText(e.getMessage());
-            } catch (FollowMeParserException e) {
-                System.out.println("Error loading program");
+            } catch (IOException | FollowMeParserException e) {
+               errorAlert(e.getMessage());
             }
         }
     }

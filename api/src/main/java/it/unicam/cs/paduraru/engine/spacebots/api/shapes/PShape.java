@@ -1,11 +1,11 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.shapes;
 
-import it.unicam.cs.paduraru.engine.DeepCopy;
+import it.unicam.cs.paduraru.engine.PDeepCopy;
 
 /**
  * Rappresenta una forma generica.
  */
-public class PShape implements DeepCopy {
+public class PShape implements PDeepCopy {
     private double[] data;
 
     public PShape(){}

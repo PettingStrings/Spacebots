@@ -7,7 +7,7 @@ import it.unicam.cs.paduraru.engine.PEnvironment;
 import it.unicam.cs.paduraru.engine.PVector;
 import it.unicam.cs.paduraru.engine.Pair;
 import it.unicam.cs.paduraru.engine.spacebots.api.PLabel;
-import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
+import it.unicam.cs.paduraru.engine.spacebots.api.commands.*;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PAreaLabel;
 import it.unicam.cs.paduraru.engine.spacebots.api.environments.builder.SpaceBotsEnvironmentBuilder;
 import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PCircle;
@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Si occupa di caricare in un PEnvironment da file programmi e figure.
+ */
 public class SpaceBotsEnvironmentParser {
     private SpaceBotsEnvironmentBuilder envBuilder;
     private SpaceBotsEnvironmentHandler envHandler;
@@ -38,6 +41,10 @@ public class SpaceBotsEnvironmentParser {
                 .forEach(envBuilder::addLabelledArea);
     }
 
+    /**
+     * @param followShape Shape de convertire
+     * @return Pair contenente l'AreaLabel e la sua PShape.
+     */
     public static Pair<PAreaLabel, PShape> convertShapeDataToAreaEntity(ShapeData followShape){
         /*label CIRCLE x y r
             label RECTANGLE x y w h */
@@ -80,6 +87,26 @@ public class SpaceBotsEnvironmentParser {
     }
 
     public List<BotCommand> getProgram(){
-        return new ArrayList<>(program);
+        ArrayList<BotCommand> deepProgram = new ArrayList<>();
+
+        for (BotCommand comm: program) {
+            Object tmp = comm.deepCopy();
+            if(tmp instanceof Continue cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Done cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Follow cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Forever cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Move cmd) deepProgram.add(cmd);
+            else if(tmp instanceof RepeatN cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Signal cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Stop cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Unsignal cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Until cmd) deepProgram.add(cmd);
+            else if(tmp instanceof MoveRandom cmd){
+                cmd.RandomizeDirection();
+                deepProgram.add(cmd);
+            }
+        }
+
+        return deepProgram;
     }
 }

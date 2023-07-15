@@ -1,0 +1,11 @@
+DO FOREVER
+
+UNTIL left
+MOVE -1 0 5
+DONE
+
+UNTIL right
+MOVE 1 0 5
+DONE
+
+DONE

@@ -1,6 +1,6 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.systems;
 
-import it.unicam.cs.paduraru.engine.DeepCopy;
+import it.unicam.cs.paduraru.engine.PDeepCopy;
 import it.unicam.cs.paduraru.engine.PComponent;
 import it.unicam.cs.paduraru.engine.PSystem;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * Sistema che si occupa di eseguire il codice dei componenti {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU}.
  */
-public class PSysCEU extends PSystem implements DeepCopy {
+public class PSysCEU extends PSystem implements PDeepCopy {
     /**
      * Aggiunge solo elementi di una lista appartenenti a {@link it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU}.
      * @param components Lista contenente gli elementi da aggiungere.

@@ -1,7 +1,4 @@
 Larghezza area di simulazione:
 h: 511 l: 529
 
-Le entità possono essere generate al di fuori di queste dimensioni solo che non saranno visibili.
-Shapes:
-label CIRCLE x y r
-label RECTANGLE x y w h
+Le entità possono essere generate al di fuori di queste dimensioni ma non saranno visibili.

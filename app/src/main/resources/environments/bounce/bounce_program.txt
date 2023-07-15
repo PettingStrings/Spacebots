@@ -1,0 +1,11 @@
+DO FOREVER
+
+UNTIL ground
+    MOVE 0.3 1 5
+DONE
+
+REPEAT 20
+    MOVE 0.3 -1 5
+DONE
+
+DONE

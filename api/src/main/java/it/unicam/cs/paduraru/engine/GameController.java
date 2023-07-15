@@ -9,11 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Gestisce gli environment
+ */
 public final class GameController {
     static List<PEnvironment> environments = new ArrayList<>();
     static List<List<PEnvironment>> history = new ArrayList<>();
     static int currentEnvironment;
 
+    /**
+     * Esegue un passo di simulazione
+     */
     public static void stepForwardCurrentEnvironment(){
         history.get(currentEnvironment).add((PEnvironment)environments.get(currentEnvironment).deepCopy());
         environments.get(currentEnvironment).run();
@@ -35,11 +41,11 @@ public final class GameController {
         GameController.currentEnvironment = currentEnvironment;
     }
 
-    public static void runCurrentEnvironment(){
-        history.get(currentEnvironment).add((PEnvironment)environments.get(currentEnvironment).deepCopy());
-        environments.get(currentEnvironment).run();
-    }
-
+    /**
+     * @param origin Centro dell' area da scansionare
+     * @param shape Forma dell' area da scansionare
+     * @return Lista dei collider trovati. Se l' environment non ha un PSYsCollision viene data una lista vuota.  
+     */
     public static List<PCollider> scanInShapeArea(PVector origin, PShape shape){
         PSysCollision sys = (PSysCollision) environments.get(currentEnvironment)
                 .getSystems().stream().
@@ -60,10 +66,20 @@ public final class GameController {
                 .map(Pair::second)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Scannerizza l'area con una forma circolare.
+     * @param origin Centro dell' area da scansionare
+     * @param radius Raggio del cerchio.
+     * @return Lista dei collider trovati. Se l' environment non ha un PSYsCollision viene data una lista vuota.
+     */
     public static List<PCollider> scanInRoundArea(PVector origin, double radius){
         return scanInShapeArea(origin, new PCircle(radius));
     }
 
+    /**
+     * Torna indietro di un passo nella simulazione
+     */
     public static void stepBackCurrentEnvironment() {
         environments.set(currentEnvironment, history.get(currentEnvironment).remove(history.get(currentEnvironment).size()-1));
     }
@@ -72,12 +88,20 @@ public final class GameController {
         environments.set(currentEnvironment, environment);
     }
 
+    /**
+     * Va avanti di stepNum passi nella simulazione.
+     * @param stepNum Numero di passi da fare
+     */
     public static void stepForwardCurrentEnvironment(int stepNum) {
         for (int i = 0; i < stepNum; i++) {
             stepForwardCurrentEnvironment();
         }
     }
 
+    /**
+     * Va indietro di stepNum passi.
+     * @param stepNum Numero di passi da fare.
+     */
     public static void stepBackCurrentEnvironment(int stepNum) {
         for (int i = 0; i < stepNum; i++) {
             stepBackCurrentEnvironment();

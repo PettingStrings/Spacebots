@@ -44,7 +44,7 @@ public class Main {
             LogEntitiesLocations(envBuilder.getEnvironment().getEntities());
 
             try {
-                GameController.runCurrentEnvironment();
+                GameController.stepForwardCurrentEnvironment();
             } catch (Exception e) {
                 LogLn("Error running environment");
                 System.exit(1);

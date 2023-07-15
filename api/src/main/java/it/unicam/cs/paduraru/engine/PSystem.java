@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Da il modello da cui partire per la creazione di un sistema utilizzabile in un environment
  */
-public abstract class PSystem implements DeepCopy{
+public abstract class PSystem implements PDeepCopy {
     private List<PComponent> components;
     protected PSystem(){
         components = new ArrayList<>();

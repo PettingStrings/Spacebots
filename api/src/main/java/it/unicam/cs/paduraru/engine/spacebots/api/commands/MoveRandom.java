@@ -1,6 +1,7 @@
 package it.unicam.cs.paduraru.engine.spacebots.api.commands;
 
 import it.unicam.cs.paduraru.engine.PVector;
+import it.unicam.cs.paduraru.engine.Pair;
 import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 
 /**
@@ -9,18 +10,19 @@ import it.unicam.cs.paduraru.engine.spacebots.api.entities.PRobot;
 //MOVE RANDOM x1 x2 y1 y2 s: si muove alla velocità s espressa in m/s verso una posizione (x,y)
 //scelta casualmente nell’intervallo [x1, x2] e [y1, y2];
 public class MoveRandom implements BotCommand{
-    double minX;
-    double maxX;
-    double minY;
-    double maxY;
+    Pair<Double,Double> rangeX, rangeY;
     double velocity;
+    PVector dir;
 
     public MoveRandom(double minX, double maxX, double minY, double maxY, double velocity){
-        this.minX = minX;
-        this.maxX = maxX;
-        this.minY = minY;
-        this.maxY = maxY;
+        this(new Pair<>(minX,maxX),new Pair<>(minY,maxY),velocity);
+    }
+
+    public MoveRandom(Pair<Double,Double> rangeX, Pair<Double,Double> rangeY, double velocity){
         this.velocity = velocity;
+        this.rangeX = rangeX;
+        this.rangeY = rangeY;
+        this.RandomizeDirection();
     }
 
     /**
@@ -30,19 +32,27 @@ public class MoveRandom implements BotCommand{
      */
     @Override
     public int execute(PRobot target, int instructionPointer) {
-        target.setDirection(PVector.random(minX, maxX, minY, maxY));
+        target.setDirection(dir);
         target.setVelocity(velocity);
         target.move();
-        return 0;
+        return instructionPointer+1;
     }
 
+    private MoveRandom(PVector dir, double velocity){
+        this.dir = dir;
+        this.velocity = velocity;
+    }
+    public void RandomizeDirection(){
+        this.dir = PVector.random(rangeX.first(), rangeX.second(), rangeY.first(), rangeY.second());
+    }
     @Override
     public Object deepCopy() {
-        return new MoveRandom(this.minX,this.maxX,this.minY,this.maxY,this.velocity);
+        return new MoveRandom((Pair<Double, Double>) rangeX.deepCopy(),
+                (Pair<Double, Double>) rangeY.deepCopy(), velocity);
     }
 
     @Override
     public String convertToString() {
-        return String.format("MOVE RANDOM %f %f %f %f %f", minX, maxX, minY, maxX, velocity);
+        return "Move Random not implemented";
     }
 }

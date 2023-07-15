@@ -22,10 +22,6 @@ public class PRobot extends PEntity {
      */
     private List<PLabel> signaledLabels;
     /**
-     * La Label che sta attualemnte seguendo. Se non ne sta seguendo nessuna il valore è null.
-     */
-    private PLabel followingLabel;
-    /**
      * Direzione in cui sta viaggiando. Ha un range da -1 a 1 per ogni componente.
      */
     private PVector direction;
@@ -100,8 +96,6 @@ public class PRobot extends PEntity {
         PRobot robot = new PRobot((PEntity)(super.deepCopy()));
         robot.currentLabels = currentLabels.stream().map(lab -> (PLabel)lab.deepCopy()).collect(Collectors.toList());
         robot.signaledLabels = signaledLabels.stream().map(lab -> (PLabel)lab.deepCopy()).collect(Collectors.toList());
-        if(followingLabel != null)
-            robot.followingLabel = (PLabel) followingLabel.deepCopy();
         robot.direction = (PVector) direction.deepCopy();
         robot.velocity = velocity;
         return robot;

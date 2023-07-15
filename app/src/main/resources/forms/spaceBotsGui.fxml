@@ -39,7 +39,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button layoutX="378.0" layoutY="14.0" minWidth="72.0" mnemonicParsing="false" onMouseClicked="#onClick_Shapes" prefHeight="62.0" text="Load shapes">
+                              <Button layoutX="378.0" layoutY="14.0" minWidth="72.0" mnemonicParsing="false" onMouseClicked="#onClick_LoadShapes" prefHeight="62.0" text="Load shapes">
                                  <graphic>
                                     <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -89,18 +89,19 @@
                               </Button>
                            </buttons>
                         </ButtonBar>
-                        <Label layoutX="309.0" layoutY="4.0" text="Dimension(px):" />
-                        <Label layoutX="309.0" layoutY="49.0" text="Number:" />
-                        <TextField layoutX="309.0" layoutY="23.0" onInputMethodTextChanged="#onInput_Check" prefHeight="14.0" prefWidth="103.0">
+                        <Label layoutX="416.0" layoutY="4.0" text="Dimension(px):" />
+                        <Label layoutX="416.0" layoutY="45.0" text="Number:" />
+                        <TextField editable="false" layoutX="416.0" layoutY="22.0" onInputMethodTextChanged="#onInput_Check" prefHeight="14.0" prefWidth="103.0" promptText="Not Implemented">
                            <font>
                               <Font size="10.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="309.0" layoutY="65.0" onInputMethodTextChanged="#onInput_Check" prefHeight="14.0" prefWidth="103.0">
+                        <TextField layoutX="416.0" layoutY="65.0" onInputMethodTextChanged="#onInput_Check" prefHeight="14.0" prefWidth="103.0" promptText="Not implemented">
                            <font>
                               <Font size="10.0" />
                            </font>
                         </TextField>
+                        <Label layoutX="281.0" layoutY="13.0" text="Dafult Label:prova" />
                      </children>
                   </AnchorPane>
             </content>
@@ -109,11 +110,11 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="93.0" prefWidth="442.0" style="-fx-background-color: #DCDCDC;">
                      <children>
-                        <ButtonBar layoutX="14.0" layoutY="9.0" prefHeight="70.0" prefWidth="120.0" style="-fx-background-color: #DCDCDC;">
+                        <ButtonBar disable="true" layoutX="14.0" layoutY="9.0" prefHeight="70.0" prefWidth="120.0" style="-fx-background-color: #DCDCDC;">
                            <buttons>
                               <Button mnemonicParsing="false" onMouseClicked="#onClick_ClearSimulation">
                                  <graphic>
-                                    <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView disable="true" fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../icons/trash.png" />
                                        </image>
@@ -122,7 +123,7 @@
                               </Button>
                               <Button mnemonicParsing="false" onMouseClicked="#onClick_SelectDeleteTool">
                                  <graphic>
-                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView disable="true" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../icons/eraser.png" />
                                        </image>
@@ -131,6 +132,7 @@
                               </Button>
                            </buttons>
                         </ButtonBar>
+                        <Label layoutX="210.0" layoutY="14.0" text="Tools not implemented" />
                      </children>
                   </AnchorPane>
                </content>
@@ -177,7 +179,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="93.0" prefWidth="442.0" style="-fx-background-color: #DCDCDC;">
                      <children>
-                        <ButtonBar layoutX="-13.0" layoutY="9.0" prefHeight="70.0" prefWidth="475.0" style="-fx-background-color: #DCDCDC;">
+                        <ButtonBar disable="true" layoutX="-13.0" layoutY="9.0" prefHeight="70.0" prefWidth="475.0" style="-fx-background-color: #DCDCDC;">
                            <buttons>
                               <Button minWidth="0.0" mnemonicParsing="false" onMouseClicked="#onClick_ZoomIn" prefHeight="38.0">
                                  <graphic>
@@ -235,6 +237,7 @@
                               </Button>
                            </buttons>
                         </ButtonBar>
+                        <Label layoutX="25.0" layoutY="1.0" text="View Buttons not implemented" />
                      </children>
                   </AnchorPane>
                </content>

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class PSysCollision extends PSystem {
 
-    public enum CollisionType{ RECT_RECT, RECT_CIRCLE, CIRCLE_RECT, CIRCLE_CIRCLE }
+    public enum CollisionType{ UNDEFINED, RECT_RECT, RECT_CIRCLE, CIRCLE_RECT, CIRCLE_CIRCLE }
 
     /**
      * Lista contenente le coppie che sono entrate in collisione lo step precedente.
@@ -151,6 +151,7 @@ public class PSysCollision extends PSystem {
             case CIRCLE_CIRCLE -> isColliding = PSysCollision.collisionCircleToCircle(pair);
 
         }
+
         return isColliding;
     }
 
@@ -174,8 +175,8 @@ public class PSysCollision extends PSystem {
             else if(pair.second().getShape() instanceof PRectangle)
                 return CollisionType.RECT_RECT;
         }
-        //Null al posto di un eccezione
-        return null;
+
+        return CollisionType.UNDEFINED;
     }
 
     public static boolean collisionCircleToCircle(Pair<PCollider, PCollider> pair) {

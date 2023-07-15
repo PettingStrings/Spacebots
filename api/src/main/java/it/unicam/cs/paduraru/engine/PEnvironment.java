@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * Si occupa della gestione di una simulazione.
  * Esso si occupa di aggiungere/rimuovere entità, compnenti, sistemi e di eseguire la simulazione.
  */
-public class PEnvironment implements DeepCopy{
+public class PEnvironment implements PDeepCopy {
     /**
      * Memorizza l'ultimo ID assegnato.
      * L'assegnazione degli ID è incrementale e locale all'environent,
@@ -61,16 +61,6 @@ public class PEnvironment implements DeepCopy{
 
     public List<PSystem> getSystems() {
         return systems;
-    }
-
-    /**
-     * Esegue n step di simulazione
-     * @param steps Numero di step da eseguire.
-     */
-    public void run(long steps){
-        for (int i = 0; i < steps; i++) {
-           run();
-        }
     }
 
     /**

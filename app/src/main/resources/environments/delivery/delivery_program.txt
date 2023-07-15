@@ -1,0 +1,17 @@
+DO FOREVER
+    SIGNAL poste
+    UNTIL poste
+        UNSIGNAL poste
+        DO FOREVER
+            UNTIL poste
+                FOLLOW poste 500 5
+            DONE
+            UNTIL wall
+                MOVE RANDOM -1 1 -1 1 5
+            DONE
+        DONE
+    DONE
+    DO FOREVER
+        STOP
+    DONE
+DONE

@@ -1,4 +1,5 @@
 Creare uno almeno uno sciame dentro il cerchio e almeno uno sciame fuori dal cerchio.
+
 Comportamento dei robot:
 Il primo movimento sarà casuale visto che nessun robot sta segnalando una label.
 I prossimi movimenti invece saranno verso i robot dento il cerchio.

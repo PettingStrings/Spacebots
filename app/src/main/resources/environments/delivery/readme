@@ -1,0 +1,5 @@
+Creare uno sciame nel cerchio centrale e altri sciami dove si vuole.
+
+I esterni al cerchio dovrebbero sciamare verso i robot verso il cerchio.
+Una volta raggiunto inizieranno ad allontanarsi verso direzioni casuali fino
+a toccare un bordo per poi ritornare al cerchio.

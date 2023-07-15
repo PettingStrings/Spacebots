@@ -1,11 +1,11 @@
 package it.unicam.cs.paduraru.engine;
 
-import it.unicam.cs.paduraru.engine.spacebots.api.APIUtil;
+import it.unicam.cs.paduraru.engine.spacebots.api.SpaceBotsUtil;
 
 /**
  * Rappresenta un vettore.
  */
-public class PVector implements DeepCopy{
+public class PVector implements PDeepCopy {
     double x,y;
 
     public PVector(){
@@ -33,7 +33,7 @@ public class PVector implements DeepCopy{
      * @return Un nuovo vettore con coordinate casuali comprese nel range definito
      */
     public static PVector random(double minX, double maxX, double minY, double maxY) {
-        return new PVector(APIUtil.randDouble(minX, maxX), APIUtil.randDouble(minY, maxY));
+        return new PVector(SpaceBotsUtil.randDouble(minX, maxX), SpaceBotsUtil.randDouble(minY, maxY));
     }
 
     /**

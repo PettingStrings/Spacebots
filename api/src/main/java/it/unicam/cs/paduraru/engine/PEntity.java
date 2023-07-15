@@ -3,7 +3,7 @@ package it.unicam.cs.paduraru.engine;
 /**
  * Rappresenta un'oggetto dentro un PEnvironment.
  */
-public class PEntity implements DeepCopy{
+public class PEntity implements PDeepCopy {
     private long ID;
     private PVector position;
     public PEntity(){}

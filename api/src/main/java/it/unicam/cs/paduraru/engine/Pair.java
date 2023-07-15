@@ -8,7 +8,7 @@ package it.unicam.cs.paduraru.engine;
  * @param <R> Tipo del secondo elemento.
  */
 //records java 14+
-public record Pair<T, R>(T first, R second) implements DeepCopy {
+public record Pair<T, R>(T first, R second) implements PDeepCopy {
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
@@ -23,21 +23,21 @@ public record Pair<T, R>(T first, R second) implements DeepCopy {
 
     /**
      * Crea una nuova istanza di Pair.
-     * Se gli elementi contenuti non implementano l'interfaccia {@link it.unicam.cs.paduraru.engine.DeepCopy}
+     * Se gli elementi contenuti non implementano l'interfaccia {@link PDeepCopy}
      * vengono usate le stesse reference.
      * @return Nuova istanza di Pair.
      */
     @Override
     @SuppressWarnings("unchecked")
     public Object deepCopy() {
-        if (this.first instanceof DeepCopy && this.second instanceof DeepCopy)
-            return new Pair<>((T) ((DeepCopy) this.first).deepCopy(), (R) ((DeepCopy) this.second).deepCopy());
+        if (this.first instanceof PDeepCopy && this.second instanceof PDeepCopy)
+            return new Pair<>((T) ((PDeepCopy) this.first).deepCopy(), (R) ((PDeepCopy) this.second).deepCopy());
 
-        if (this.first instanceof DeepCopy)
-            return new Pair<>((T) ((DeepCopy) this.first).deepCopy(), this.second);
+        if (this.first instanceof PDeepCopy)
+            return new Pair<>((T) ((PDeepCopy) this.first).deepCopy(), this.second);
 
-        if (this.second instanceof DeepCopy)
-            return new Pair<>(this.first, (R) ((DeepCopy) this.second).deepCopy());
+        if (this.second instanceof PDeepCopy)
+            return new Pair<>(this.first, (R) ((PDeepCopy) this.second).deepCopy());
 
         return new Pair<>(this.first, this.second);
     }

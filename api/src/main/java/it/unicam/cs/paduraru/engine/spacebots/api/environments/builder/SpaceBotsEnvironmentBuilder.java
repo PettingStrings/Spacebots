@@ -3,8 +3,8 @@ package it.unicam.cs.paduraru.engine.spacebots.api.environments.builder;
 import it.unicam.cs.paduraru.engine.EnvironmentBuilder;
 import it.unicam.cs.paduraru.engine.Pair;
 import it.unicam.cs.paduraru.engine.PVector;
-import it.unicam.cs.paduraru.engine.spacebots.api.commands.BotCommand;
-import it.unicam.cs.paduraru.engine.spacebots.api.APIUtil;
+import it.unicam.cs.paduraru.engine.spacebots.api.commands.*;
+import it.unicam.cs.paduraru.engine.spacebots.api.SpaceBotsUtil;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PColliderRobot;
 import it.unicam.cs.paduraru.engine.spacebots.api.components.PColliderAreaLabel;
@@ -15,6 +15,7 @@ import it.unicam.cs.paduraru.engine.spacebots.api.shapes.PShape;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.PSysCEU;
 import it.unicam.cs.paduraru.engine.spacebots.api.systems.PSysCollision;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,15 +43,36 @@ public class SpaceBotsEnvironmentBuilder extends EnvironmentBuilder{
         PRobot bot;
 
         for(int i = 0; i < numBots; i++){
-            origin = new PVector(APIUtil.randDouble(rangeX.first(),rangeX.second()),
-                    APIUtil.randDouble(rangeY.first(), rangeY.second() ));
+            origin = new PVector(SpaceBotsUtil.randDouble(rangeX.first(),rangeX.second()),
+                    SpaceBotsUtil.randDouble(rangeY.first(), rangeY.second() ));
 
             bot = new PRobot(origin);
 
             addEntity(bot);
             addComponent(new PColliderRobot(bot, shape));
-            addComponent(new PCEU(bot, commands));
+            addComponent(new PCEU(bot, deepCopyCommands(commands)));
         }
+    }
+
+    private List<BotCommand> deepCopyCommands(List<BotCommand> commands) {
+        ArrayList<BotCommand> deepProgram = new ArrayList<>();
+
+        for (BotCommand comm: commands) {
+            Object tmp = comm.deepCopy();
+            if(tmp instanceof Continue cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Done cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Follow cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Forever cmd) deepProgram.add(cmd);
+            else if(tmp instanceof MoveRandom cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Move cmd) deepProgram.add(cmd);
+            else if(tmp instanceof RepeatN cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Signal cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Stop cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Unsignal cmd) deepProgram.add(cmd);
+            else if(tmp instanceof Until cmd) deepProgram.add(cmd);
+        }
+
+        return deepProgram;
     }
 
     /**

@@ -1,12 +1,12 @@
 package it.unicam.cs.paduraru.engine.spacebots.api;
 
-import it.unicam.cs.paduraru.engine.DeepCopy;
+import it.unicam.cs.paduraru.engine.PDeepCopy;
 
 /**
  * Rappresenta una Label nella simulazione dei Robot.
  * Viene automaticamente aggiunto '_' alla fine della Label sel caso in cui esso non sia presente.
  */
-public class PLabel implements DeepCopy {
+public class PLabel implements PDeepCopy {
     String name;
 
     public PLabel(String name) {

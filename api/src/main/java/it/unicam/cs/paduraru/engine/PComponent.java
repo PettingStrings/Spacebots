@@ -4,7 +4,7 @@ package it.unicam.cs.paduraru.engine;
  * Definisce una proprietà all'entità a cui è associato.
  * Un componente viene gestito da un sistema.
  */
-public class PComponent implements DeepCopy{
+public class PComponent implements PDeepCopy {
     private long ID;
     private PEntity parent;
     protected PComponent(PEntity parent){

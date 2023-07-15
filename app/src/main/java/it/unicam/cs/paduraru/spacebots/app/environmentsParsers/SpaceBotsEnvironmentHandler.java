@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Implementa i metodi di FollowMeParserHandler.
+ */
 public class SpaceBotsEnvironmentHandler implements FollowMeParserHandler {
     private int instructionPointer = 0;
     private final List<BotCommand> instructions = new ArrayList<>();
