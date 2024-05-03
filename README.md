@@ -23,43 +23,43 @@ Ogni comando deve essere scritto su una riga.
     <th width="50%"> Descrizione </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> MOVE *x y s* </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot si muove nella direzione data dal vettore *(x,y)* alla velocità *s* </th>
+    <th markdown="1" width="50%"> MOVE **x y s** </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot si muove nella direzione data dal vettore **(x,y)** alla velocità **s** </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> MOVE RANDOM *x1 x2 y1 y2 s* </th>
+    <th markdown="1" width="50%"> MOVE RANDOM **x1 x2 y1 y2 s** </th>
     <th  markdown="1" width="50%" style="text-align: justify;"> Il robot si muove nella direzione casuale data dal vettore (x,y) generato dal range *x1,x2* e *y1,y2* e si muove alla velocità *s* </th>
   </tr>
   <tr>
     <th markdown="1" width="50%"> SIGNAL *label* </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot segnala label *label*</th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot segnala label **label**</th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> UNSIGNAL *label* </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot smette di segnalare la label *label*</th>
+    <th markdown="1" width="50%"> UNSIGNAL **label** </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot smette di segnalare la label **label**</th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> FOLLOW *label dist s* </th>
+    <th markdown="1" width="50%"> FOLLOW **label dist s** </th>
     <th markdown="1" width="50%" style="text-align: justify;"> Il robot si muove muove alla velocità *s* in una
-      direzione che è la media delle posizioni dei robot che segnalano la condizione *label* e
-      che si trovano ad una distanza minore o uguale a *dist*.
+      direzione che è la media delle posizioni dei robot che segnalano la condizione **label** e
+      che si trovano ad una distanza minore o uguale a **dist**.
     </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> CONTINUE *s* </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot continua a muoversi alla direzione e velocità attuali per *s* "secondi"</th>
+    <th markdown="1" width="50%"> CONTINUE **s** </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot continua a muoversi alla direzione e velocità attuali per **s** "secondi"</th>
   </tr>
   <tr>
     <th markdown="1" width="50%"> STOP </th>
     <th markdown="1" width="50%" style="text-align: justify;"> Il robot cessa ogni movimento</th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> REPEAT *n* </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il codice dentro questo blocco viene eseguito per *n* volte</th>
+    <th markdown="1" width="50%"> REPEAT **n** </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il codice dentro questo blocco viene eseguito per **n** volte</th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> UNTIL *label* </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il codice dentro questo blocco viene eseguito per fino a quando il robot non entra in contatto con una label *label*</th>
+    <th markdown="1" width="50%"> UNTIL **label** </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il codice dentro questo blocco viene eseguito per fino a quando il robot non entra in contatto con una label **label**</th>
   </tr>
     <tr>
     <th markdown="1" width="50%"> DO FOREVER </th>
@@ -91,7 +91,7 @@ Qui ci sarebbe stata l'opzione di eliminare elementi singoli o direttamente tutt
 
 ![Schermata 4](/docs/schermata_4.png "schermata 4")
 <br><br>
-Con la freccia destra possiamo andare avanti nella simulazione in base a quanti *step* sono stati scelti e con la freccia sinistra si può tornare indietro.
+Con la freccia destra possiamo andare avanti nella simulazione in base a quanti **step** sono stati scelti e con la freccia sinistra si può tornare indietro.
 <br><br><br>
 
 ![Schermata 5](/docs/schermata_5.png "schermata 5")
