@@ -74,27 +74,27 @@ Ogni comando deve essere scritto su una riga.
 <details markdown="1"><summary style="font-size: 1.54rem;color: var(--heading-color);"><a name="GUI">La GUI</a></summary>
 Il programma presenta molte funzioni ma non tutte sono state implementate o implementate correttamente perchè non erano richieste nella specifica del progetto.<br><br><br>
 
-![Schermata 1](/docs/img/spacebots/schermata_1.png "schermata 1")
+![Schermata 1](/docs/spacebots/schermata_1.png "schermata 1")
 <br><br>
 In questa tab si possono caricare il programma e le forme da file di testo. L'esplora file si aprirà automaticamente su una cartella dove ho provveduto degli esempi. Ogni esempio ha un file *readme* con spiegato come far funzionare la simulazione e il comportamento che avranno i robot.
 <br><br><br>
 
-![Schermata 2](/docs/img/spacebots/schermata_2.png "schermata 2")
+![Schermata 2](/docs/spacebots/schermata_2.png "schermata 2")
 <br><br>
 Qui abbiamo tre bottoni: il primo per creare uno sciame aventi il programma caricato il precedenza e creare le aree che avranno come label *prova*. La scelta delle dimensioni e il numero di robot nello sciame non possono essere modificati da GUI.
 <br><br><br>
 
-![Schermata 3](/docs/img/spacebots/schermata_3.png "schermata 3")
+![Schermata 3](/docs/spacebots/schermata_3.png "schermata 3")
 <br><br>
 Qui ci sarebbe stata l'opzione di eliminare elementi singoli o direttamente tutta la simulazione ma non è stato implementato nulla.
 <br><br><br>
 
-![Schermata 4](/docs/img/spacebots/schermata_4.png "schermata 4")
+![Schermata 4](/docs/spacebots/schermata_4.png "schermata 4")
 <br><br>
 Con la freccia destra possiamo andare avanti nella simulazione in base a quanti *step* sono stati scelti e con la freccia sinistra si può tornare indietro.
 <br><br><br>
 
-![Schermata 5](/docs/img/spacebots/schermata_5.png "schermata 5")
+![Schermata 5](/docs/spacebots/schermata_5.png "schermata 5")
 <br><br>
 Dentro questa tab ci sarebbero stati i controlli per muovere la telecamera. Si sarebbe potuto ingrandire/rimpicciolire la simulazione e con le frecce muoversi in tutte e quattro le direzioni ma nulla è stato implementato.
 <br><br><br>
@@ -105,25 +105,25 @@ Dentro questa tab ci sarebbero stati i controlli per muovere la telecamera. Si s
 
 ## Pong
 
-<img src="/docs/img/spacebots/examples/pong.gif" style="height: 500px;">
+<img src="/docs/examples/pong.gif" style="height: 500px;">
 <br><br>
 Questo è l'esempio più semplice di tutti. I robot rimbalzano a destra e a sinistra come nel gioco pong.
 <br><br><br>
 
 ### Bounce
-<img src="/docs/img/spacebots/examples/bounce.gif" style="height: 500px;">
+<img src="/docs/examples/bounce.gif" style="height: 500px;">
 <br><br>
 In questo esempio i robot rimbalzano sulla piattaforma sottostante come se fossero delle palline. I robot poi cadranno dall'estremità destra all'infinito.
 <br><br><br>
 
 ### Followus
-<img src="/docs/img/spacebots/examples/followus.gif" style="height: 500px;">
+<img src="/docs/examples/followus.gif" style="height: 500px;">
 <br><br>
 In questo esempio i robot sciameranno dritti verso i robot dentro al cerchio che stanno segnalando la propria posizione.
 <br><br><br>
 
 ### Delivery
-<img src="/docs/img/spacebots/examples/delivery.gif" style="height: 500px;">
+<img src="/docs/examples/delivery.gif" style="height: 500px;">
 <br><br>
 Questo è l'esempio più complesso ma anche il più bello. I robot al centro sono "lavoratori alle poste" che segnalano la propria posizione e "consegnano pacchi" ai postini. Quest'ultimi sono i robot all'esterno che sciameranno verso le poste a prendere un pacco per poi partire in una direzione casuale per consegnarlo.
 <br><br><br>
