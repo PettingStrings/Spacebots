@@ -1,7 +1,7 @@
 Spacebots è un programma che simula dei robot nello spazio che ho fatto per l'esame di __[Metodologie Di Programmazione](http://www.didattica.cs.unicam.it/doku.php?id=didattica:ay2223:mp:main)__. In questo spazio ci sono 2 entità: i robot e delle aree.<br><br>
 Le aree possono essere di forma circolare o rettangolare e possiedono una label che è semplicemente una stringa.<br><br>
 I robot sono rappresentati da una forma circolare e essi possono eseguire del codice scritto in una sintassi inventata.<br><br>
-La simulazione viene eseguita manualmente andando avanti o indietro di *x* step che possono essere decisi dall'utente. Ogni step di simulazione rappresenta un secondo.<br>
+La simulazione viene eseguita manualmente andando avanti o indietro di  x  step che possono essere decisi dall'utente. Ogni step di simulazione rappresenta un secondo.<br>
 Per informazioni più dettagliate potete consultare la __[specifica di progetto](/docs/spacebots.pdf)__.
 
 2. __[Sintassi](#sintassi)__
@@ -23,43 +23,43 @@ Ogni comando deve essere scritto su una riga.
     <th width="50%"> Descrizione </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> MOVE **x y s** </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot si muove nella direzione data dal vettore **(x,y)** alla velocità **s** </th>
+    <th markdown="1" width="50%"> MOVE x y s</th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot si muove nella direzione data dal vettore  (x,y)  alla velocità  s  </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> MOVE RANDOM **x1 x2 y1 y2 s** </th>
-    <th  markdown="1" width="50%" style="text-align: justify;"> Il robot si muove nella direzione casuale data dal vettore (x,y) generato dal range *x1,x2* e *y1,y2* e si muove alla velocità *s* </th>
+    <th markdown="1" width="50%"> MOVE RANDOM  x1 x2 y1 y2 s  </th>
+    <th  markdown="1" width="50%" style="text-align: justify;"> Il robot si muove nella direzione casuale data dal vettore (x,y) generato dal range  x1,x2  e  y1,y2  e si muove alla velocità  s  </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> SIGNAL *label* </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot segnala label **label**</th>
+    <th markdown="1" width="50%"> SIGNAL  label  </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot segnala label  label </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> UNSIGNAL **label** </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot smette di segnalare la label **label**</th>
+    <th markdown="1" width="50%"> UNSIGNAL  label  </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot smette di segnalare la label  label </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> FOLLOW **label dist s** </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot si muove muove alla velocità *s* in una
-      direzione che è la media delle posizioni dei robot che segnalano la condizione **label** e
-      che si trovano ad una distanza minore o uguale a **dist**.
+    <th markdown="1" width="50%"> FOLLOW  label dist s  </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot si muove muove alla velocità s in una
+      direzione che è la media delle posizioni dei robot che segnalano la condizione  label  e
+      che si trovano ad una distanza minore o uguale a  dist .
     </th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> CONTINUE **s** </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il robot continua a muoversi alla direzione e velocità attuali per **s** "secondi"</th>
+    <th markdown="1" width="50%"> CONTINUE  s  </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il robot continua a muoversi alla direzione e velocità attuali per  s  "secondi"</th>
   </tr>
   <tr>
     <th markdown="1" width="50%"> STOP </th>
     <th markdown="1" width="50%" style="text-align: justify;"> Il robot cessa ogni movimento</th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> REPEAT **n** </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il codice dentro questo blocco viene eseguito per **n** volte</th>
+    <th markdown="1" width="50%"> REPEAT  n  </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il codice dentro questo blocco viene eseguito per  n  volte</th>
   </tr>
   <tr>
-    <th markdown="1" width="50%"> UNTIL **label** </th>
-    <th markdown="1" width="50%" style="text-align: justify;"> Il codice dentro questo blocco viene eseguito per fino a quando il robot non entra in contatto con una label **label**</th>
+    <th markdown="1" width="50%"> UNTIL  label  </th>
+    <th markdown="1" width="50%" style="text-align: justify;"> Il codice dentro questo blocco viene eseguito per fino a quando il robot non entra in contatto con una label  label </th>
   </tr>
     <tr>
     <th markdown="1" width="50%"> DO FOREVER </th>
@@ -76,12 +76,12 @@ Il programma presenta molte funzioni ma non tutte sono state implementate o impl
 
 ![Schermata 1](/docs/schermata_1.png "schermata 1")
 <br><br>
-In questa tab si possono caricare il programma e le forme da file di testo. L'esplora file si aprirà automaticamente su una cartella dove ho provveduto degli esempi. Ogni esempio ha un file *readme* con spiegato come far funzionare la simulazione e il comportamento che avranno i robot.
+In questa tab si possono caricare il programma e le forme da file di testo. L'esplora file si aprirà automaticamente su una cartella dove ho provveduto degli esempi. Ogni esempio ha un file  readme  con spiegato come far funzionare la simulazione e il comportamento che avranno i robot.
 <br><br><br>
 
 ![Schermata 2](/docs/schermata_2.png "schermata 2")
 <br><br>
-Qui abbiamo tre bottoni: il primo per creare uno sciame aventi il programma caricato il precedenza e creare le aree che avranno come label *prova*. La scelta delle dimensioni e il numero di robot nello sciame non possono essere modificati da GUI.
+Qui abbiamo tre bottoni: il primo per creare uno sciame aventi il programma caricato il precedenza e creare le aree che avranno come label  prova . La scelta delle dimensioni e il numero di robot nello sciame non possono essere modificati da GUI.
 <br><br><br>
 
 ![Schermata 3](/docs/schermata_3.png "schermata 3")
@@ -91,7 +91,7 @@ Qui ci sarebbe stata l'opzione di eliminare elementi singoli o direttamente tutt
 
 ![Schermata 4](/docs/schermata_4.png "schermata 4")
 <br><br>
-Con la freccia destra possiamo andare avanti nella simulazione in base a quanti **step** sono stati scelti e con la freccia sinistra si può tornare indietro.
+Con la freccia destra possiamo andare avanti nella simulazione in base a quanti  step  sono stati scelti e con la freccia sinistra si può tornare indietro.
 <br><br><br>
 
 ![Schermata 5](/docs/schermata_5.png "schermata 5")
