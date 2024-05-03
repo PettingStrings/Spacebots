@@ -74,27 +74,27 @@ Ogni comando deve essere scritto su una riga.
 <details markdown="1"><summary style="font-size: 1.54rem;color: var(--heading-color);"><a name="GUI">La GUI</a></summary>
 Il programma presenta molte funzioni ma non tutte sono state implementate o implementate correttamente perchè non erano richieste nella specifica del progetto.<br><br><br>
 
-![Schermata 1](/docs/spacebots/schermata_1.png "schermata 1")
+![Schermata 1](/docs/schermata_1.png "schermata 1")
 <br><br>
 In questa tab si possono caricare il programma e le forme da file di testo. L'esplora file si aprirà automaticamente su una cartella dove ho provveduto degli esempi. Ogni esempio ha un file *readme* con spiegato come far funzionare la simulazione e il comportamento che avranno i robot.
 <br><br><br>
 
-![Schermata 2](/docs/spacebots/schermata_2.png "schermata 2")
+![Schermata 2](/docs/schermata_2.png "schermata 2")
 <br><br>
 Qui abbiamo tre bottoni: il primo per creare uno sciame aventi il programma caricato il precedenza e creare le aree che avranno come label *prova*. La scelta delle dimensioni e il numero di robot nello sciame non possono essere modificati da GUI.
 <br><br><br>
 
-![Schermata 3](/docs/spacebots/schermata_3.png "schermata 3")
+![Schermata 3](/docs/schermata_3.png "schermata 3")
 <br><br>
 Qui ci sarebbe stata l'opzione di eliminare elementi singoli o direttamente tutta la simulazione ma non è stato implementato nulla.
 <br><br><br>
 
-![Schermata 4](/docs/spacebots/schermata_4.png "schermata 4")
+![Schermata 4](/docs/schermata_4.png "schermata 4")
 <br><br>
 Con la freccia destra possiamo andare avanti nella simulazione in base a quanti *step* sono stati scelti e con la freccia sinistra si può tornare indietro.
 <br><br><br>
 
-![Schermata 5](/docs/spacebots/schermata_5.png "schermata 5")
+![Schermata 5](/docs/schermata_5.png "schermata 5")
 <br><br>
 Dentro questa tab ci sarebbero stati i controlli per muovere la telecamera. Si sarebbe potuto ingrandire/rimpicciolire la simulazione e con le frecce muoversi in tutte e quattro le direzioni ma nulla è stato implementato.
 <br><br><br>
