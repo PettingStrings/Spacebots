@@ -72,7 +72,7 @@ Ogni comando deve essere scritto su una riga.
 </table>
 
 <details markdown="1"><summary style="font-size: 1.54rem;color: var(--heading-color);"><a name="GUI">La GUI</a></summary>
-Il programma presenta molte funzioni ma non tutte sono state implementate o implementate correttamente perchè non erano richieste nella specifica del progetto.<br><br><br>
+Il programma presenta molte funzioni ma non tutte sono state implementate perchè non erano richieste nella specifica del progetto.<br><br><br>
 
 ![Schermata 1](/docs/schermata_1.png "schermata 1")
 <br><br>
@@ -101,7 +101,7 @@ Dentro questa tab ci sarebbero stati i controlli per muovere la telecamera. Si s
 
 </details>
 
-<details markdown="1"><summary style="font-size: 1.54rem;color: var(--heading-color);"><a name="Examples">Esempi</a></summary>
+<summary style="font-size: 1.54rem;color: var(--heading-color);"><a name="Examples">Esempi</a></summary>
 
 ## Pong
 
@@ -128,7 +128,6 @@ In questo esempio i robot sciameranno dritti verso i robot dentro al cerchio che
 Questo è l'esempio più complesso ma anche il più bello. I robot al centro sono "lavoratori alle poste" che segnalano la propria posizione e "consegnano pacchi" ai postini. Quest'ultimi sono i robot all'esterno che sciameranno verso le poste a prendere un pacco per poi partire in una direzione casuale per consegnarlo.
 <br><br><br>
 
-</details>
 
 ## Eseguire il progetto
 Il codice è pubblico sul mio __[GitHub](https://github.com/PettingStrings/Spacebots)__.<br>
