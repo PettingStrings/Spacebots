@@ -101,7 +101,7 @@ Dentro questa tab ci sarebbero stati i controlli per muovere la telecamera. Si s
 
 </details>
 
-<summary style="font-size: 1.54rem;color: var(--heading-color);"><a name="Examples">Esempi</a></summary>
+# <a name="Examples">Esempi</a>
 
 ## Pong
 
